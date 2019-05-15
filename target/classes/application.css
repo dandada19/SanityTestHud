@@ -1,0 +1,30 @@
+.myTree{
+	    -fx-border-style: none;
+	    -fx-background-insets:0;
+}
+
+.myTree .tree-cell {
+    -fx-background-color:rgb(240,240,255);
+    -fx-text-fill: rgb(0,0,0);
+    -fx-padding:4;
+}
+
+.myTree .tree-cell:selected {
+    -fx-background-color:rgb(192,192,192);
+    -fx-text-fill: rgb(0,0,0);
+    -fx-padding:4;
+}
+
+.myVBox{
+	-fx-background-color: cornsilk; 
+	-fx-padding: 20;
+}
+
+.btn{
+	-fx-background-color: rgb(255,255,0);
+}
+
+#myBtn{
+	-fx-background-color: rgb(255,255,0);
+	-fx-padding:20;	
+}
