@@ -30,6 +30,7 @@ public class Int2DevmonController {
 
 	@FXML
 	public void btnInt2LogonDevmonClicked(Event e) throws FindFailed {
+		btnInt2LogonDevmon.getStyleClass().add("warning");
 		try {
 			Runtime.getRuntime().exec("javaws " + Int2Settings.DEVMON_LINK);
 		} catch (IOException ex) {
@@ -44,13 +45,15 @@ public class Int2DevmonController {
 		String elementsFolderPath = "src/main/resources/sikuli_elements/";
         Pattern btnRun = new Pattern(elementsFolderPath + "common_button_run.PNG");
         Pattern textUserName = new Pattern(elementsFolderPath + "common_text_username.PNG");
-        textUserName.similar((float) 0.9);
+        textUserName.similar((float) 0.8);
         textUserName.targetOffset(150, 0);
         Pattern textPassword = new Pattern(elementsFolderPath + "common_text_password.PNG");
+        textPassword.similar((float) 0.8);
         Pattern btnLogon = new Pattern(elementsFolderPath + "common_button_logon.PNG");
+        btnLogon.similar((float)0.8);
         try {
         	btnRun.similar((float)0.8);
-        	s.wait(btnRun, 15);
+        	s.wait(btnRun, 10);
             s.click(btnRun);
         }catch(FindFailed ff) {
         	//run button may not be present sometimes.

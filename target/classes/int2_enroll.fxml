@@ -13,5 +13,5 @@
 	<Label text="5. Agree and click Submit" />
 	<Label text="6. Enroll" />
 	<Button fx:id="btnInt2LaunchEnrollPage" text="Launch Enroll Page" onAction="#btnInt2LaunchEnrollPageClicked"/>
-	<Button fx:id="btnInt2LaunchEnrollApp" text="Launch Enroll App" onAction="#btnInt2LaunchEnrollAppClicked"/>
+	<Button fx:id="btnInt2LaunchEnrollApp" text="Enroll" onAction="#btnInt2LaunchEnrollAppClicked"/>
 </VBox>

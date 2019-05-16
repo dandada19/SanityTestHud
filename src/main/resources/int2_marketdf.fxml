@@ -5,7 +5,7 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.Int2MarketDfController">
 
-	<Label text="1. Login Market Data Feeder with your user" />
+	<Label text="1. Login Market Data Feed with your user" />
 	<Label text="2. Check streams are working" />
 	<Button fx:id="btnInt2LaunchMarketDf" text="Launch MarketDataFeed" onAction="#btnInt2LaunchMarketDfClicked"/>
 	<Button fx:id="btnInt2LogonMarketDf" text="Logon MarketDataFeed" onAction="#btnInt2LogonMarketDfClicked"/>

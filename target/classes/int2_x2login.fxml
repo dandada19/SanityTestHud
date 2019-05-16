@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.Int2X2LoginController">
+
+	<Label text="1. Successfully Logon to X2" />
+	<Label text="2. Do some trades (optional)" />
+	<Button fx:id="btnInt2LaunchX2" text="Launch X2" onAction="#btnInt2LaunchX2Clicked"/>
+	<Button fx:id="btnInt2LogonX2" text="Logon X2" onAction="#btnInt2LogonX2Clicked"/>
+</VBox>
