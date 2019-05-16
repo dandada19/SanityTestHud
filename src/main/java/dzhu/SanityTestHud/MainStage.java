@@ -88,6 +88,8 @@ public class MainStage {
 		stage.resizableProperty().set(false);
 		stage.setScene(mainScene);
 		stage.resizableProperty().set(false);
+		stage.setX(0);
+		stage.setY(200);
 		stage.xProperty().addListener((obs, oldVal, newVal) -> {
 			sideStage.setX((double)newVal + stage.getWidth()-3);
 		});

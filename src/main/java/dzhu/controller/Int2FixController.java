@@ -17,6 +17,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import dzhu.settings.Int2Settings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -60,7 +61,7 @@ public class Int2FixController {
 	@FXML
 	public void btnInt2FixFXClicked(Event e) {
 		driver = getDriver();
-        driver.get("https://teamcity.qcnx.eexchange.com/viewType.html?buildTypeId=FixTests_INT2_Sanity");        
+        driver.get(Int2Settings.FIX_FX_LINK);
         if(isLoginPageShown()) {
         	login();
         }
@@ -76,7 +77,7 @@ public class Int2FixController {
 	@FXML
 	public void btnInt2FixTreasClicked(Event e) {
 		driver = getDriver();
-		driver.get("https://teamcity.qcnx.eexchange.com/viewType.html?buildTypeId=FixTests_INT2_TreasurySanity");        
+		driver.get(Int2Settings.FIX_TREASURY_LINK);        
         if(isLoginPageShown()) {
         	login();
         }
@@ -92,7 +93,7 @@ public class Int2FixController {
 	@FXML
 	public void btnInt2LaunchTeamcityClicked(Event e) {
 		driver = getDriver();
-        driver.get("https://teamcity.qcnx.eexchange.com/project.html?projectId=FixTests");
+        driver.get(Int2Settings.FIX_FX_LINK);
         if(isLoginPageShown()) {
         	login();
         }

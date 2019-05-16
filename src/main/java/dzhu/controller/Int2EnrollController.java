@@ -3,14 +3,13 @@ package dzhu.controller;
 import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 
+import dzhu.settings.Int2Settings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -53,7 +52,7 @@ public class Int2EnrollController {
 	@FXML
 	public void btnInt2LaunchEnrollAppClicked(Event e) throws FindFailed {
 		try {
-			Runtime.getRuntime().exec("javaws https://integration2-dl.currenex.com/webstart/enroll.jnlp");
+			Runtime.getRuntime().exec("javaws " + Int2Settings.ENROLL_LINK);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -72,6 +71,6 @@ public class Int2EnrollController {
         s.type(textUserName, "qtpint2_enroll");
         s.type(textPin, "test1234");
         s.type(textEmail, "qa@currenex.com");
-        s.click(btnEnroll);        
+        s.click(btnEnroll);
 	}
 }
