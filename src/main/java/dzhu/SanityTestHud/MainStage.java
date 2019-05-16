@@ -2,6 +2,10 @@ package dzhu.SanityTestHud;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +23,8 @@ import javafx.stage.StageStyle;
 public class MainStage {
 	private Stage stage;
 	private Stage sideStage;
+	private Map<String, Scene> scenePool = new HashMap();
+	final int SCENE_POOL_SIZE = 10;
 
 	public Stage getStage() {
 		return stage;
@@ -64,17 +70,8 @@ public class MainStage {
 					System.out.println("fxmlName is: " + fxmlName);
 					sideStage.setTitle(parentItem.getValue() + "-" + cb.getText());
 					
-					FXMLLoader loader = new FXMLLoader();
-					Parent root = new VBox();
-					try {
-						loader.setLocation(new File("src/main/resources/" + fxmlName).toURI().toURL());
-						root = (Parent) loader.load();
-					} catch (IOException e) {
-						e.printStackTrace();
-						System.out.println(fxmlName+" not found or loading error...");
-					}					
-					Scene scene = new Scene(root);
-					sideStage.setScene(scene);
+				
+					sideStage.setScene(getScene(fxmlName));
 					
 					if(sideStage.isShowing()) {
 						sideStage.show();
@@ -127,5 +124,34 @@ public class MainStage {
 		int2.getChildren().addAll(int2FIX, int2Enroll, int2Classic, int2Mdf, int2Devmon, int2X2Login, int2WALogin, int2Jasper);
 		int2.setExpanded(true);
 		return int2;
+	}
+	
+	private Scene getScene(String name) {
+		if(scenePool.containsKey(name)) {
+			return scenePool.get(name);
+		}else {
+			FXMLLoader loader = new FXMLLoader();
+			Parent root = new VBox();
+			try {
+				loader.setLocation(new File("src/main/resources/" + name).toURI().toURL());
+				root = (Parent) loader.load();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println(name+" not found or loading error...");
+			}					
+			Scene scene = new Scene(root);
+			if(scenePool.size()==SCENE_POOL_SIZE) {
+				int rand = new Random().nextInt(SCENE_POOL_SIZE);
+				int i=0;
+				for(Map.Entry<String, Scene> e : scenePool.entrySet()) {
+					if(i==rand) {
+						scenePool.remove(e.getKey());
+					}
+					i++;					
+				}
+			}
+			scenePool.put(name, scene);
+			return scene;
+		}
 	}
 }

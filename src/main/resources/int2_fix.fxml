@@ -5,12 +5,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableView?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="sidestage.css" fx:controller="dzhu.controller.Int2FixController">
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.Int2FixController">
 
 	<Label text="1. Go to https://teamcity.qcnx.eexchange.com" />
 	<Label text="2. Run INT2 Sanity" />
 	<Label text="3. Run INT2 Treasury Sanity" />
 	<Label text="4. Check results in 25 minutes" />
+	<Label text="5. Contact Jeff/Dan if fail" />
 	<Button fx:id="btnInt2FixFX" text="Run INT2 Sanity FX" onAction="#btnInt2FixFXClicked"/>
 	<Button fx:id="btnInt2FixTreas" text="Run INT2 Sanity Treasury" onAction="#btnInt2FixTreasClicked"/>
 	<Button fx:id="btnInt2LaunchTeamcity" text="Launch FIX portal page" onAction="#btnInt2LaunchTeamcityClicked"/>

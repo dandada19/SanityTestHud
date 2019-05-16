@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.Int2EnrollController">
+
+	
+	<Label text="1. On DEVMON, reset pin to test1234 for qtpint2_enroll " />
+	<Label text="2. On IE, go to https://integration2-dl.currenex.com/enroll-int2/enroll.html" />
+	<Label text="3. Remove old cert" />
+	<Label text="4. Click CLICKING HERE link at the bottom" />
+	<Label text="5. Agree and click Submit" />
+	<Label text="6. Enroll" />
+	<Button fx:id="btnInt2LaunchEnrollPage" text="Launch Enroll Page" onAction="#btnInt2LaunchEnrollPageClicked"/>
+	<Button fx:id="btnInt2LaunchEnrollApp" text="Launch Enroll App" onAction="#btnInt2LaunchEnrollAppClicked"/>
+</VBox>
