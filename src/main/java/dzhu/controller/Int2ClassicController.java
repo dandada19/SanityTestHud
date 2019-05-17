@@ -97,6 +97,8 @@ public class Int2ClassicController {
 	        s.wait(textUserName, 20);
 	        s.doubleClick(textUserName);
 	        s.type(Key.DELETE);
+	        s.doubleClick(textUserName);
+	        s.type(Key.DELETE);
 	        s.type(textUserName, user);
 	        s.type(textPassword, password);
 	        s.click(btnLogon);

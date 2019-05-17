@@ -13,6 +13,7 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -42,18 +43,24 @@ public class Int2FixController {
 		if(driver==null) {
 			//driver = new ChromeDriver();
 			//driver.get("https://teamcity.qcnx.eexchange.com");
-			//addCookieToDriver();		
-			driver = new ChromeDriver();
-			return driver;
+			//addCookieToDriver();
+			return initDriver();
 		}else {
 			try {
 				driver.get("https://teamcity.qcnx.eexchange.com");
 			}catch(Exception e){
 				//browser may be closed manually.
-				driver = new ChromeDriver();
+				driver = initDriver();
 			}
 			return driver;
 		}
+	}
+	
+	private WebDriver initDriver() {
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--start-maximized");
+		driver = new ChromeDriver(options);
+		return driver;
 	}
 	
 	@FXML
@@ -98,10 +105,30 @@ public class Int2FixController {
 	}
 	
 	private void login() {
+		String filePath = System.getProperty("user.home") + "/portal.id";
+		String id="";
+		String pwd="";
+		try {
+		File file = new File(filePath);
+			if(!file.exists()) {
+				file.createNewFile();
+				BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+				bw.write("id=,pwd=");
+				bw.close();
+			}
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			String line = br.readLine();
+			String [] arr = line.split(",");
+			id = arr[0].split("=")[1].trim();
+			pwd = arr[1].split("=")[1].trim();
+			br.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		WebElement username = driver.findElement(By.name("username"));
-        username.sendKeys("dzhu");
+        username.sendKeys(id);
         WebElement password = driver.findElement(By.name("password"));
-        password.sendKeys("Nihaoma1@");
+        password.sendKeys(pwd);
         WebElement submitLogin = driver.findElement(By.name("submitLogin"));
         submitLogin.click();
         
