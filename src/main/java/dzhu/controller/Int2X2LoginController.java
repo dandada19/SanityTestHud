@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.sikuli.script.FindFailed;
@@ -70,17 +71,22 @@ public class Int2X2LoginController {
 	
 	private WebDriver getDriver() {
 		if(driver==null) {		
-			driver = new ChromeDriver();
-			return driver;
+			return initDriver();
 		}else {
 			try {
 				driver.get(Int2Settings.X2_LINK);
 			}catch(Exception e){
 				//browser may be closed manually.
-				driver = new ChromeDriver();
+				driver = initDriver();
 			}
-			driver.manage().window().maximize();
 			return driver;
 		}
+	}
+	
+	private WebDriver initDriver() {
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--start-maximized");
+		driver = new ChromeDriver(options);
+		return driver;
 	}
 }

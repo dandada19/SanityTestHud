@@ -10,7 +10,7 @@ public class Int2Settings {
 	public static final String ENROLL_PAGE_LINK = BASE_LINK+"/enroll-int2/enroll.html";
 	public static final String X2_LINK = BASE_LINK+"/x2/login.html";
 	public static final String WEBADMIN_LINK = BASE_LINK+"/webadmin2/app/login";
-		
-	public static final String FIX_FX_LINK = "https://teamcity.qcnx.eexchange.com/project.html?projectId=FixTests";
+	
+	public static final String FIX_FX_LINK = "https://teamcity.qcnx.eexchange.com/viewType.html?buildTypeId=FixTests_INT2_Sanity";
 	public static final String FIX_TREASURY_LINK = "https://teamcity.qcnx.eexchange.com/viewType.html?buildTypeId=FixTests_INT2_TreasurySanity";
 }

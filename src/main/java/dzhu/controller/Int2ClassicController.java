@@ -2,11 +2,17 @@ package dzhu.controller;
 
 import java.io.IOException;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Key;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 
+import dzhu.settings.GlobalSettings;
 import dzhu.settings.Int2Settings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -17,6 +23,30 @@ public class Int2ClassicController {
 	private Button btnInt2LaunchClassicTaker=null;
 	@FXML
 	private Button btnInt2LaunchClassicMaker=null;
+	@FXML
+	private Button btnInt2LaunchQtpPortal=null;
+	private WebDriver driver = null;
+	
+	private WebDriver getDriver() {
+		if(driver==null) {
+			return initDriver();
+		}else {
+			try {
+				driver.get(GlobalSettings.QTP_PORTAL_LINK);
+			}catch(Exception e){
+				//browser may be closed manually.
+				driver = initDriver();
+			}
+			return driver;
+		}
+	}
+	
+	private WebDriver initDriver() {
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--start-maximized");
+		driver = new ChromeDriver(options);
+		return driver;
+	}
 	
 	@FXML
 	public void btnInt2LaunchClassicTakerClicked(Event e) throws FindFailed {
@@ -38,6 +68,13 @@ public class Int2ClassicController {
 		}
 		launchAndLoginGui("qalbank3u1", "test1234");
 		btnInt2LaunchClassicMaker.getStyleClass().add("success");
+	}
+	
+	@FXML
+	public void btnInt2LaunchQtpPortalClicked(Event e) {
+		driver = getDriver();
+		driver.get(GlobalSettings.QTP_PORTAL_LINK);
+		btnInt2LaunchQtpPortal.getStyleClass().add("success");
 	}
 	
 	private void launchAndLoginGui(String user, String password) {

@@ -6,9 +6,13 @@
 <VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.Int2ClassicController">
 
 	
-	<Label text="1. Launch Classic Taker with qtpint2_enroll/test1234" />
-	<Label text="2. Launch Classic Maker with qalbank3u1/test1234" />
+	<Label text="1. Launch Classic Taker" />
+	<Label text="   qtpint2_enroll/test1234" />
+	<Label text="2. Launch Classic Maker" />
+	<Label text="   qalbank3u1/test1234" />
 	<Label text="3. Execute ESP and RFQ orders" />
 	<Button fx:id="btnInt2LaunchClassicTaker" text="Launch Classic Taker" onAction="#btnInt2LaunchClassicTakerClicked"/>
 	<Button fx:id="btnInt2LaunchClassicMaker" text="Launch Classic Maker" onAction="#btnInt2LaunchClassicMakerClicked"/>
+	<Button fx:id="btnInt2LaunchQtpPortal" text="Launch QTP Portal Page" onAction="#btnInt2LaunchQtpPortalClicked"/>
+	
 </VBox>

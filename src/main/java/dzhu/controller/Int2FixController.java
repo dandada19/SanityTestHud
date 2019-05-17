@@ -16,6 +16,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import dzhu.settings.GlobalSettings;
 import dzhu.settings.Int2Settings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -90,7 +91,7 @@ public class Int2FixController {
 	@FXML
 	public void btnInt2LaunchTeamcityClicked(Event e) {
 		driver = getDriver();
-        driver.get(Int2Settings.FIX_FX_LINK);
+        driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
         if(isLoginPageShown()) {
         	login();
         }

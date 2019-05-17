@@ -30,7 +30,6 @@ public class Int2DevmonController {
 
 	@FXML
 	public void btnInt2LogonDevmonClicked(Event e) throws FindFailed {
-		btnInt2LogonDevmon.getStyleClass().add("warning");
 		try {
 			Runtime.getRuntime().exec("javaws " + Int2Settings.DEVMON_LINK);
 		} catch (IOException ex) {
