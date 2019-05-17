@@ -7,6 +7,9 @@
 
 	<Label text="1. Successfully Logon to X2" />
 	<Label text="2. Do some trades (optional)" />
+	<Label text="    User Name: qtpint2_enroll" />
+	<Label text="    Password: test1234" />
+	<Label text="    Cert: required" />
 	<Button fx:id="btnInt2LaunchX2" text="Launch X2" onAction="#btnInt2LaunchX2Clicked"/>
 	<Button fx:id="btnInt2LogonX2" text="Logon X2" onAction="#btnInt2LogonX2Clicked"/>
 </VBox>

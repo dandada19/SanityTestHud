@@ -1,18 +1,24 @@
 .myTree{
 	    -fx-border-style: none;
 	    -fx-background-insets:0;
+	    -fx-border-width: 0;
 }
 
 .myTree .tree-cell {
     -fx-background-color:rgb(240,240,255);
     -fx-text-fill: rgb(0,0,0);
-    -fx-padding:4;
+    
 }
 
 .myTree .tree-cell:selected {
     -fx-background-color:rgb(192,192,192);
     -fx-text-fill: rgb(0,0,0);
     -fx-padding:4;
+}
+
+.mainVBox{
+	-fx-background-color: rgb(240,240,255);
+	-fx-padding: 5 5 5 5;
 }
 
 .myVBox{

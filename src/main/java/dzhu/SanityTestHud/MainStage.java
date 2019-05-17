@@ -4,12 +4,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import dzhu.settings.GlobalSettings;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -52,11 +59,61 @@ public class MainStage {
 		tv.setShowRoot(false);
 		
 		VBox vb = new VBox(tv);
-		VBox.setVgrow(tv, Priority.ALWAYS);
+		//VBox.setVgrow(tv, Priority.ALWAYS);
 		
 		Scene mainScene = new Scene(vb, 230, 600);
 		mainScene.getStylesheets().add(getClass().getClassLoader().getResource("application.css").toExternalForm());
+		mainScene.getStylesheets().add(getClass().getClassLoader().getResource("bootstrap3.css").toExternalForm());
 		tv.getStyleClass().add("myTree");
+
+		Button btnComposeEmail = new Button("Compose Email");
+		btnComposeEmail.setStyle("-fx-margin: 10 10 10 20;");
+		btnComposeEmail.getStyleClass().add("primary");
+		btnComposeEmail.setMaxWidth(Double.MAX_VALUE);
+		
+		//not able to login
+//		WebDriver driver = new HtmlUnitDriver(false);
+//		driver.get(GlobalSettings.DEV_PORTAL_LINK);
+//		try {
+//			WebElement element = driver.findElement(By.id("stackInfo_int2"));
+//			stackVersion = element.getText();
+//		}catch(Exception e) {
+//			//element not found, ignore this step.
+//		}
+		
+		
+		btnComposeEmail.setOnAction(e->{
+			String stackVersion = "[check it on DEVMON]";
+			System.out.println("compose emial");
+			String body = getTestResult(treeRoot);
+			System.out.println("body="+body);
+			try {
+		        Runtime.getRuntime().exec(new String[] {
+		        		"wscript.exe", "sendEmail.vbs", 
+		        		//0-to
+		        		"Integration Support <IntSupport@eexchange.com>; TechOps <techops@globallink.com>; "
+		        		+ "Product Management <ProductManagement@globallink.com>",
+		        		//1-cc
+		        		"Siby John STT <SJohn@StateStreet.com>; QA-internal <QA-internal@globallink.com>",
+		        		//2-subject
+		        		"INT2 Updated to " + stackVersion,
+		        		//3-body
+		        		"INT2 Updated to " + stackVersion + "<br>" + body
+		        });        
+		    } catch (Exception ex) {
+		        ex.printStackTrace();
+		    }
+		});
+		
+		VBox v1 = new VBox(tv);
+		VBox.setVgrow(tv, Priority.ALWAYS);
+		VBox.setVgrow(v1, Priority.ALWAYS);
+		VBox v2 = new VBox(btnComposeEmail);
+		v2.getStyleClass().add("mainVBox");
+		
+		vb.getChildren().addAll(v1, v2);
+		
+		//vb.setSpacing(5);
 		
 		//set TreeView selecting actions
 		tv.getSelectionModel().selectedItemProperty().addListener(
@@ -155,5 +212,33 @@ public class MainStage {
 			scenePool.put(name, scene);
 			return scene;
 		}
+	}
+	
+	private String getTestResult(TreeItem root) {
+		String lineBreak = "<br>    &nbsp&nbsp&nbsp&nbsp&nbsp-";
+		String result = "";
+		String stackResult = "";
+		for(TreeItem stack : (ObservableList<TreeItem>)root.getChildren()) {
+			if("Settings".equals(stack.getValue())) {
+				continue;
+			}
+			//stackResult += "<strong>"+stack.getValue()+"</strong>";
+			boolean isTested  = false;
+			for(TreeItem<CheckBox>test : (ObservableList<TreeItem>)stack.getChildren()) {
+				boolean isPassed = test.getValue().isSelected();
+				if(isPassed) {
+					isTested = true;
+					stackResult += lineBreak + test.getValue().getText() + ":    <font color=\"green\">Passed</font>" ;
+				}else {
+					stackResult += lineBreak + test.getValue().getText() + ":    <font color=\"red\">Failed</font>";
+				}
+			}
+			if(isTested) {
+				result += stackResult + "<br><br><br>";
+			}
+			
+			stackResult = "";
+		}
+		return result;
 	}
 }

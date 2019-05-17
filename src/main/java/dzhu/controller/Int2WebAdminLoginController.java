@@ -38,25 +38,21 @@ public class Int2WebAdminLoginController {
 	@FXML
 	public void btnInt2LogonWebAdminClicked(Event e) {
 		driver = getDriver();
+		Runnable run = () -> {
+			Screen s = new Screen();		
+			String elementsFolderPath = "src/main/resources/sikuli_elements/";
+	        Pattern btnOk = new Pattern(elementsFolderPath + "webadmin_button_ok.PNG");      
+	        try {
+				s.wait(btnOk, 20);
+		        s.click(btnOk);
+			} catch (FindFailed e1) {
+				e1.printStackTrace();
+			}
+		};
+		Thread thread = new Thread(run);
+		thread.start();
 		driver.get(Int2Settings.WEBADMIN_LINK);
-		Screen s = new Screen();		
-		String elementsFolderPath = "src/main/resources/sikuli_elements/";
-        Pattern btnOk = new Pattern(elementsFolderPath + "x2_cert_other.PNG");
-      
-        try {
-			s.wait(btnOk, 10);
-	        s.type(Key.ENTER);
-		} catch (FindFailed e1) {
-			e1.printStackTrace();
-		}
-//		Robot r;
-//		try {
-//			r = new Robot();
-//			r.keyPress(KeyEvent.VK_ENTER);
-//		} catch (AWTException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
+		
 		logonWebAdmin("qawebadmindz", "test1234");
 		btnInt2LogonWebAdmin.getStyleClass().add("success");
 	}

@@ -13,7 +13,6 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -42,10 +41,8 @@ public class Int2FixController {
 		if(driver==null) {
 			//driver = new ChromeDriver();
 			//driver.get("https://teamcity.qcnx.eexchange.com");
-			//addCookieToDriver();
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("user-data-dir=C:\\Users\\dzhu\\AppData\\Local\\Google\\Chrome\\User Data\\Default");			
-			driver = new ChromeDriver(options);
+			//addCookieToDriver();		
+			driver = new ChromeDriver();
 			return driver;
 		}else {
 			try {

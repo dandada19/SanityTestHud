@@ -8,7 +8,9 @@
 	<Label text="1. Login DEVMON with your user" />
 	<Label text="2. Check nodes are all green" />
 	<Label text="3. Check nodes crypto status are green" />
-	<Label text="4. Launch and Check Jasper Report" />
+	<Label text="4. Launch and Check Jasper Report" />	
+	<Label text="    User Name: dzhu" />
+	<Label text="    Password: test1234" />
 	<Button fx:id="btnInt2LaunchDevmon" text="Launch DEVMON" onAction="#btnInt2LaunchDevmonClicked"/>
 	<Button fx:id="btnInt2LogonDevmon" text="Logon DEVMON" onAction="#btnInt2LogonDevmonClicked"/>
 </VBox>
