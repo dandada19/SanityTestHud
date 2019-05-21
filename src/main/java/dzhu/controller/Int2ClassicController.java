@@ -5,8 +5,6 @@ import java.io.IOException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Key;
 import org.sikuli.script.Pattern;
@@ -17,6 +15,7 @@ import dzhu.settings.Int2Settings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class Int2ClassicController {
 	@FXML
@@ -26,6 +25,14 @@ public class Int2ClassicController {
 	@FXML
 	private Button btnInt2LaunchQtpPortal=null;
 	private WebDriver driver = null;
+	private Stage parentStage = null;
+	
+	private Stage getParentStage() {
+		if(parentStage == null) {
+			parentStage = (Stage)btnInt2LaunchClassicTaker.getScene().getWindow();
+		}
+		return parentStage;
+	}
 	
 	private WebDriver getDriver() {
 		if(driver==null) {
@@ -50,30 +57,36 @@ public class Int2ClassicController {
 	
 	@FXML
 	public void btnInt2LaunchClassicTakerClicked(Event e) throws FindFailed {
+		getParentStage().hide();
 		try {
 			Runtime.getRuntime().exec("javaws " + Int2Settings.CLASSIC_TAKER_LINK);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		launchAndLoginGui("qtpint2_enroll", "test1234");
+		launchAndLoginGui(Int2Settings.CLASSICTAKER_USERNAME, Int2Settings.CLASSICTAKER_PASSWORD);
+		getParentStage().show();
 		btnInt2LaunchClassicTaker.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LaunchClassicMakerClicked(Event e) {
+		getParentStage().hide();
 		try {
 			Runtime.getRuntime().exec("javaws " + Int2Settings.CLASSIC_MAKER_LINK);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		launchAndLoginGui("qalbank3u1", "test1234");
+		launchAndLoginGui(Int2Settings.CLASSICMAKER_USERNAME, Int2Settings.CLASSICMAKER_PASSWORD);
+		getParentStage().show();
 		btnInt2LaunchClassicMaker.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LaunchQtpPortalClicked(Event e) {
+		getParentStage().hide();
 		driver = getDriver();
 		driver.get(GlobalSettings.QTP_PORTAL_LINK);
+		getParentStage().show();
 		btnInt2LaunchQtpPortal.getStyleClass().add("success");
 	}
 	

@@ -13,6 +13,7 @@ import dzhu.settings.Int2Settings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class Int2EnrollController {
 	@FXML
@@ -21,6 +22,14 @@ public class Int2EnrollController {
 	private Button btnInt2LaunchEnrollApp=null;
 	
 	private WebDriver driver = null;
+	private Stage parentStage = null;
+	
+	private Stage getParentStage() {
+		if(parentStage == null) {
+			parentStage = (Stage)btnInt2LaunchEnrollPage.getScene().getWindow();
+		}
+		return parentStage;
+	}
 	
 	public WebDriver getDriver() {
 		if(driver==null) {
@@ -45,14 +54,16 @@ public class Int2EnrollController {
 	
 	@FXML
 	public void btnInt2LaunchEnrollPageClicked(Event e) {
+		getParentStage().hide();
 		driver = getDriver();
 		driver.get(Int2Settings.ENROLL_PAGE_LINK);
-
-		btnInt2LaunchEnrollApp.getStyleClass().add("success");
+		getParentStage().show();
+		btnInt2LaunchEnrollPage.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LaunchEnrollAppClicked(Event e) throws FindFailed {
+		getParentStage().hide();
 		btnInt2LaunchEnrollApp.getStyleClass().remove("success");
 		try {
 			Runtime.getRuntime().exec("javaws " + Int2Settings.ENROLL_APP_LINK);
@@ -82,10 +93,12 @@ public class Int2EnrollController {
         s.click(checkboxAgree);
         s.click(btnSubmit);
         s.wait(textUserName, 30);
-        s.type(textUserName, "qtpint2_enroll");
-        s.type(textPin, "test1234");
-        s.type(textEmail, "qa@currenex.com");
+        s.type(textUserName, Int2Settings.ENROLLMENT_USERNAME);
+        s.type(textPin, Int2Settings.ENROLLMENT_PASSWORD);
+        s.type(textEmail, Int2Settings.EMAIL_ENROLL);
         s.click(btnEnroll);
+
+		getParentStage().show();
 		btnInt2LaunchEnrollApp.getStyleClass().add("success");
 	}
 }

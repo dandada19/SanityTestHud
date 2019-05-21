@@ -61,7 +61,6 @@ public class MainStage {
 		tv.getStyleClass().add("myTree");
 
 		Button btnComposeEmail = new Button("Compose Email");
-		btnComposeEmail.setStyle("-fx-margin: 10 10 10 20;");
 		btnComposeEmail.getStyleClass().add("primary");
 		btnComposeEmail.setMaxWidth(Double.MAX_VALUE);
 		
@@ -113,15 +112,19 @@ public class MainStage {
 		tv.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue)->{
 		            TreeItem selectedItem = (TreeItem) newValue;
-					CheckBox cb = (CheckBox) selectedItem.getValue();
-					System.out.println("selected item is: " + cb.getText());
-					TreeItem parentItem = selectedItem.getParent();
-					System.out.println("selected item's father is: " + parentItem.getValue());
-					String fxmlName = parentItem.getValue() + "_" + cb.getText() + ".fxml";
-					System.out.println("fxmlName is: " + fxmlName);
-					sideStage.setTitle(parentItem.getValue() + "-" + cb.getText());
-					
-				
+		            if(selectedItem.getParent().equals(treeRoot) && !selectedItem.getValue().equals("Settings")) {
+		            	return;
+		            }
+					String fxmlName = "";
+					if(selectedItem.getValue() instanceof CheckBox) {
+						CheckBox cb = (CheckBox) selectedItem.getValue();
+						TreeItem parentItem = selectedItem.getParent();
+						fxmlName = parentItem.getValue() + "_" + cb.getText() + ".fxml";
+						sideStage.setTitle(parentItem.getValue() + "-" + cb.getText());
+					}else {
+						fxmlName = selectedItem.getValue() + ".fxml";
+						sideStage.setTitle(selectedItem.getValue().toString());
+					}
 					sideStage.setScene(getScene(fxmlName));
 					
 					if(sideStage.isShowing()) {
@@ -161,7 +164,7 @@ public class MainStage {
 		sideStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("idea.png")));
 		sideStage.setAlwaysOnTop(true);
 		sideStage.initStyle(StageStyle.DECORATED);
-		sideStage.setWidth(360);
+		sideStage.setWidth(400);
 	}
 	
 	private TreeItem setupInt2() {

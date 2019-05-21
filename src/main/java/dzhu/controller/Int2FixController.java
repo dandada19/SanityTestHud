@@ -23,6 +23,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 public class Int2FixController {
 	@FXML
@@ -38,12 +39,17 @@ public class Int2FixController {
 	
 	private WebDriver driver=null;
 	final private String cookieFileName = "FixTeamcity.cookie";
+	private Stage parentStage = null;
 	
-	public WebDriver getDriver() {
+	private Stage getParentStage() {
+		if(parentStage == null) {
+			parentStage = (Stage)labelInt2FixFxStatus.getScene().getWindow();
+		}
+		return parentStage;
+	}
+	
+	private WebDriver getDriver() {
 		if(driver==null) {
-			//driver = new ChromeDriver();
-			//driver.get("https://teamcity.qcnx.eexchange.com");
-			//addCookieToDriver();
 			return initDriver();
 		}else {
 			try {
@@ -65,6 +71,7 @@ public class Int2FixController {
 	
 	@FXML
 	public void btnInt2FixFXClicked(Event e) {
+		getParentStage().hide();
 		driver = getDriver();
         driver.get(Int2Settings.FIX_FX_LINK);
         if(isLoginPageShown()) {
@@ -76,11 +83,13 @@ public class Int2FixController {
         wait.until(ExpectedConditions.elementToBeClickable(byRun));
         WebElement run = driver.findElement(byRun);
         run.click();
-                
+
+        getParentStage().show();
 		btnInt2FixFX.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnInt2FixTreasClicked(Event e) {
+		getParentStage().hide();
 		driver = getDriver();
 		driver.get(Int2Settings.FIX_TREASURY_LINK);        
         if(isLoginPageShown()) {
@@ -92,16 +101,21 @@ public class Int2FixController {
         wait.until(ExpectedConditions.elementToBeClickable(byRun));
         WebElement run = driver.findElement(byRun);
         run.click();
-        
+
+		getParentStage().show();
 		btnInt2FixTreas.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnInt2LaunchTeamcityClicked(Event e) {
+		getParentStage().hide();
 		driver = getDriver();
         driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
         if(isLoginPageShown()) {
         	login();
         }
+
+		getParentStage().show();
+        btnInt2LaunchTeamcity.getStyleClass().add("success");
 	}
 	
 	private void login() {

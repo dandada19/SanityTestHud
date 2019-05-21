@@ -15,6 +15,7 @@ import dzhu.settings.Int2Settings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class Int2X2LoginController {
 	@FXML
@@ -23,19 +24,31 @@ public class Int2X2LoginController {
 	private Button btnInt2LogonX2=null;
 	
 	private WebDriver driver = null;
+	private Stage parentStage = null;
+	
+	private Stage getParentStage() {
+		if(parentStage == null) {
+			parentStage = (Stage)btnInt2LaunchX2.getScene().getWindow();
+		}
+		return parentStage;
+	}
 	
 	@FXML
 	public void btnInt2LaunchX2Clicked(Event e) {
+		getParentStage().hide();
 		driver = getDriver();
 		driver.get(Int2Settings.X2_LINK);
+		getParentStage().show();
 		btnInt2LaunchX2.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LogonX2Clicked(Event e) {
+		getParentStage().hide();
 		driver = getDriver();
 		driver.get(Int2Settings.X2_LINK);
-		logonX2("qtpint2_enroll", "test1234");
+		logonX2(Int2Settings.X2TAKER_USERNAME, Int2Settings.X2TAKER_PASSWORD);
+		getParentStage().show();
 		btnInt2LogonX2.getStyleClass().add("success");
 	}
 	

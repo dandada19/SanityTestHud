@@ -1,7 +1,16 @@
 package dzhu.settings;
 
 public class Int2Settings {
+	private static Int2Settings int2Settings = null;
+	public static Int2Settings getInstance() {
+		if(int2Settings==null) {
+			int2Settings = new Int2Settings();			
+		}
+		return int2Settings;
+	}
+	
 	private static final String BASE_LINK="https://integration2-dl.currenex.com";
+	
 	public static final String DEVMON_LINK = BASE_LINK+"/webstart/devmon.jnlp";
 	public static final String CLASSIC_TAKER_LINK = BASE_LINK+"/webstart/requester.jnlp";
 	public static final String CLASSIC_MAKER_LINK = BASE_LINK+"/webstart/provider.jnlp";
@@ -13,4 +22,21 @@ public class Int2Settings {
 	
 	public static final String FIX_FX_LINK = "https://teamcity.qcnx.eexchange.com/viewType.html?buildTypeId=FixTests_INT2_Sanity";
 	public static final String FIX_TREASURY_LINK = "https://teamcity.qcnx.eexchange.com/viewType.html?buildTypeId=FixTests_INT2_TreasurySanity";
+	
+	public static String ENROLLMENT_USERNAME;
+	public static String ENROLLMENT_PASSWORD;
+	public static String X2TAKER_USERNAME;
+	public static String X2TAKER_PASSWORD;
+	public static String CLASSICTAKER_USERNAME;
+	public static String CLASSICTAKER_PASSWORD;
+	public static String CLASSICMAKER_USERNAME;
+	public static String CLASSICMAKER_PASSWORD;
+	public static String DEVMONADMIN_USERNAME;
+	public static String DEVMONADMIN_PASSWORD;
+	public static String MDFADMIN_USERNAME;
+	public static String MDFADMIN_PASSWORD;
+	public static String WEBADMIN_USERNAME;
+	public static String WEBADMIN_PASSWORD;
+	
+	public static String EMAIL_ENROLL = "qa@currenex.com";
 }

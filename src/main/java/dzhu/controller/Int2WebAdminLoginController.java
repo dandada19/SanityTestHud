@@ -1,9 +1,5 @@
 package dzhu.controller;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.sikuli.script.FindFailed;
-import org.sikuli.script.Key;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 
@@ -20,6 +15,7 @@ import dzhu.settings.Int2Settings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class Int2WebAdminLoginController {
 	@FXML
@@ -28,16 +24,27 @@ public class Int2WebAdminLoginController {
 	private Button btnInt2LogonWebAdmin=null;
 	
 	private WebDriver driver = null;
+	private Stage parentStage = null;
+	
+	private Stage getParentStage() {
+		if(parentStage == null) {
+			parentStage = (Stage)btnInt2LaunchWebAdmin.getScene().getWindow();
+		}
+		return parentStage;
+	}
 	
 	@FXML
 	public void btnInt2LaunchWebAdminClicked(Event e) {
+		getParentStage().hide();
 		driver = getDriver();
 		driver.get(Int2Settings.WEBADMIN_LINK);
+		getParentStage().show();
 		btnInt2LaunchWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LogonWebAdminClicked(Event e) {
+		getParentStage().hide();
 		driver = getDriver();
 		Runnable run = () -> {
 			Screen s = new Screen();		
@@ -54,7 +61,8 @@ public class Int2WebAdminLoginController {
 		thread.start();
 		driver.get(Int2Settings.WEBADMIN_LINK);
 		
-		logonWebAdmin("qawebadmindz", "test1234");
+		logonWebAdmin(Int2Settings.WEBADMIN_USERNAME, Int2Settings.WEBADMIN_PASSWORD);
+		getParentStage().show();
 		btnInt2LogonWebAdmin.getStyleClass().add("success");
 	}
 	
