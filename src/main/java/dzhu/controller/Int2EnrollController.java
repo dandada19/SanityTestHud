@@ -72,6 +72,9 @@ public class Int2EnrollController {
 		}
 		Screen s = new Screen();		
 		String elementsFolderPath = "src/main/resources/sikuli_elements/";
+		if(getClass().getClassLoader().getResource(elementsFolderPath)==null) {
+			elementsFolderPath = "resources/sikuli_elements/";
+		}
         Pattern checkboxAgree = new Pattern(elementsFolderPath + "enroll_checkbox_agree.PNG");
         Pattern btnSubmit = new Pattern(elementsFolderPath + "enroll_button_submit.PNG");
         Pattern textUserName = new Pattern(elementsFolderPath + "enroll_text_username.PNG");

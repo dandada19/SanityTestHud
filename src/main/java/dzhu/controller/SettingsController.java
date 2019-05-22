@@ -1,22 +1,55 @@
 package dzhu.controller;
 
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import dzhu.settings.GlobalSettings;
 import dzhu.settings.Int2Settings;
+import dzhu.settings.SettingsUtil;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 
 public class SettingsController {
-	private static Map<String,String> mapControl2Property = null;
-
+	private static final Map<String, String> mapControl2Property;
+    static {
+        Map<String, String> map = new HashMap<>();
+        map.put("tfGlobalFixPortalUsername", "GlobalSettings.FIXPORTAL_USERNAME");
+		map.put("tfGlobalFixPortalPassword", "GlobalSettings.FIXPORTAL_PASSWORD");
+		map.put("tfGlobalDevPortalUsername", "GlobalSettings.DEVPORTAL_USERNAME");
+		map.put("tfGlobalDevPortalPassword", "GlobalSettings.DEVPORTAL_PASSWORD");
+		
+		map.put("tfInt2EnrollmentUsername", "Int2Settings.ENROLLMENT_USERNAME");
+		map.put("tfInt2EnrollmentPassword", "Int2Settings.ENROLLMENT_PASSWORD");
+		map.put("tfInt2ClassicTakerUsername", "Int2Settings.CLASSICTAKER_USERNAME");
+		map.put("tfInt2ClassicTakerPassword", "Int2Settings.CLASSICTAKER_PASSWORD");
+		map.put("tfInt2ClassicMakerUsername", "Int2Settings.CLASSICMAKER_USERNAME");
+		map.put("tfInt2ClassicMakerPassword", "Int2Settings.CLASSICMAKER_PASSWORD");
+		map.put("tfInt2X2TakerUsername", "Int2Settings.X2TAKER_USERNAME");
+		map.put("tfInt2X2TakerPassword", "Int2Settings.X2TAKER_PASSWORD");
+		map.put("tfInt2WebAdminUsername", "Int2Settings.WEBADMIN_USERNAME");
+		map.put("tfInt2WebAdminPassword", "Int2Settings.WEBADMIN_PASSWORD");
+		map.put("tfInt2DevmonAdminUsername", "Int2Settings.DEVMONADMIN_USERNAME");
+		map.put("tfInt2DevmonAdminPassword", "Int2Settings.DEVMONADMIN_PASSWORD");
+		map.put("tfInt2MdfAdminUsername", "Int2Settings.MDFADMIN_USERNAME");
+		map.put("tfInt2MdfAdminPassword", "Int2Settings.MDFADMIN_PASSWORD");
+        mapControl2Property = Collections.unmodifiableMap(map);
+    }
 	@FXML
 	private TabPane rootTabPane = null;
 	@FXML
@@ -64,8 +97,6 @@ public class SettingsController {
 	public void toggleButtonClick(Event e) {
 		ToggleButton tb = (ToggleButton)e.getSource();
 		if(tb.isSelected()) {
-			System.out.println("tb clicked");
-			System.out.println("tb.isSelected()="+tb.isSelected());
 			setSiblingEditable(tb, true);
 		}else {
 			setSiblingEditable(tb, false);
@@ -87,7 +118,6 @@ public class SettingsController {
 	
 	@FXML
 	public void initialize() {
-		System.out.println("this is Settings Controller init");
 		tfGlobalFixPortalUsername.setText(GlobalSettings.FIXPORTAL_USERNAME);
 		tfGlobalFixPortalPassword.setText(GlobalSettings.FIXPORTAL_PASSWORD);
 		tfGlobalDevPortalUsername.setText(GlobalSettings.DEVPORTAL_USERNAME);
@@ -122,10 +152,47 @@ public class SettingsController {
 		n.focusedProperty().addListener(
 				(obs, oldVal, newVal)->{
 					if(newVal==false) {
-			            System.out.println("Textfield out focus");
 			            System.out.println(n.getId());
+			            String property = mapControl2Property.get(n.getId());
+			            System.out.println(property);
+			            if (property==null) {
+			            	return;
+			            }
+			            try {
+				            String cls = property.split("\\.")[0];
+				            String field = property.split("\\.")[1];
+				            Class<?> c = Class.forName("dzhu.settings."+cls);
+				            Field f = c.getDeclaredField(field);
+				            f.setAccessible(true);
+				            TextInputControl input = (TextInputControl)n;
+				            f.set(c, input.getText());
+			            }catch(Exception e) {
+			            	e.printStackTrace();
+			            }
+			            
 					}
 				}
 			);
+	}
+	
+	public void savePropertiesToFile() {
+		List<String> lines = new ArrayList<>();
+		Path path = Paths.get("settings.properties");		
+		try {
+			for(Map.Entry<String, String> entry : mapControl2Property.entrySet()) {
+				TextInputControl node = (TextInputControl)rootTabPane.lookup("#"+entry.getKey());
+				String value = node.getText();
+				if (node instanceof PasswordField) {
+					value = SettingsUtil.encryptString(value);
+				}
+				//GlobalSettings.FIXPORTAL_USERNAME to GLOBAL_FIXPORTAL_USERNAME
+				String property = entry.getValue().replace("Settings.", "_").toUpperCase();
+				lines.add(property+"="+value);
+			}
+			Collections.sort(lines);
+			Files.write(path, lines, StandardCharsets.UTF_8);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

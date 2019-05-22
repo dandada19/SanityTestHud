@@ -1,11 +1,11 @@
 package dzhu.SanityTestHud;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import dzhu.controller.SettingsController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,6 +26,7 @@ public class MainStage {
 	private Stage sideStage;
 	private Map<String, Scene> scenePool = new HashMap();
 	final int SCENE_POOL_SIZE = 10;
+	private static SettingsController settingsController;
 
 	public Stage getStage() {
 		return stage;
@@ -56,8 +57,8 @@ public class MainStage {
 		//VBox.setVgrow(tv, Priority.ALWAYS);
 		
 		Scene mainScene = new Scene(vb, 230, 600);
-		mainScene.getStylesheets().add(getClass().getClassLoader().getResource("application.css").toExternalForm());
-		mainScene.getStylesheets().add(getClass().getClassLoader().getResource("bootstrap3.css").toExternalForm());
+		mainScene.getStylesheets().add("application.css");
+		mainScene.getStylesheets().add("bootstrap3.css");
 		tv.getStyleClass().add("myTree");
 
 		Button btnComposeEmail = new Button("Compose Email");
@@ -77,9 +78,7 @@ public class MainStage {
 		
 		btnComposeEmail.setOnAction(e->{
 			String stackVersion = "[check it on DEVMON]";
-			System.out.println("compose emial");
 			String body = getTestResult(treeRoot);
-			System.out.println("body="+body);
 			try {
 		        Runtime.getRuntime().exec(new String[] {
 		        		"wscript.exe", "sendEmail.vbs", 
@@ -111,6 +110,12 @@ public class MainStage {
 		//set TreeView selecting actions
 		tv.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue)->{
+		            TreeItem unSelectedItem = (TreeItem) oldValue;
+		            if(unSelectedItem!=null && unSelectedItem.getValue().equals("Settings")) {
+		            	//save settings to settings.properties file.
+		            	settingsController.savePropertiesToFile();
+		            }
+
 		            TreeItem selectedItem = (TreeItem) newValue;
 		            if(selectedItem.getParent().equals(treeRoot) && !selectedItem.getValue().equals("Settings")) {
 		            	return;
@@ -128,7 +133,9 @@ public class MainStage {
 					sideStage.setScene(getScene(fxmlName));
 					
 					if(sideStage.isShowing()) {
-						sideStage.show();
+						if(sideStage.isIconified()){
+							sideStage.setIconified(false);
+						}
 					}else {
 						sideStage.setX(stage.getX()+stage.getWidth()-3);
 						sideStage.setY(stage.getY());
@@ -142,18 +149,21 @@ public class MainStage {
 		stage.resizableProperty().set(false);
 		stage.setScene(mainScene);
 		stage.resizableProperty().set(false);
-		stage.setX(0);
-		stage.setY(200);
-		stage.xProperty().addListener((obs, oldVal, newVal) -> {
-			sideStage.setX((double)newVal + stage.getWidth()-3);
-		});
-		stage.yProperty().addListener((obs, oldVal, newVal) -> {
-			sideStage.setY((double)newVal);
-		});
 		
 		stage.setOnCloseRequest(value->{
+			if(settingsController!=null) {
+				settingsController.savePropertiesToFile();
+			}
 			sideStage.close();
 		});
+		
+		stage.iconifiedProperty().addListener(
+				(ov, oldValue, newValue)->{
+					if(sideStage.isShowing()) {
+						sideStage.toFront();
+					}
+				});
+		
 		stage.show();
 	}
 	
@@ -183,15 +193,19 @@ public class MainStage {
 	}
 	
 	private Scene getScene(String name) {
+		name = name.toLowerCase();
 		if(scenePool.containsKey(name)) {
 			return scenePool.get(name);
 		}else {
 			FXMLLoader loader = new FXMLLoader();
 			Parent root = new VBox();
 			try {
-				loader.setLocation(new File("src/main/resources/" + name).toURI().toURL());
-				root = (Parent) loader.load();
-			} catch (IOException e) {
+				InputStream is = MainStage.class.getClassLoader().getResourceAsStream(name);
+				root = (Parent) loader.load(is);
+				if(name.contains("settings.fxml")) {
+					settingsController = loader.getController();
+				}
+			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println(name+" not found or loading error...");
 			}					

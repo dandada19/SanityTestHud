@@ -119,30 +119,30 @@ public class Int2FixController {
 	}
 	
 	private void login() {
-		String filePath = System.getProperty("user.home") + "/portal.id";
-		String id="";
-		String pwd="";
-		try {
-		File file = new File(filePath);
-			if(!file.exists()) {
-				file.createNewFile();
-				BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-				bw.write("id=,pwd=");
-				bw.close();
-			}
-			BufferedReader br = new BufferedReader(new FileReader(file));
-			String line = br.readLine();
-			String [] arr = line.split(",");
-			id = arr[0].split("=")[1].trim();
-			pwd = arr[1].split("=")[1].trim();
-			br.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+//		String filePath = System.getProperty("user.home") + "/portal.id";
+//		String id="";
+//		String pwd="";
+//		try {
+//		File file = new File(filePath);
+//			if(!file.exists()) {
+//				file.createNewFile();
+//				BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+//				bw.write("id=,pwd=");
+//				bw.close();
+//			}
+//			BufferedReader br = new BufferedReader(new FileReader(file));
+//			String line = br.readLine();
+//			String [] arr = line.split(",");
+//			id = arr[0].split("=")[1].trim();
+//			pwd = arr[1].split("=")[1].trim();
+//			br.close();
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
 		WebElement username = driver.findElement(By.name("username"));
-        username.sendKeys(id);
+        username.sendKeys(GlobalSettings.FIXPORTAL_USERNAME);
         WebElement password = driver.findElement(By.name("password"));
-        password.sendKeys(pwd);
+        password.sendKeys(GlobalSettings.FIXPORTAL_PASSWORD);
         WebElement submitLogin = driver.findElement(By.name("submitLogin"));
         submitLogin.click();
         
