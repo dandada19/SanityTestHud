@@ -63,7 +63,7 @@ public class Int2ClassicController {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		launchAndLoginGui(Int2Settings.CLASSICTAKER_USERNAME, Int2Settings.CLASSICTAKER_PASSWORD);
+		//launchAndLoginGui(Int2Settings.CLASSICTAKER_USERNAME, Int2Settings.CLASSICTAKER_PASSWORD);
 		getParentStage().show();
 		btnInt2LaunchClassicTaker.getStyleClass().add("success");
 	}
@@ -76,7 +76,6 @@ public class Int2ClassicController {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		launchAndLoginGui(Int2Settings.CLASSICMAKER_USERNAME, Int2Settings.CLASSICMAKER_PASSWORD);
 		getParentStage().show();
 		btnInt2LaunchClassicMaker.getStyleClass().add("success");
 	}
@@ -90,7 +89,8 @@ public class Int2ClassicController {
 		btnInt2LaunchQtpPortal.getStyleClass().add("success");
 	}
 	
-	private void launchAndLoginGui(String user, String password) {
+	@Deprecated
+	private void launchAndLoginGuiSikuli(String user, String password) {
 		Screen s = new Screen();
 		String elementsFolderPath = "src/main/resources/sikuli_elements/";
         Pattern btnRun = new Pattern(elementsFolderPath + "classic_button_run.PNG");

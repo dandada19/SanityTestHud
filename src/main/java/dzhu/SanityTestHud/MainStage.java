@@ -149,6 +149,8 @@ public class MainStage {
 		stage.resizableProperty().set(false);
 		stage.setScene(mainScene);
 		stage.resizableProperty().set(false);
+		stage.setX(1200);
+		stage.setY(100);
 		
 		stage.setOnCloseRequest(value->{
 			if(settingsController!=null) {
