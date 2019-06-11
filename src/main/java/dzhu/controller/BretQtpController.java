@@ -21,6 +21,8 @@ public class BretQtpController {
 	@FXML
 	private Button btnBretQtpLondonAsiaRegionIcLogin=null;
 	@FXML
+	private Button btnBretQtpE2EELogin=null;
+	@FXML
 	private Button btnBretQtpRetailMargin=null;
 	@FXML
 	private Button btnBretQtpRetailWs=null;
@@ -66,6 +68,10 @@ public class BretQtpController {
 	@FXML
 	public void btnBretQtpLondonAsiaRegionIcLoginClicked(Event e) {
 		runQtpTest(btnBretQtpLondonAsiaRegionIcLogin, "FX_RetailIC", "BRET", "SMOKE", "qtpGr_LondonAsiaRegionICLogin");
+	}
+	@FXML
+	public void btnBretQtpE2EELoginClicked(Event e) {
+		runQtpTest(btnBretQtpRetailIc, "FX_RetailIC", "BRET", "SMOKE", "qtpGr_E2EELogin");
 	}
 	@FXML
 	public void btnBretQtpRetailMarginClicked(Event e) {
