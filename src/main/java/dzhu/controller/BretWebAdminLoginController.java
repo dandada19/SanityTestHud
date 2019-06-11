@@ -81,8 +81,10 @@ public class BretWebAdminLoginController {
 		boolean ret = resetPin("qtpicuser" , BretSettings.ENROLLMENT_USERNAME, "test1234");
 		if (ret==false) {
 			lbBretWebadminResult.setText("You need to login before reset pin");
+			btnBretResetPin.getStyleClass().remove("success");
 			btnBretResetPin.getStyleClass().add("danger");
 		}else {
+			btnBretResetPin.getStyleClass().remove("danger");
 			btnBretResetPin.getStyleClass().add("success");
 		}
 		getParentStage().show();
@@ -104,48 +106,55 @@ public class BretWebAdminLoginController {
 		if(driver==null) {
 			return false;
 		}
-		WebDriverWait wait = new WebDriverWait(driver, 5);
-		By by = By.cssSelector("input[placeholder='Search...']");
-		if (wait.until(ExpectedConditions.elementToBeClickable(by)) == null){
-			return false;
-		}
 		try {
-			WebElement inputSearch = driver.findElement(by);
-			inputSearch.sendKeys(party);
-			Thread.sleep(2000);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		WebElement dropdown = driver.findElement(By.xpath(".//ul[@class='dropdown-menu btn-block']"));
-		WebElement btnDropdown = driver.findElement(By.xpath(".//button[@ng-disabled='isTakerCreationInProgress()']"));
-		btnDropdown.click();
-		List<WebElement> countriesList=dropdown.findElements(By.tagName("li"));
-		for (WebElement li : countriesList) {
-			WebElement a;
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			By by = By.cssSelector("input[placeholder='Search...']");
+			if (wait.until(ExpectedConditions.elementToBeClickable(by)) == null){
+				return false;
+			}
 			try {
-				a = li.findElement(By.tagName("a"));
+				WebElement inputSearch = driver.findElement(by);
+				inputSearch.clear();
+				inputSearch.sendKeys(party);
+				//((RemoteWebDriver) driver).executeScript("arguments[0].value='"+party+"';", inputSearch);
+				Thread.sleep(2000);
 			}catch(Exception e) {
-				continue;
+				e.printStackTrace();
 			}
 			
-			if (a.getAttribute("innerHTML").contains(user)) {
-				li.click();
+			WebElement dropdown = driver.findElement(By.xpath(".//ul[@class='dropdown-menu btn-block']"));
+			WebElement btnDropdown = driver.findElement(By.xpath(".//button[@ng-disabled='isTakerCreationInProgress()']"));
+			btnDropdown.click();
+			List<WebElement> countriesList=dropdown.findElements(By.tagName("li"));
+			for (WebElement li : countriesList) {
+				WebElement a;
+				try {
+					a = li.findElement(By.tagName("a"));
+				}catch(Exception e) {
+					continue;
+				}
+				
+				if (a.getAttribute("innerHTML").contains(user)) {
+					li.click();
+				}
 			}
+			
+			WebElement btnReset = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'reset')]")));
+			btnReset.click();
+			
+			WebElement pinInput = wait.until(ExpectedConditions.elementToBeClickable(By.name("pinInput")));
+			pinInput.click();
+			pinInput.sendKeys(pin);
+	
+			WebElement btnSavePin = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//form[@name='pinForm']/div/div/button")));
+			btnSavePin.click();
+			
+			WebElement btnApply = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".apply-button")));
+			btnApply.click();
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
 		}
-		
-		WebElement btnReset = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'reset')]")));
-		btnReset.click();
-		
-		WebElement pinInput = wait.until(ExpectedConditions.elementToBeClickable(By.name("pinInput")));
-		pinInput.click();
-		pinInput.sendKeys(pin);
-
-		WebElement btnSavePin = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//form[@name='pinForm']/div/div/button")));
-		btnSavePin.click();
-		
-		WebElement btnApply = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".apply-button")));
-		btnApply.click();
 		
 		return true;
 	}
