@@ -90,6 +90,7 @@ public class Int2ClassicController {
 	}
 	
 	@Deprecated
+	@SuppressWarnings({ "unused" })
 	private void launchAndLoginGuiSikuli(String user, String password) {
 		Screen s = new Screen();
 		String elementsFolderPath = "src/main/resources/sikuli_elements/";

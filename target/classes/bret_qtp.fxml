@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.BretQtpController">
+
+	<Label wrapText="true" text="Run qtp tests and check the results in your outlook" />
+	<Button fx:id="btnBretQtpRetailIc" text="Retail IC" onAction="#btnBretQtpRetailIcClicked"/>
+	<Button fx:id="btnBretQtpLondonAsiaRegionIcLogin" text="LondonAsiaRegion IC Login" onAction="#btnBretQtpLondonAsiaRegionIcLoginClicked"/>
+	<Button fx:id="btnBretQtpRetailMargin" text="Retail Margin" onAction="#btnBretQtpRetailMarginClicked"/>
+	<Button fx:id="btnBretQtpRetailWs" text="Retail WS" onAction="#btnBretQtpRetailWsClicked"/>
+	<Button fx:id="btnBretQtpRetailAdminTool" text="Retail Admin Tool" onAction="#btnBretQtpRetailAdminToolClicked"/>
+</VBox>

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 import dzhu.controller.SettingsController;
+import dzhu.settings.GlobalSettings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -46,9 +47,11 @@ public class MainStage {
 		TreeItem<String> settingsMenu = new TreeItem<String>("Settings");
 		
 		TreeItem int2 = setupInt2();
+		TreeItem bret = setupBret();
 		
 		treeRoot.getChildren().add(settingsMenu);
 		treeRoot.getChildren().add(int2);
+		treeRoot.getChildren().add(bret);
 		
 		tv.setRoot(treeRoot);
 		tv.setShowRoot(false);
@@ -74,23 +77,35 @@ public class MainStage {
 //		}catch(Exception e) {
 //			//element not found, ignore this step.
 //		}
-		
-		
+
 		btnComposeEmail.setOnAction(e->{
-			String stackVersion = "[check it on DEVMON]";
-			String body = getTestResult(treeRoot);
+			String [] rets = getTestResult(treeRoot);
+			String testedStacks = rets[0];
+			if(testedStacks.equals("")) {
+				return;
+			}
+			String body = rets[1];
+			String strSubject = testedStacks + " updated";
+			String toList = "", ccList="";
+			if (testedStacks.toLowerCase().contains("int2")) {
+				toList = GlobalSettings.EMAIL_TO_LIST_INT2;
+				ccList = GlobalSettings.EMAIL_CC_LIST_INT2;
+			}else if (testedStacks.toLowerCase().contains("bret")) {
+				toList = GlobalSettings.EMAIL_TO_LIST_BRET;
+				ccList = GlobalSettings.EMAIL_CC_LIST_BRET;
+			}
+			
 			try {
 		        Runtime.getRuntime().exec(new String[] {
 		        		"wscript.exe", "sendEmail.vbs", 
 		        		//0-to
-		        		"Integration Support <IntSupport@eexchange.com>; TechOps <techops@globallink.com>; "
-		        		+ "Product Management <ProductManagement@globallink.com>",
+		        		toList,
 		        		//1-cc
-		        		"Siby John STT <SJohn@StateStreet.com>; QA-internal <QA-internal@globallink.com>",
+		        		ccList,
 		        		//2-subject
-		        		"INT2 Updated to " + stackVersion,
+		        		strSubject,
 		        		//3-body
-		        		"INT2 Updated to " + stackVersion + "<br>" + body
+		        		body
 		        });        
 		    } catch (Exception ex) {
 		        ex.printStackTrace();
@@ -139,7 +154,7 @@ public class MainStage {
 					}else {
 						sideStage.setX(stage.getX()+stage.getWidth()-3);
 						sideStage.setY(stage.getY());
-						sideStage.setHeight(stage.getHeight());
+						sideStage.setHeight(650);
 						sideStage.show();
 					}
 				});
@@ -190,8 +205,26 @@ public class MainStage {
 		TreeItem<CheckBox> int2WALogin = new TreeItem<CheckBox>(new CheckBox("WebAdmin"));
 		TreeItem<CheckBox> int2Jasper = new TreeItem<CheckBox>(new CheckBox("Jasper"));
 		int2.getChildren().addAll(int2FIX, int2Enroll, int2Classic, int2Mdf, int2Devmon, int2X2Login, int2WALogin, int2Jasper);
-		int2.setExpanded(true);
+		int2.setExpanded(false);
 		return int2;
+	}
+	
+	private TreeItem setupBret() {
+		TreeItem bret = new TreeItem(new String("BRET"));
+
+		TreeItem<CheckBox> bretDevmon = new TreeItem<CheckBox>(new CheckBox("DEVMON"));
+		TreeItem<CheckBox> bretWALogin = new TreeItem<CheckBox>(new CheckBox("WebAdmin"));
+		TreeItem<CheckBox> bretEnroll = new TreeItem<CheckBox>(new CheckBox("Enroll"));
+		TreeItem<CheckBox> bretQtp = new TreeItem<CheckBox>(new CheckBox("QTP"));
+		
+		TreeItem<CheckBox> bretFIX = new TreeItem<CheckBox>(new CheckBox("FIX"));
+		TreeItem<CheckBox> bretMdf = new TreeItem<CheckBox>(new CheckBox("MarketDF"));
+		TreeItem<CheckBox> bretX2 = new TreeItem<CheckBox>(new CheckBox("X2"));
+		TreeItem<CheckBox> bretMobile = new TreeItem<CheckBox>(new CheckBox("Mobile"));
+		TreeItem<CheckBox> bretViking = new TreeItem<CheckBox>(new CheckBox("Viking"));
+		bret.getChildren().addAll(bretDevmon, bretWALogin, bretEnroll, bretQtp, bretFIX, bretMdf, bretX2, bretMobile, bretViking);
+		bret.setExpanded(false);
+		return bret;
 	}
 	
 	private Scene getScene(String name) {
@@ -227,15 +260,15 @@ public class MainStage {
 		}
 	}
 	
-	private String getTestResult(TreeItem root) {
+	private String[] getTestResult(TreeItem root) {
 		String lineBreak = "<br>    &nbsp&nbsp&nbsp&nbsp&nbsp-";
+		String testedStacks = "";
 		String result = "";
 		String stackResult = "";
 		for(TreeItem stack : (ObservableList<TreeItem>)root.getChildren()) {
 			if("Settings".equals(stack.getValue())) {
 				continue;
 			}
-			//stackResult += "<strong>"+stack.getValue()+"</strong>";
 			boolean isTested  = false;
 			for(TreeItem<CheckBox>test : (ObservableList<TreeItem>)stack.getChildren()) {
 				boolean isPassed = test.getValue().isSelected();
@@ -247,11 +280,16 @@ public class MainStage {
 				}
 			}
 			if(isTested) {
+				stackResult = "<strong>"+stack.getValue() + " is updated to <Check Version>"+"</strong><br>" + stackResult;
 				result += stackResult + "<br><br><br>";
+				testedStacks += stack.getValue() + "/";
 			}
 			
 			stackResult = "";
 		}
-		return result;
+		if(!testedStacks.equals("")) {
+			testedStacks = testedStacks.substring(0,testedStacks.length()-1);
+		}
+		return new String [] {testedStacks, result};
 	}
 }

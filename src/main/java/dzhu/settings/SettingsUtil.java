@@ -26,21 +26,22 @@ public class SettingsUtil {
 				if(line.contains("=")) {
 					//GLOBAL_DEVPORTAL_USERNAME=dzhu
 					String key = line.split("=")[0];
-					String value = line.split("=")[1];
+					String value = "";
+					if(line.split("=").length>1) {
+						value = line.split("=")[1];
+					}
 					if(key.equals("GLOBAL_DEVPORTAL_PASSWORD") ||
 							key.equals("GLOBAL_FIXPORTAL_PASSWORD")) {
 						value=decryptString(value);
 					}
+					String stackName = key.split("_")[0];
+					stackName = stackName.substring(0, 1) + stackName.substring(1, stackName.length()).toLowerCase();
 					String fieldName = key.split("_")[1] + "_" + key.split("_")[2];
-					if(key.contains("GLOBAL")) {
-						Field fieldA = GlobalSettings.class.getDeclaredField( fieldName );
-			            fieldA.setAccessible( true );
-			            fieldA.set( GlobalSettings.class, value );
-					}else if(key.contains("INT2")) {
-						Field fieldA = Int2Settings.class.getDeclaredField( fieldName );
-			            fieldA.setAccessible( true );
-			            fieldA.set( Int2Settings.class, value );
-					}
+					Class<?> clsSettings = Class.forName("dzhu.settings." + stackName + "Settings");
+
+					Field fieldA = clsSettings.getDeclaredField( fieldName );
+		            fieldA.setAccessible( true );
+		            fieldA.set( clsSettings, value );
 				}
 			}
 		} catch (Exception e) {

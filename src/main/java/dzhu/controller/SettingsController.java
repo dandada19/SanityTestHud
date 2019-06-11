@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dzhu.settings.BretSettings;
 import dzhu.settings.GlobalSettings;
 import dzhu.settings.Int2Settings;
 import dzhu.settings.SettingsUtil;
@@ -34,6 +35,7 @@ public class SettingsController {
 		map.put("tfGlobalDevPortalUsername", "GlobalSettings.DEVPORTAL_USERNAME");
 		map.put("tfGlobalDevPortalPassword", "GlobalSettings.DEVPORTAL_PASSWORD");
 		
+		//INT2
 		map.put("tfInt2EnrollmentUsername", "Int2Settings.ENROLLMENT_USERNAME");
 		map.put("tfInt2EnrollmentPassword", "Int2Settings.ENROLLMENT_PASSWORD");
 		map.put("tfInt2ClassicTakerUsername", "Int2Settings.CLASSICTAKER_USERNAME");
@@ -48,6 +50,22 @@ public class SettingsController {
 		map.put("tfInt2DevmonAdminPassword", "Int2Settings.DEVMONADMIN_PASSWORD");
 		map.put("tfInt2MdfAdminUsername", "Int2Settings.MDFADMIN_USERNAME");
 		map.put("tfInt2MdfAdminPassword", "Int2Settings.MDFADMIN_PASSWORD");
+		
+		//BRET
+		map.put("tfBretEnrollmentUsername", "BretSettings.ENROLLMENT_USERNAME");
+		map.put("tfBretEnrollmentPassword", "BretSettings.ENROLLMENT_PASSWORD");
+		map.put("tfBretVikingUsername", "BretSettings.VIKING_USERNAME");
+		map.put("tfBretVikingPassword", "BretSettings.VIKING_PASSWORD");
+		map.put("tfBretMobileUsername", "BretSettings.MOBILE_USERNAME");
+		map.put("tfBretMobilePassword", "BretSettings.MOBILE_PASSWORD");
+		map.put("tfBretX2TakerUsername", "BretSettings.X2TAKER_USERNAME");
+		map.put("tfBretX2TakerPassword", "BretSettings.X2TAKER_PASSWORD");
+		map.put("tfBretWebAdminUsername", "BretSettings.WEBADMIN_USERNAME");
+		map.put("tfBretWebAdminPassword", "BretSettings.WEBADMIN_PASSWORD");
+		map.put("tfBretDevmonAdminUsername", "BretSettings.DEVMONADMIN_USERNAME");
+		map.put("tfBretDevmonAdminPassword", "BretSettings.DEVMONADMIN_PASSWORD");
+		map.put("tfBretMdfAdminUsername", "BretSettings.MDFADMIN_USERNAME");
+		map.put("tfBretMdfAdminPassword", "BretSettings.MDFADMIN_PASSWORD");
         mapControl2Property = Collections.unmodifiableMap(map);
     }
 	@FXML
@@ -61,6 +79,8 @@ public class SettingsController {
 	@FXML
 	private TextField tfGlobalDevPortalPassword = null;	
 
+	
+	//INT2
 	@FXML
 	private TextField tfInt2EnrollmentUsername = null;
 	@FXML
@@ -89,6 +109,36 @@ public class SettingsController {
 	private TextField tfInt2MdfAdminUsername = null;
 	@FXML
 	private TextField tfInt2MdfAdminPassword = null;
+	
+	//BRET
+	@FXML
+	private TextField tfBretEnrollmentUsername = null;
+	@FXML
+	private TextField tfBretEnrollmentPassword = null;
+	@FXML
+	private TextField tfBretVikingUsername = null;
+	@FXML
+	private TextField tfBretVikingPassword = null;
+	@FXML
+	private TextField tfBretMobileUsername = null;
+	@FXML
+	private TextField tfBretMobilePassword = null;
+	@FXML
+	private TextField tfBretX2TakerUsername = null;
+	@FXML
+	private TextField tfBretX2TakerPassword = null;
+	@FXML
+	private TextField tfBretWebAdminUsername = null;
+	@FXML
+	private TextField tfBretWebAdminPassword = null;
+	@FXML
+	private TextField tfBretDevmonAdminUsername = null;
+	@FXML
+	private TextField tfBretDevmonAdminPassword = null;
+	@FXML
+	private TextField tfBretMdfAdminUsername = null;
+	@FXML
+	private TextField tfBretMdfAdminPassword = null;	
 	
 	public static void initMapControl2Property() {
 	}
@@ -123,6 +173,7 @@ public class SettingsController {
 		tfGlobalDevPortalUsername.setText(GlobalSettings.DEVPORTAL_USERNAME);
 		tfGlobalDevPortalPassword.setText(GlobalSettings.DEVPORTAL_PASSWORD);		
 		
+		//INT2
 		tfInt2EnrollmentUsername.setText(Int2Settings.ENROLLMENT_USERNAME);		
 		tfInt2EnrollmentPassword.setText(Int2Settings.ENROLLMENT_PASSWORD);		
 		tfInt2ClassicTakerUsername.setText(Int2Settings.CLASSICTAKER_USERNAME);		
@@ -137,6 +188,22 @@ public class SettingsController {
 		tfInt2DevmonAdminPassword.setText(Int2Settings.DEVMONADMIN_PASSWORD);		
 		tfInt2MdfAdminUsername.setText(Int2Settings.MDFADMIN_USERNAME);		
 		tfInt2MdfAdminPassword.setText(Int2Settings.MDFADMIN_PASSWORD);
+		
+		//BRET
+		tfBretEnrollmentUsername.setText(BretSettings.ENROLLMENT_USERNAME);		
+		tfBretEnrollmentPassword.setText(BretSettings.ENROLLMENT_PASSWORD);		
+		tfBretVikingUsername.setText(BretSettings.VIKING_USERNAME);		
+		tfBretVikingPassword.setText(BretSettings.VIKING_PASSWORD);		
+		tfBretMobileUsername.setText(BretSettings.MOBILE_USERNAME);		
+		tfBretMobilePassword.setText(BretSettings.MOBILE_PASSWORD);		
+		tfBretX2TakerUsername.setText(BretSettings.X2TAKER_USERNAME);		
+		tfBretX2TakerPassword.setText(BretSettings.X2TAKER_PASSWORD);		
+		tfBretWebAdminUsername.setText(BretSettings.WEBADMIN_USERNAME);		
+		tfBretWebAdminPassword.setText(BretSettings.WEBADMIN_PASSWORD);		
+		tfBretDevmonAdminUsername.setText(BretSettings.DEVMONADMIN_USERNAME);		
+		tfBretDevmonAdminPassword.setText(BretSettings.DEVMONADMIN_PASSWORD);		
+		tfBretMdfAdminUsername.setText(BretSettings.MDFADMIN_USERNAME);		
+		tfBretMdfAdminPassword.setText(BretSettings.MDFADMIN_PASSWORD);
 		
 		//add listener to Textfield and PasswordField
 		//i don't know how to lookup by Type selector.
@@ -181,7 +248,10 @@ public class SettingsController {
 		try {
 			for(Map.Entry<String, String> entry : mapControl2Property.entrySet()) {
 				TextInputControl node = (TextInputControl)rootTabPane.lookup("#"+entry.getKey());
-				String value = node.getText();
+				String value = "";
+				if(node.getText()!=null) {
+					value = node.getText();
+				}
 				if (node instanceof PasswordField) {
 					value = SettingsUtil.encryptString(value);
 				}
