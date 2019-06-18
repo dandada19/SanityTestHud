@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.PretEnrollController">
+	
+	<Label wrapText="true" text="1. You should have reset pin of qtppret_enroll on WebAdmin " />	
+	<Label wrapText="true" text="2. Click below button to enroll" />
+	<Button fx:id="btnPretEnroll" text="Enroll" onAction="#btnPretEnrollClicked"/>
+	<Label wrapText="true" text="3. Go to IE and remove old cert of qtppret_enroll" />
+	<Button fx:id="btnPretLaunchIe" text="Launch IE" onAction="#btnPretLaunchIeClicked"/>
+</VBox>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.TkfxQtpController">
+
+	<Label wrapText="true" text="Run qtp tests and check the results in your outlook" />
+	<Button fx:id="btnTkfxQtpRetailIc" text="Retail IC" onAction="#btnTkfxQtpRetailIcClicked"/>
+	<Button fx:id="btnTkfxQtpRetailMargin" text="Retail Margin" onAction="#btnTkfxQtpRetailMarginClicked"/>
+	<Button fx:id="btnTkfxQtpRetailWs" text="Retail WS" onAction="#btnTkfxQtpRetailWsClicked"/>
+	<Button visible="false" fx:id="btnTkfxQtpRetailAdminTool" text="Retail Admin Tool" onAction="#btnTkfxQtpRetailAdminToolClicked"/>
+	<Button visible="false" fx:id="btnTkfxQtpLondonAsiaRegionIcLogin" text="LondonAsiaRegion IC Login" onAction="#btnTkfxQtpLondonAsiaRegionIcLoginClicked"/>
+	<Button visible="false" fx:id="btnTkfxQtpE2EELogin" text="E2EE Login" onAction="#btnTkfxQtpE2EELoginClicked"/>
+	
+</VBox>

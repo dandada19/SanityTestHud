@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.TkfxDevmonController">
+
+	<Label text="1. Login DEVMON with your user" />
+	<Label text="2. Check all nodes are  green" />
+	<Label text="    -devmon printNodeStatus to get all nodes" />
+	<Label text="3. Compare active orders" />
+	<Button fx:id="btnTkfxCompareOrders" text="Compare Orders" onAction="#btnTkfxCompareOrdersClicked"/>
+	<Button fx:id="btnTkfxLaunchDevmon" text="Launch DEVMON" onAction="#btnTkfxLaunchDevmonClicked"/>
+	<Button fx:id="btnTkfxLogonDevmon" text="Logon DEVMON" onAction="#btnTkfxLogonDevmonClicked"/>
+</VBox>

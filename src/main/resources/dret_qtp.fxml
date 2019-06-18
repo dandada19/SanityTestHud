@@ -8,8 +8,9 @@
 	<Label wrapText="true" text="Run qtp tests and check the results in your outlook" />
 	<Button fx:id="btnDretQtpRetailIc" text="Retail IC" onAction="#btnDretQtpRetailIcClicked"/>
 	<Button fx:id="btnDretQtpLondonAsiaRegionIcLogin" text="LondonAsiaRegion IC Login" onAction="#btnDretQtpLondonAsiaRegionIcLoginClicked"/>
-	<Button fx:id="btnDretQtpE2EELogin" text="E2EE Login" onAction="#btnDretQtpE2EELoginClicked"/>
 	<Button fx:id="btnDretQtpRetailMargin" text="Retail Margin" onAction="#btnDretQtpRetailMarginClicked"/>
 	<Button fx:id="btnDretQtpRetailWs" text="Retail WS" onAction="#btnDretQtpRetailWsClicked"/>
 	<Button visible="false" fx:id="btnDretQtpRetailAdminTool" text="Retail Admin Tool" onAction="#btnDretQtpRetailAdminToolClicked"/>
+	<Button visible="false" fx:id="btnDretQtpE2EELogin" text="E2EE Login" onAction="#btnDretQtpE2EELoginClicked"/>
+
 </VBox>

@@ -49,11 +49,15 @@ public class MainStage {
 		TreeItem int2 = setupInt2();
 		TreeItem bret = setupBret();
 		TreeItem dret = setupDret();
+		TreeItem pret = setupPret();
+		TreeItem tkfx = setupTkfx();
 		
 		treeRoot.getChildren().add(settingsMenu);
 		treeRoot.getChildren().add(int2);
 		treeRoot.getChildren().add(bret);
 		treeRoot.getChildren().add(dret);
+		treeRoot.getChildren().add(pret);
+		treeRoot.getChildren().add(tkfx);
 		
 		tv.setRoot(treeRoot);
 		tv.setShowRoot(false);
@@ -185,7 +189,7 @@ public class MainStage {
 						sideStage.toFront();
 					}
 				});
-		
+		stage.setAlwaysOnTop(true);
 		stage.show();
 	}
 	
@@ -250,6 +254,38 @@ public class MainStage {
 		return dret;
 	}
 	
+	private TreeItem setupPret() {
+		TreeItem pret = new TreeItem(new String("PRET"));
+
+		TreeItem<CheckBox> pretDevmon = new TreeItem<CheckBox>(new CheckBox("DEVMON"));
+		TreeItem<CheckBox> pretWALogin = new TreeItem<CheckBox>(new CheckBox("WebAdmin"));
+		TreeItem<CheckBox> pretEnroll = new TreeItem<CheckBox>(new CheckBox("Enroll"));
+		TreeItem<CheckBox> pretQtp = new TreeItem<CheckBox>(new CheckBox("QTP"));
+		
+		TreeItem<CheckBox> pretFIX = new TreeItem<CheckBox>(new CheckBox("FIX"));
+		TreeItem<CheckBox> pretMdf = new TreeItem<CheckBox>(new CheckBox("MarketDF"));
+		TreeItem<CheckBox> pretMobile = new TreeItem<CheckBox>(new CheckBox("Mobile"));
+		TreeItem<CheckBox> pretViking = new TreeItem<CheckBox>(new CheckBox("Viking"));
+		pret.getChildren().addAll(pretDevmon, pretWALogin, pretEnroll, pretQtp, pretFIX, pretMdf, pretMobile, pretViking);
+		pret.setExpanded(false);
+		return pret;
+	}
+	
+	private TreeItem setupTkfx() {
+		TreeItem tkfx = new TreeItem(new String("TKFX"));
+
+		TreeItem<CheckBox> tkfxDevmon = new TreeItem<CheckBox>(new CheckBox("DEVMON"));
+		TreeItem<CheckBox> tkfxWALogin = new TreeItem<CheckBox>(new CheckBox("WebAdmin"));
+		TreeItem<CheckBox> tkfxEnroll = new TreeItem<CheckBox>(new CheckBox("Enroll"));
+		TreeItem<CheckBox> tkfxQtp = new TreeItem<CheckBox>(new CheckBox("QTP"));
+		
+		TreeItem<CheckBox> tkfxFIX = new TreeItem<CheckBox>(new CheckBox("FIX"));
+		TreeItem<CheckBox> tkfxMdf = new TreeItem<CheckBox>(new CheckBox("MarketDF"));
+		tkfx.getChildren().addAll(tkfxDevmon, tkfxWALogin, tkfxEnroll, tkfxQtp, tkfxFIX, tkfxMdf);
+		tkfx.setExpanded(false);
+		return tkfx;
+	}
+	
 	private Scene getScene(String name) {
 		name = name.toLowerCase();
 		if(scenePool.containsKey(name)) {
@@ -274,6 +310,7 @@ public class MainStage {
 				for(Map.Entry<String, Scene> e : scenePool.entrySet()) {
 					if(i==rand) {
 						scenePool.remove(e.getKey());
+						break;
 					}
 					i++;					
 				}
@@ -303,10 +340,17 @@ public class MainStage {
 					stackResult += lineBreak + test.getValue().getText() + ":    <font color=\"red\">Failed</font>";
 				}
 
-				if("DRET".equals(stack.getValue()) 
-						|| "BRET".equals(stack.getValue())
-						|| "PRET".equals(stack.getValue())
-						|| "TKFX".equals(stack.getValue()) ) {
+				if("DRET".equals(stack.getValue()) ) {
+					if(test.getValue().getText().contains("QTP")) {
+						stackResult = stackResult 
+												+ lineBreak2 + "<font color=\"gray\">" + "Retail IC" + "</font>"
+								 				+ lineBreak2 + "<font color=\"gray\">" + "LondonAsiaRegion IC Login" + "</font>"
+												+ lineBreak2 + "<font color=\"gray\">" + "Retail Margin" + "</font>"
+												+ lineBreak2 + "<font color=\"gray\">" + "Retail WS" + "</font>"
+												;
+					}
+				}else if("BRET".equals(stack.getValue())
+						|| "PRET".equals(stack.getValue()) ) {
 					if(test.getValue().getText().contains("QTP")) {
 						stackResult = stackResult 
 												+ lineBreak2 + "<font color=\"gray\">" + "Retail IC" + "</font>"
@@ -316,7 +360,15 @@ public class MainStage {
 												+ lineBreak2 + "<font color=\"gray\">" + "Retail WS" + "</font>"
 												;
 					}
-				}
+				}else if("TKFX".equals(stack.getValue()) ) {
+					if(test.getValue().getText().contains("QTP")) {
+						stackResult = stackResult 
+												+ lineBreak2 + "<font color=\"gray\">" + "Retail IC" + "</font>"
+												+ lineBreak2 + "<font color=\"gray\">" + "Retail Margin" + "</font>"
+												+ lineBreak2 + "<font color=\"gray\">" + "Retail WS" + "</font>"
+												;
+					}
+				}else {}
 			}
 			
 			if(isTested) {

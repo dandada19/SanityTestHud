@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.TkfxFixController">
+
+	<Label text="1. Run TKFX Sanity" />
+	<Button fx:id="btnTkfxFixFX" text="Run TKFX Sanity FX" onAction="#btnTkfxFixFXClicked"/>
+	<Label text="2. Check results in 20 minutes" />
+	<Label text="3. Contact Jeff/Dan if fail" />
+	<Button fx:id="btnTkfxLaunchTeamcity" text="Launch FIX portal page" onAction="#btnTkfxLaunchTeamcityClicked"/>
+	<Label fx:id="labelTkfxFixFxStatus" text="" />
+</VBox>

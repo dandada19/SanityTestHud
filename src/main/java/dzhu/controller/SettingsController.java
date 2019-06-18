@@ -16,7 +16,9 @@ import dzhu.settings.BretSettings;
 import dzhu.settings.DretSettings;
 import dzhu.settings.GlobalSettings;
 import dzhu.settings.Int2Settings;
+import dzhu.settings.PretSettings;
 import dzhu.settings.SettingsUtil;
+import dzhu.settings.TkfxSettings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -84,8 +86,33 @@ public class SettingsController {
 		map.put("tfDretMdfAdminUsername", "DretSettings.MDFADMIN_USERNAME");
 		map.put("tfDretMdfAdminPassword", "DretSettings.MDFADMIN_PASSWORD");
 		
+		//PRET
+		map.put("tfPretEnrollmentUsername", "PretSettings.ENROLLMENT_USERNAME");
+		map.put("tfPretEnrollmentPassword", "PretSettings.ENROLLMENT_PASSWORD");
+		map.put("tfPretVikingUsername", "PretSettings.VIKING_USERNAME");
+		map.put("tfPretVikingPassword", "PretSettings.VIKING_PASSWORD");
+		map.put("tfPretMobileUsername", "PretSettings.MOBILE_USERNAME");
+		map.put("tfPretMobilePassword", "PretSettings.MOBILE_PASSWORD");
+		map.put("tfPretWebAdminUsername", "PretSettings.WEBADMIN_USERNAME");
+		map.put("tfPretWebAdminPassword", "PretSettings.WEBADMIN_PASSWORD");
+		map.put("tfPretDevmonAdminUsername", "PretSettings.DEVMONADMIN_USERNAME");
+		map.put("tfPretDevmonAdminPassword", "PretSettings.DEVMONADMIN_PASSWORD");
+		map.put("tfPretMdfAdminUsername", "PretSettings.MDFADMIN_USERNAME");
+		map.put("tfPretMdfAdminPassword", "PretSettings.MDFADMIN_PASSWORD");
+		
+		//TKFX
+		map.put("tfTkfxEnrollmentUsername", "TkfxSettings.ENROLLMENT_USERNAME");
+		map.put("tfTkfxEnrollmentPassword", "TkfxSettings.ENROLLMENT_PASSWORD");
+		map.put("tfTkfxWebAdminUsername", "TkfxSettings.WEBADMIN_USERNAME");
+		map.put("tfTkfxWebAdminPassword", "TkfxSettings.WEBADMIN_PASSWORD");
+		map.put("tfTkfxDevmonAdminUsername", "TkfxSettings.DEVMONADMIN_USERNAME");
+		map.put("tfTkfxDevmonAdminPassword", "TkfxSettings.DEVMONADMIN_PASSWORD");
+		map.put("tfTkfxMdfAdminUsername", "TkfxSettings.MDFADMIN_USERNAME");
+		map.put("tfTkfxMdfAdminPassword", "TkfxSettings.MDFADMIN_PASSWORD");
+		
         mapControl2Property = Collections.unmodifiableMap(map);
     }
+    
 	@FXML
 	private TabPane rootTabPane = null;
 	@FXML
@@ -187,6 +214,50 @@ public class SettingsController {
 	private TextField tfDretMdfAdminUsername = null;
 	@FXML
 	private TextField tfDretMdfAdminPassword = null;
+
+	//PRET
+	@FXML
+	private TextField tfPretEnrollmentUsername = null;
+	@FXML
+	private TextField tfPretEnrollmentPassword = null;
+	@FXML
+	private TextField tfPretVikingUsername = null;
+	@FXML
+	private TextField tfPretVikingPassword = null;
+	@FXML
+	private TextField tfPretMobileUsername = null;
+	@FXML
+	private TextField tfPretMobilePassword = null;
+	@FXML
+	private TextField tfPretWebAdminUsername = null;
+	@FXML
+	private TextField tfPretWebAdminPassword = null;
+	@FXML
+	private TextField tfPretDevmonAdminUsername = null;
+	@FXML
+	private TextField tfPretDevmonAdminPassword = null;
+	@FXML
+	private TextField tfPretMdfAdminUsername = null;
+	@FXML
+	private TextField tfPretMdfAdminPassword = null;
+	
+	//TKFX
+	@FXML
+	private TextField tfTkfxEnrollmentUsername = null;
+	@FXML
+	private TextField tfTkfxEnrollmentPassword = null;
+	@FXML
+	private TextField tfTkfxWebAdminUsername = null;
+	@FXML
+	private TextField tfTkfxWebAdminPassword = null;
+	@FXML
+	private TextField tfTkfxDevmonAdminUsername = null;
+	@FXML
+	private TextField tfTkfxDevmonAdminPassword = null;
+	@FXML
+	private TextField tfTkfxMdfAdminUsername = null;
+	@FXML
+	private TextField tfTkfxMdfAdminPassword = null;
 	
 	public static void initMapControl2Property() {
 	}
@@ -268,6 +339,30 @@ public class SettingsController {
 		tfDretDevmonAdminPassword.setText(DretSettings.DEVMONADMIN_PASSWORD);		
 		tfDretMdfAdminUsername.setText(DretSettings.MDFADMIN_USERNAME);		
 		tfDretMdfAdminPassword.setText(DretSettings.MDFADMIN_PASSWORD);
+		
+		//PRET
+		tfPretEnrollmentUsername.setText(PretSettings.ENROLLMENT_USERNAME);		
+		tfPretEnrollmentPassword.setText(PretSettings.ENROLLMENT_PASSWORD);		
+		tfPretVikingUsername.setText(PretSettings.VIKING_USERNAME);		
+		tfPretVikingPassword.setText(PretSettings.VIKING_PASSWORD);		
+		tfPretMobileUsername.setText(PretSettings.MOBILE_USERNAME);		
+		tfPretMobilePassword.setText(PretSettings.MOBILE_PASSWORD);	
+		tfPretWebAdminUsername.setText(PretSettings.WEBADMIN_USERNAME);		
+		tfPretWebAdminPassword.setText(PretSettings.WEBADMIN_PASSWORD);		
+		tfPretDevmonAdminUsername.setText(PretSettings.DEVMONADMIN_USERNAME);		
+		tfPretDevmonAdminPassword.setText(PretSettings.DEVMONADMIN_PASSWORD);		
+		tfPretMdfAdminUsername.setText(PretSettings.MDFADMIN_USERNAME);		
+		tfPretMdfAdminPassword.setText(PretSettings.MDFADMIN_PASSWORD);
+		
+		//TKFX
+		tfTkfxEnrollmentUsername.setText(TkfxSettings.ENROLLMENT_USERNAME);		
+		tfTkfxEnrollmentPassword.setText(TkfxSettings.ENROLLMENT_PASSWORD);
+		tfTkfxWebAdminUsername.setText(TkfxSettings.WEBADMIN_USERNAME);		
+		tfTkfxWebAdminPassword.setText(TkfxSettings.WEBADMIN_PASSWORD);		
+		tfTkfxDevmonAdminUsername.setText(TkfxSettings.DEVMONADMIN_USERNAME);		
+		tfTkfxDevmonAdminPassword.setText(TkfxSettings.DEVMONADMIN_PASSWORD);		
+		tfTkfxMdfAdminUsername.setText(TkfxSettings.MDFADMIN_USERNAME);		
+		tfTkfxMdfAdminPassword.setText(TkfxSettings.MDFADMIN_PASSWORD);
 		
 		//add listener to Textfield and PasswordField
 		//i don't know how to lookup by Type selector.

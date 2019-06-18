@@ -21,7 +21,6 @@ public class BretSettings {
 	public static final String WEBADMIN_LINK = BASE_LINK+"/webadmin2/app/login";
 	
 	public static final String FIX_FX_LINK = "https://teamcity.qcnx.eexchange.com/viewType.html?buildTypeId=FixTests_BRET_Sanity";
-	public static final String FIX_TREASURY_LINK = "https://teamcity.qcnx.eexchange.com/viewType.html?buildTypeId=FixTests_BRET_TreasurySanity";
 	public static final String SELENIUM_X2_LINK = "https://teamcity.qcnx.eexchange.com/viewType.html?buildTypeId=X2Selenium_Remote_Integration_BretSanity";
 	
 	public static String ENROLLMENT_USERNAME;
