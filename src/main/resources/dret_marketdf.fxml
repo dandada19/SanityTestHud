@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.DretMarketDfController">
+
+	<Label text="1. Login Market Data Feed with your user" />
+	<Label text="2. Check streams are working" />
+	<Button fx:id="btnDretLogonMarketDf" text="Logon MarketDataFeed" onAction="#btnDretLogonMarketDfClicked"/>
+</VBox>

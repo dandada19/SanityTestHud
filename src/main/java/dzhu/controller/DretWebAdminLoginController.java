@@ -10,44 +10,44 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import dzhu.settings.BretSettings;
+import dzhu.settings.DretSettings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class BretWebAdminLoginController {
+public class DretWebAdminLoginController {
 	@FXML
-	private Button btnBretLaunchWebAdmin=null;
+	private Button btnDretLaunchWebAdmin=null;
 	@FXML
-	private Button btnBretLogonWebAdmin=null;
+	private Button btnDretLogonWebAdmin=null;
 	@FXML
-	private Button btnBretResetPin=null;
+	private Button btnDretResetPin=null;
 	@FXML
-	private Label lbBretWebadminResult=null;
+	private Label lbDretWebadminResult=null;
 	
 	private WebDriver driver = null;
 	private Stage parentStage = null;
 	
 	private Stage getParentStage() {
 		if(parentStage == null) {
-			parentStage = (Stage)btnBretLaunchWebAdmin.getScene().getWindow();
+			parentStage = (Stage)btnDretLaunchWebAdmin.getScene().getWindow();
 		}
 		return parentStage;
 	}
 	
 	@FXML
-	public void btnBretLaunchWebAdminClicked(Event e) {
+	public void btnDretLaunchWebAdminClicked(Event e) {
 		getParentStage().hide();
 		driver = getDriver();
-		driver.get(BretSettings.WEBADMIN_LINK);
+		driver.get(DretSettings.WEBADMIN_LINK);
 		getParentStage().show();
-		btnBretLaunchWebAdmin.getStyleClass().add("success");
+		btnDretLaunchWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
-	public void btnBretLogonWebAdminClicked(Event e) {
+	public void btnDretLogonWebAdminClicked(Event e) {
 		getParentStage().hide();
 		driver = getDriver();
 		/*
@@ -66,26 +66,26 @@ public class BretWebAdminLoginController {
 		Thread thread = new Thread(run);
 		thread.start();
 		*/
-		driver.get(BretSettings.WEBADMIN_LINK);
+		driver.get(DretSettings.WEBADMIN_LINK);
 		
-		logonWebAdmin(BretSettings.WEBADMIN_USERNAME, BretSettings.WEBADMIN_PASSWORD);
+		logonWebAdmin(DretSettings.WEBADMIN_USERNAME, DretSettings.WEBADMIN_PASSWORD);
 		getParentStage().show();
-		btnBretLogonWebAdmin.getStyleClass().add("success");
+		btnDretLogonWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
-	public void btnBretResetPinClicked(Event e) {
+	public void btnDretResetPinClicked(Event e) {
 		getParentStage().hide();
-		lbBretWebadminResult.setText("");
+		lbDretWebadminResult.setText("");
 		
-		boolean ret = resetPin("qtpicuser" , BretSettings.ENROLLMENT_USERNAME, "test1234");
+		boolean ret = resetPin("qtpicuser" , DretSettings.ENROLLMENT_USERNAME, "test1234");
 		if (ret==false) {
-			lbBretWebadminResult.setText("You need to login before reset pin");
-			btnBretResetPin.getStyleClass().remove("success");
-			btnBretResetPin.getStyleClass().add("danger");
+			lbDretWebadminResult.setText("You need to login before reset pin");
+			btnDretResetPin.getStyleClass().remove("success");
+			btnDretResetPin.getStyleClass().add("danger");
 		}else {
-			btnBretResetPin.getStyleClass().remove("danger");
-			btnBretResetPin.getStyleClass().add("success");
+			btnDretResetPin.getStyleClass().remove("danger");
+			btnDretResetPin.getStyleClass().add("success");
 		}
 		getParentStage().show();
 	}
@@ -126,8 +126,11 @@ public class BretWebAdminLoginController {
 			
 			WebElement dropdown = driver.findElement(By.xpath(".//ul[@class='dropdown-menu btn-block']"));
 			WebElement btnDropdown = driver.findElement(By.xpath(".//button[@ng-disabled='isTakerCreationInProgress()']"));
+			
 			btnDropdown.click();
 			List<WebElement> countriesList=dropdown.findElements(By.tagName("li"));
+
+			boolean isUserExist = false;
 			for (WebElement li : countriesList) {
 				WebElement a;
 				try {
@@ -138,7 +141,12 @@ public class BretWebAdminLoginController {
 				
 				if (a.getAttribute("innerHTML").contains(user)) {
 					li.click();
+					isUserExist = true;
 				}
+			}
+			if(!isUserExist) {
+				System.out.println("user " + user + " doesn't exist in the dropdown list.");
+				return false;
 			}
 			
 			WebElement btnReset = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'reset')]")));
@@ -166,7 +174,7 @@ public class BretWebAdminLoginController {
 			return initDriver();
 		}else {
 			try {
-				driver.get(BretSettings.WEBADMIN_LINK);
+				driver.get(DretSettings.WEBADMIN_LINK);
 			}catch(Exception e){
 				//browser may be closed manually.
 				driver = initDriver();

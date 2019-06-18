@@ -5,16 +5,16 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox"
 		stylesheets="@sidestage.css, @bootstrap3.css" 
-		fx:controller="dzhu.controller.BretWebAdminLoginController">
+		fx:controller="dzhu.controller.DretWebAdminLoginController">
 
 	<Label text="Successfully Logon to WebAdmin" />
-	<Label text="    User Name: Mattbretu1" />
-	<Label text="    Password: Test12345" />
+	<Label text="    User Name: qadretvr" />
+	<Label text="    Password: test1234" />
 	<Label text="    Cert: Required" />
 	<Label wrapText="true" text="After click logon button below, you may need manually select the cert and click Allow button on popup." />
-	<Button fx:id="btnBretLogonWebAdmin" text="Logon WebAdmin" onAction="#btnBretLogonWebAdminClicked"/>
-	<Button fx:id="btnBretLaunchWebAdmin" text="Launch WebAdmin" onAction="#btnBretLaunchWebAdminClicked"/>
+	<Button fx:id="btnDretLogonWebAdmin" text="Logon WebAdmin" onAction="#btnDretLogonWebAdminClicked"/>
+	<Button fx:id="btnDretLaunchWebAdmin" text="Launch WebAdmin" onAction="#btnDretLaunchWebAdminClicked"/>
 	<Label wrapText="true" text="Make sure you logon to webadmin before click below button" />
-	<Button fx:id="btnBretResetPin" text="Reset Pin for Enroll" onAction="#btnBretResetPinClicked"/>
-	<Label fx:id="lbBretWebadminResult" wrapText="true" text="" />
+	<Button fx:id="btnDretResetPin" text="Reset Pin for Enroll" onAction="#btnDretResetPinClicked"/>
+	<Label fx:id="lbDretWebadminResult" wrapText="true" text="" />
 </VBox>

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import dzhu.settings.BretSettings;
+import dzhu.settings.DretSettings;
 import dzhu.settings.GlobalSettings;
 import dzhu.settings.Int2Settings;
 import dzhu.settings.SettingsUtil;
@@ -66,6 +67,23 @@ public class SettingsController {
 		map.put("tfBretDevmonAdminPassword", "BretSettings.DEVMONADMIN_PASSWORD");
 		map.put("tfBretMdfAdminUsername", "BretSettings.MDFADMIN_USERNAME");
 		map.put("tfBretMdfAdminPassword", "BretSettings.MDFADMIN_PASSWORD");
+		
+		//DRET
+		map.put("tfDretEnrollmentUsername", "DretSettings.ENROLLMENT_USERNAME");
+		map.put("tfDretEnrollmentPassword", "DretSettings.ENROLLMENT_PASSWORD");
+		map.put("tfDretVikingUsername", "DretSettings.VIKING_USERNAME");
+		map.put("tfDretVikingPassword", "DretSettings.VIKING_PASSWORD");
+		map.put("tfDretMobileUsername", "DretSettings.MOBILE_USERNAME");
+		map.put("tfDretMobilePassword", "DretSettings.MOBILE_PASSWORD");
+		map.put("tfDretX2TakerUsername", "DretSettings.X2TAKER_USERNAME");
+		map.put("tfDretX2TakerPassword", "DretSettings.X2TAKER_PASSWORD");
+		map.put("tfDretWebAdminUsername", "DretSettings.WEBADMIN_USERNAME");
+		map.put("tfDretWebAdminPassword", "DretSettings.WEBADMIN_PASSWORD");
+		map.put("tfDretDevmonAdminUsername", "DretSettings.DEVMONADMIN_USERNAME");
+		map.put("tfDretDevmonAdminPassword", "DretSettings.DEVMONADMIN_PASSWORD");
+		map.put("tfDretMdfAdminUsername", "DretSettings.MDFADMIN_USERNAME");
+		map.put("tfDretMdfAdminPassword", "DretSettings.MDFADMIN_PASSWORD");
+		
         mapControl2Property = Collections.unmodifiableMap(map);
     }
 	@FXML
@@ -138,7 +156,37 @@ public class SettingsController {
 	@FXML
 	private TextField tfBretMdfAdminUsername = null;
 	@FXML
-	private TextField tfBretMdfAdminPassword = null;	
+	private TextField tfBretMdfAdminPassword = null;
+
+	//DRET
+	@FXML
+	private TextField tfDretEnrollmentUsername = null;
+	@FXML
+	private TextField tfDretEnrollmentPassword = null;
+	@FXML
+	private TextField tfDretVikingUsername = null;
+	@FXML
+	private TextField tfDretVikingPassword = null;
+	@FXML
+	private TextField tfDretMobileUsername = null;
+	@FXML
+	private TextField tfDretMobilePassword = null;
+	@FXML
+	private TextField tfDretX2TakerUsername = null;
+	@FXML
+	private TextField tfDretX2TakerPassword = null;
+	@FXML
+	private TextField tfDretWebAdminUsername = null;
+	@FXML
+	private TextField tfDretWebAdminPassword = null;
+	@FXML
+	private TextField tfDretDevmonAdminUsername = null;
+	@FXML
+	private TextField tfDretDevmonAdminPassword = null;
+	@FXML
+	private TextField tfDretMdfAdminUsername = null;
+	@FXML
+	private TextField tfDretMdfAdminPassword = null;
 	
 	public static void initMapControl2Property() {
 	}
@@ -204,6 +252,22 @@ public class SettingsController {
 		tfBretDevmonAdminPassword.setText(BretSettings.DEVMONADMIN_PASSWORD);		
 		tfBretMdfAdminUsername.setText(BretSettings.MDFADMIN_USERNAME);		
 		tfBretMdfAdminPassword.setText(BretSettings.MDFADMIN_PASSWORD);
+		
+		//DRET
+		tfDretEnrollmentUsername.setText(DretSettings.ENROLLMENT_USERNAME);		
+		tfDretEnrollmentPassword.setText(DretSettings.ENROLLMENT_PASSWORD);		
+		tfDretVikingUsername.setText(DretSettings.VIKING_USERNAME);		
+		tfDretVikingPassword.setText(DretSettings.VIKING_PASSWORD);		
+		tfDretMobileUsername.setText(DretSettings.MOBILE_USERNAME);		
+		tfDretMobilePassword.setText(DretSettings.MOBILE_PASSWORD);		
+		tfDretX2TakerUsername.setText(DretSettings.X2TAKER_USERNAME);		
+		tfDretX2TakerPassword.setText(DretSettings.X2TAKER_PASSWORD);		
+		tfDretWebAdminUsername.setText(DretSettings.WEBADMIN_USERNAME);		
+		tfDretWebAdminPassword.setText(DretSettings.WEBADMIN_PASSWORD);		
+		tfDretDevmonAdminUsername.setText(DretSettings.DEVMONADMIN_USERNAME);		
+		tfDretDevmonAdminPassword.setText(DretSettings.DEVMONADMIN_PASSWORD);		
+		tfDretMdfAdminUsername.setText(DretSettings.MDFADMIN_USERNAME);		
+		tfDretMdfAdminPassword.setText(DretSettings.MDFADMIN_PASSWORD);
 		
 		//add listener to Textfield and PasswordField
 		//i don't know how to lookup by Type selector.

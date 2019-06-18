@@ -24,6 +24,7 @@ public class GlobalSettings {
     		+ "Product Management <ProductManagement@globallink.com>";
 	public static String EMAIL_CC_LIST_INT2 = "Siby John STT <SJohn@StateStreet.com>; QA-internal <QA-internal@globallink.com>";
 	
-	public static String EMAIL_TO_LIST_BRET = "Retail Development <RetailDevelopment@globallink.com>; TechOps <techops@globallink.com>";
-	public static String EMAIL_CC_LIST_BRET = "TokyoAcctMgr <TokyoAcctMgr@globallink.com>; SingaporeAcctMgr <SingaporeAcctMgr@globallink.com>; QA-internal <QA-internal@globallink.com>; tradeops2 <tradeops@currenex.com>";
+	public static String EMAIL_TO_LIST_RET = "Retail Development <RetailDevelopment@globallink.com>; TechOps <techops@globallink.com>";
+	public static String EMAIL_CC_LIST_RET = "TokyoAcctMgr <TokyoAcctMgr@globallink.com>; SingaporeAcctMgr <SingaporeAcctMgr@globallink.com>;"
+			+ " QA-internal <QA-internal@globallink.com>; tradeops2 <tradeops@currenex.com>";
 }

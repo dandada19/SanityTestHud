@@ -48,10 +48,12 @@ public class MainStage {
 		
 		TreeItem int2 = setupInt2();
 		TreeItem bret = setupBret();
+		TreeItem dret = setupDret();
 		
 		treeRoot.getChildren().add(settingsMenu);
 		treeRoot.getChildren().add(int2);
 		treeRoot.getChildren().add(bret);
+		treeRoot.getChildren().add(dret);
 		
 		tv.setRoot(treeRoot);
 		tv.setShowRoot(false);
@@ -90,9 +92,12 @@ public class MainStage {
 			if (testedStacks.toLowerCase().contains("int2")) {
 				toList = GlobalSettings.EMAIL_TO_LIST_INT2;
 				ccList = GlobalSettings.EMAIL_CC_LIST_INT2;
-			}else if (testedStacks.toLowerCase().contains("bret")) {
-				toList = GlobalSettings.EMAIL_TO_LIST_BRET;
-				ccList = GlobalSettings.EMAIL_CC_LIST_BRET;
+			}else if (testedStacks.toLowerCase().contains("bret") ||
+					testedStacks.toLowerCase().contains("dret") ||
+					testedStacks.toLowerCase().contains("tkfx") ||
+					testedStacks.toLowerCase().contains("pret") ) {
+				toList = GlobalSettings.EMAIL_TO_LIST_RET;
+				ccList = GlobalSettings.EMAIL_CC_LIST_RET;
 			}
 			
 			try {
@@ -227,6 +232,24 @@ public class MainStage {
 		return bret;
 	}
 	
+	private TreeItem setupDret() {
+		TreeItem dret = new TreeItem(new String("DRET"));
+
+		TreeItem<CheckBox> dretDevmon = new TreeItem<CheckBox>(new CheckBox("DEVMON"));
+		TreeItem<CheckBox> dretWALogin = new TreeItem<CheckBox>(new CheckBox("WebAdmin"));
+		TreeItem<CheckBox> dretEnroll = new TreeItem<CheckBox>(new CheckBox("Enroll"));
+		TreeItem<CheckBox> dretQtp = new TreeItem<CheckBox>(new CheckBox("QTP"));
+		
+		TreeItem<CheckBox> dretFIX = new TreeItem<CheckBox>(new CheckBox("FIX"));
+		TreeItem<CheckBox> dretMdf = new TreeItem<CheckBox>(new CheckBox("MarketDF"));
+		TreeItem<CheckBox> dretX2 = new TreeItem<CheckBox>(new CheckBox("X2"));
+		TreeItem<CheckBox> dretMobile = new TreeItem<CheckBox>(new CheckBox("Mobile"));
+		TreeItem<CheckBox> dretViking = new TreeItem<CheckBox>(new CheckBox("Viking"));
+		dret.getChildren().addAll(dretDevmon, dretWALogin, dretEnroll, dretQtp, dretFIX, dretMdf, dretX2, dretMobile, dretViking);
+		dret.setExpanded(false);
+		return dret;
+	}
+	
 	private Scene getScene(String name) {
 		name = name.toLowerCase();
 		if(scenePool.containsKey(name)) {
@@ -261,7 +284,8 @@ public class MainStage {
 	}
 	
 	private String[] getTestResult(TreeItem root) {
-		String lineBreak = "<br>    &nbsp&nbsp&nbsp&nbsp&nbsp-";
+		String lineBreak = "<br>&nbsp&nbsp&nbsp&nbsp&nbsp-";
+		String lineBreak2 = "<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 		String testedStacks = "";
 		String result = "";
 		String stackResult = "";
@@ -278,7 +302,23 @@ public class MainStage {
 				}else {
 					stackResult += lineBreak + test.getValue().getText() + ":    <font color=\"red\">Failed</font>";
 				}
+
+				if("DRET".equals(stack.getValue()) 
+						|| "BRET".equals(stack.getValue())
+						|| "PRET".equals(stack.getValue())
+						|| "TKFX".equals(stack.getValue()) ) {
+					if(test.getValue().getText().contains("QTP")) {
+						stackResult = stackResult 
+												+ lineBreak2 + "<font color=\"gray\">" + "Retail IC" + "</font>"
+								 				+ lineBreak2 + "<font color=\"gray\">" + "LondonAsiaRegion IC Login" + "</font>"
+										 		+ lineBreak2 + "<font color=\"gray\">" + "E2EE Login" + "</font>"
+												+ lineBreak2 + "<font color=\"gray\">" + "Retail Margin" + "</font>"
+												+ lineBreak2 + "<font color=\"gray\">" + "Retail WS" + "</font>"
+												;
+					}
+				}
 			}
+			
 			if(isTested) {
 				stackResult = "<strong>"+stack.getValue() + " is updated to <Check Version>"+"</strong><br>" + stackResult;
 				result += stackResult + "<br><br><br>";
