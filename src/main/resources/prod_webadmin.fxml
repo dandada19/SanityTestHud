@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox"
+		stylesheets="@sidestage.css, @bootstrap3.css" 
+		fx:controller="dzhu.controller.ProdWebAdminLoginController">
+
+	<Label text="Logon to WebAdmin" />
+	<Label text="    User Name: qalhubbank" />
+	<Label text="    Password: test1234 (refer to settings)"/>
+	<Label text="    Cert: Required" />
+	<Label wrapText="true" text="After click logon button below, you may need manually select the cert and click Allow button on popup." />
+	<Button fx:id="btnProdLogonWebAdmin" text="Logon WebAdmin" onAction="#btnProdLogonWebAdminClicked"/>
+	<Label wrapText="true" text="Make sure you logon to webadmin before click below button" />
+	<Button fx:id="btnProdResetPin" text="Reset Pin for Enroll" onAction="#btnProdResetPinClicked"/>
+</VBox>

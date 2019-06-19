@@ -19,6 +19,10 @@ public class GlobalSettings {
 	public static String DEVPORTAL_USERNAME;
 	public static String DEVPORTAL_PASSWORD;
 	
+	public static String EMAIL_TO_LIST_PROD = "IQA-internal <QA-internal@globallink.com>; TechOps <techops@globallink.com>; "
+			+ "Development <dev@globallink.com>; tradeops2 <tradeops@currenex.com>; DBAs <DBAs@globallink.com>; network <network@eexchange.com>";
+	public static String EMAIL_CC_LIST_PROD = "Siby John STT <SJohn@StateStreet.com>; Integration Support <IntSupport@eexchange.com>";
+	
 
 	public static String EMAIL_TO_LIST_INT2 = "Integration Support <IntSupport@eexchange.com>; TechOps <techops@globallink.com>; "
     		+ "Product Management <ProductManagement@globallink.com>";

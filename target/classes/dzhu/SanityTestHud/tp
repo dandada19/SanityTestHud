@@ -1,6 +1,6 @@
 
-    <Tab text="TKFX">
-    	<VBox spacing="4">
+    <Tab text="PROD">
+		<VBox spacing="4">
         	<padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="20.0"/>
             </padding>
@@ -11,45 +11,61 @@
 	                    <Insets right="-1.0"/>
 	                </HBox.margin>
 	            </ToggleButton>
-	            <TextField fx:id="tfTkfxEnrollmentUsername" promptText="User Name" styleClass="middle" prefWidth="120" editable="false">
+	            <TextField fx:id="tfProdEnrollmentUsername" promptText="User Name" styleClass="middle" prefWidth="120" editable="false">
 	                <HBox.margin>
 	                    <Insets right="-1.0"/>
 	                </HBox.margin>
 	            </TextField>
 	
-	            <TextField fx:id="tfTkfxEnrollmentPassword" promptText="Password" styleClass="last" prefWidth="120" editable="false"/>
+	            <TextField fx:id="tfProdEnrollmentPassword" promptText="Password" styleClass="last" prefWidth="120" editable="false"/>
 	        </HBox>
         	<Separator visible="false" />
         	
         	<HBox>
-		        <ToggleButton mnemonicParsing="false" selected="false" styleClass="first, primary" text="Viking" prefWidth="130" onAction="#toggleButtonClick">	                
+		        <ToggleButton mnemonicParsing="false" selected="false" styleClass="first, primary" text="Classic Taker" prefWidth="130" onAction="#toggleButtonClick">	                
 	                <HBox.margin>
 	                    <Insets right="-1.0"/>
 	                </HBox.margin>
 	            </ToggleButton>
-	            <TextField fx:id="tfTkfxVikingUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
+	            <TextField fx:id="tfProdClassicTakerUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
 	                <HBox.margin>
 	                    <Insets right="-1.0"/>
 	                </HBox.margin>
 	            </TextField>
 	
-	            <TextField fx:id="tfTkfxVikingPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
+	            <TextField fx:id="tfProdClassicTakerPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
 	        </HBox>
         	<Separator visible="false" />
         	
         	<HBox>
-		        <ToggleButton mnemonicParsing="false" selected="false" styleClass="first, primary" text="Mobile" prefWidth="130" onAction="#toggleButtonClick">	                
+		        <ToggleButton mnemonicParsing="false" selected="false" styleClass="first, primary" text="Classic Maker" prefWidth="130" onAction="#toggleButtonClick">	                
 	                <HBox.margin>
 	                    <Insets right="-1.0"/>
 	                </HBox.margin>
 	            </ToggleButton>
-	            <TextField fx:id="tfTkfxMobileUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
+	            <TextField fx:id="tfProdClassicMakerUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
 	                <HBox.margin>
 	                    <Insets right="-1.0"/>
 	                </HBox.margin>
 	            </TextField>
 	
-	            <TextField fx:id="tfTkfxMobilePassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
+	            <TextField fx:id="tfProdClassicMakerPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
+	        </HBox>
+        	<Separator visible="false" />
+        	
+        	<HBox>
+		        <ToggleButton mnemonicParsing="false" selected="false" styleClass="first, primary" text="X2 Taker" prefWidth="130" onAction="#toggleButtonClick">	                
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </ToggleButton>
+	            <TextField fx:id="tfProdX2TakerUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </TextField>
+	
+	            <TextField fx:id="tfProdX2TakerPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
 	        </HBox>
         	<Separator visible="false" />
         	
@@ -59,13 +75,13 @@
 	                    <Insets right="-1.0"/>
 	                </HBox.margin>
 	            </ToggleButton>
-	            <TextField fx:id="tfTkfxWebAdminUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
+	            <TextField fx:id="tfProdWebAdminUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
 	                <HBox.margin>
 	                    <Insets right="-1.0"/>
 	                </HBox.margin>
 	            </TextField>
 	
-	            <TextField fx:id="tfTkfxWebAdminPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
+	            <TextField fx:id="tfProdWebAdminPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
 	        </HBox>
         	<Separator visible="false" />
         	
@@ -75,13 +91,13 @@
 	                    <Insets right="-1.0"/>
 	                </HBox.margin>
 	            </ToggleButton>
-	            <TextField fx:id="tfTkfxDevmonAdminUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
+	            <TextField fx:id="tfProdDevmonAdminUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
 	                <HBox.margin>
 	                    <Insets right="-1.0"/>
 	                </HBox.margin>
 	            </TextField>
 	
-	            <TextField fx:id="tfTkfxDevmonAdminPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
+	            <TextField fx:id="tfProdDevmonAdminPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
 	        </HBox>
         	<Separator visible="false" />
         	
@@ -91,14 +107,15 @@
 	                    <Insets right="-1.0"/>
 	                </HBox.margin>
 	            </ToggleButton>
-	            <TextField fx:id="tfTkfxMdfAdminUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
+	            <TextField fx:id="tfProdMdfAdminUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
 	                <HBox.margin>
 	                    <Insets right="-1.0"/>
 	                </HBox.margin>
 	            </TextField>
 	
-	            <TextField fx:id="tfTkfxMdfAdminPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
+	            <TextField fx:id="tfProdMdfAdminPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
 	        </HBox>
         	<Separator visible="false" />        	
         </VBox>
     </Tab>
+    

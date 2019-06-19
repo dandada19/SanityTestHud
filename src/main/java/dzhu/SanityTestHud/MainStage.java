@@ -47,6 +47,8 @@ public class MainStage {
 		TreeItem<String> settingsMenu = new TreeItem<String>("Settings");
 		
 		TreeItem int2 = setupInt2();
+		TreeItem prod = setupProd();
+		TreeItem lofx = setupLofx();
 		TreeItem bret = setupBret();
 		TreeItem dret = setupDret();
 		TreeItem pret = setupPret();
@@ -54,6 +56,8 @@ public class MainStage {
 		
 		treeRoot.getChildren().add(settingsMenu);
 		treeRoot.getChildren().add(int2);
+		treeRoot.getChildren().add(prod);
+		treeRoot.getChildren().add(lofx);
 		treeRoot.getChildren().add(bret);
 		treeRoot.getChildren().add(dret);
 		treeRoot.getChildren().add(pret);
@@ -102,6 +106,10 @@ public class MainStage {
 					testedStacks.toLowerCase().contains("pret") ) {
 				toList = GlobalSettings.EMAIL_TO_LIST_RET;
 				ccList = GlobalSettings.EMAIL_CC_LIST_RET;
+			}else if (testedStacks.toLowerCase().contains("prod") ||
+					testedStacks.toLowerCase().contains("lofx") ) {
+				toList = GlobalSettings.EMAIL_TO_LIST_PROD;
+				ccList = GlobalSettings.EMAIL_CC_LIST_PROD;
 			}
 			
 			try {
@@ -216,6 +224,42 @@ public class MainStage {
 		int2.getChildren().addAll(int2FIX, int2Devmon, int2Enroll, int2Classic, int2Mdf, int2X2Login, int2WALogin, int2Jasper);
 		int2.setExpanded(false);
 		return int2;
+	}
+	
+	private TreeItem setupProd() {
+		TreeItem prod = new TreeItem(new String("PROD"));
+		TreeItem<CheckBox> prodDevmon = new TreeItem<CheckBox>(new CheckBox("DEVMON"));
+		TreeItem<CheckBox> prodFIX = new TreeItem<CheckBox>(new CheckBox("FIX"));
+		TreeItem<CheckBox> prodWALogin = new TreeItem<CheckBox>(new CheckBox("WebAdmin"));
+		TreeItem<CheckBox> prodEnroll = new TreeItem<CheckBox>(new CheckBox("Enroll"));
+		TreeItem<CheckBox> prodClassic = new TreeItem<CheckBox>(new CheckBox("Classic"));
+		TreeItem<CheckBox> prodMdf = new TreeItem<CheckBox>(new CheckBox("MarketDF"));
+		TreeItem<CheckBox> prodX2 = new TreeItem<CheckBox>(new CheckBox("X2"));
+		TreeItem<CheckBox> prodJasper = new TreeItem<CheckBox>(new CheckBox("Jasper"));
+		TreeItem<CheckBox> prodMobile = new TreeItem<CheckBox>(new CheckBox("Mobile"));
+		TreeItem<CheckBox> prodGlobalCredit = new TreeItem<CheckBox>(new CheckBox("GlobalCredit"));
+		prod.getChildren().addAll(prodDevmon, prodFIX, prodWALogin, prodEnroll, prodClassic, prodMdf, prodX2, 
+				prodJasper, prodMobile, prodGlobalCredit);
+		prod.setExpanded(false);
+		return prod;
+	}
+	
+	private TreeItem setupLofx() {
+		TreeItem lofx = new TreeItem(new String("LOFX"));
+		TreeItem<CheckBox> lofxDevmon = new TreeItem<CheckBox>(new CheckBox("DEVMON"));
+		TreeItem<CheckBox> lofxFIX = new TreeItem<CheckBox>(new CheckBox("FIX"));
+		TreeItem<CheckBox> lofxWALogin = new TreeItem<CheckBox>(new CheckBox("WebAdmin"));
+		TreeItem<CheckBox> lofxEnroll = new TreeItem<CheckBox>(new CheckBox("Enroll"));
+		TreeItem<CheckBox> lofxClassic = new TreeItem<CheckBox>(new CheckBox("Classic"));
+		TreeItem<CheckBox> lofxMdf = new TreeItem<CheckBox>(new CheckBox("MarketDF"));
+		TreeItem<CheckBox> lofxX2 = new TreeItem<CheckBox>(new CheckBox("X2"));
+		TreeItem<CheckBox> lofxJasper = new TreeItem<CheckBox>(new CheckBox("Jasper"));
+		TreeItem<CheckBox> lofxMobile = new TreeItem<CheckBox>(new CheckBox("Mobile"));
+		TreeItem<CheckBox> lofxGlobalCredit = new TreeItem<CheckBox>(new CheckBox("GlobalCredit"));
+		lofx.getChildren().addAll(lofxDevmon, lofxFIX, lofxWALogin, lofxEnroll, lofxClassic, lofxMdf, lofxX2, 
+				lofxJasper, lofxMobile, lofxGlobalCredit);
+		lofx.setExpanded(false);
+		return lofx;
 	}
 	
 	private TreeItem setupBret() {

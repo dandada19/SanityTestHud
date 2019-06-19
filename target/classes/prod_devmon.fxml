@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.ProdDevmonController">
+
+	<Label text="1. Login DEVMON with your user" />
+	<Button fx:id="btnProdLogonDevmon" text="Logon DEVMON" onAction="#btnProdLogonDevmonClicked"/>
+	<Label text="2. Check nodes are all green" />
+	<Label text="3. Check nodes crypto status are green" />
+	<Label text="4. Compare active orders" />
+	<Button fx:id="btnProdCompareOrders" text="Compare Orders" onAction="#btnProdCompareOrdersClicked"/>
+	<Label text="5. Launch and Check Jasper Report" />
+</VBox>
