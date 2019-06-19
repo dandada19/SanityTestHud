@@ -54,7 +54,7 @@ public class DretX2Controller {
 	
 	@FXML
 	public void btnDretSeleniumX2TestClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		btnDretSeleniumX2Test.getStyleClass().remove("success");
 		
 		driver = getDriver();
@@ -69,18 +69,18 @@ public class DretX2Controller {
         WebElement run = driver.findElement(byRun);
         run.click();
 
-        getParentStage().show();
+        ControllerUtils.showStages(getParentStage());
 		btnDretSeleniumX2Test.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnDretLaunchX2Clicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
         btnDretLaunchX2.getStyleClass().remove("success");
         
 		driver = getDriver();
         driver.get(DretSettings.X2_LINK);
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
         btnDretLaunchX2.getStyleClass().add("success");
 	}
 	

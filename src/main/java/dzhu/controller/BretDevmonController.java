@@ -32,20 +32,20 @@ public class BretDevmonController {
 	
 	@FXML
 	public void btnBretLaunchDevmonClicked(Event e){
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		try {
 			Runtime.getRuntime().exec("javaws " + BretSettings.DEVMON_LINK);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnBretLaunchDevmon.getStyleClass().add("success");
 	}
 
 
 	@FXML
 	public void btnBretLogonDevmonClicked(Event e){
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		
 		String agentArgs = BretSettings.DEVMONADMIN_USERNAME + ";" +
 						   BretSettings.DEVMONADMIN_PASSWORD;
@@ -58,7 +58,7 @@ public class BretDevmonController {
 			ex.printStackTrace();
 		}
 		
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnBretLogonDevmon.getStyleClass().add("success");
 	}
 }

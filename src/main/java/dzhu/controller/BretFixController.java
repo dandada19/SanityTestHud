@@ -57,7 +57,7 @@ public class BretFixController {
 	
 	@FXML
 	public void btnBretFixFXClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
         driver.get(BretSettings.FIX_FX_LINK);
         if(isLoginPageShown()) {
@@ -70,19 +70,19 @@ public class BretFixController {
         WebElement run = driver.findElement(byRun);
         run.click();
 
-        getParentStage().show();
+        ControllerUtils.showStages(getParentStage());
 		btnBretFixFX.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnBretLaunchTeamcityClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
         driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
         if(isLoginPageShown()) {
         	login();
         }
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
         btnBretLaunchTeamcity.getStyleClass().add("success");
 	}
 	

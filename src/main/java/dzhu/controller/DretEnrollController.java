@@ -51,7 +51,7 @@ public class DretEnrollController {
 	
 	@FXML
 	public void btnDretEnrollClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		btnDretEnroll.getStyleClass().remove("success");
 		
 		String agentArgs = DretSettings.ENROLLMENT_USERNAME + ";" +
@@ -66,18 +66,18 @@ public class DretEnrollController {
 			ex.printStackTrace();
 		}
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnDretEnroll.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnDretLaunchIeClicked(Event e) {
-		getParentStage().hide();		
+		ControllerUtils.hideStages(getParentStage());		
 		btnDretLaunchIe.getStyleClass().remove("success");
 
 		driver = getDriver();
 		driver.get(DretSettings.ENROLL_PAGE_LINK);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnDretLaunchIe.getStyleClass().add("success");
 	}
 }

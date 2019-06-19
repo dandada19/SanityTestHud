@@ -32,20 +32,20 @@ public class TkfxDevmonController {
 	
 	@FXML
 	public void btnTkfxLaunchDevmonClicked(Event e){
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		try {
 			Runtime.getRuntime().exec("javaws " + TkfxSettings.DEVMON_LINK);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnTkfxLaunchDevmon.getStyleClass().add("success");
 	}
 
 
 	@FXML
 	public void btnTkfxLogonDevmonClicked(Event e){
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		
 		String agentArgs = TkfxSettings.DEVMONADMIN_USERNAME + ";" +
 						   TkfxSettings.DEVMONADMIN_PASSWORD;
@@ -58,7 +58,7 @@ public class TkfxDevmonController {
 			ex.printStackTrace();
 		}
 		
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnTkfxLogonDevmon.getStyleClass().add("success");
 	}
 }

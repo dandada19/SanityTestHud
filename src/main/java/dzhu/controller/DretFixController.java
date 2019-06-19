@@ -57,7 +57,7 @@ public class DretFixController {
 	
 	@FXML
 	public void btnDretFixFXClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
         driver.get(DretSettings.FIX_FX_LINK);
         if(isLoginPageShown()) {
@@ -70,19 +70,19 @@ public class DretFixController {
         WebElement run = driver.findElement(byRun);
         run.click();
 
-        getParentStage().show();
+        ControllerUtils.showStages(getParentStage());
 		btnDretFixFX.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnDretLaunchTeamcityClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
         driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
         if(isLoginPageShown()) {
         	login();
         }
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
         btnDretLaunchTeamcity.getStyleClass().add("success");
 	}
 	

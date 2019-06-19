@@ -51,16 +51,16 @@ public class Int2EnrollController {
 	
 	@FXML
 	public void btnInt2LaunchEnrollPageClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
 		driver.get(Int2Settings.ENROLL_PAGE_LINK);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LaunchEnrollPage.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LaunchEnrollAppClicked(Event e) throws FindFailed {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		btnInt2LaunchEnrollApp.getStyleClass().remove("success");
 		
 		String agentArgs = Int2Settings.ENROLLMENT_USERNAME + ";" +
@@ -103,7 +103,7 @@ public class Int2EnrollController {
 //        s.type(textEmail, Int2Settings.EMAIL_ENROLL);
 //        s.click(btnEnroll);
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LaunchEnrollApp.getStyleClass().add("success");
 	}
 }

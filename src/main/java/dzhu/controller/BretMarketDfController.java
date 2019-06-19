@@ -22,7 +22,7 @@ public class BretMarketDfController {
 	
 	@FXML
 	public void btnBretLogonMarketDfClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		
 		String agentArgs = BretSettings.MDFADMIN_USERNAME + ";" +
 				   BretSettings.MDFADMIN_PASSWORD;
@@ -35,7 +35,7 @@ public class BretMarketDfController {
 			ex.printStackTrace();
 		}
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnBretLogonMarketDf.getStyleClass().add("success");
 	}	
 }

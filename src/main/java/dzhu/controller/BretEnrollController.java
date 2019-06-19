@@ -51,7 +51,7 @@ public class BretEnrollController {
 	
 	@FXML
 	public void btnBretEnrollClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		btnBretEnroll.getStyleClass().remove("success");
 		
 		String agentArgs = BretSettings.ENROLLMENT_USERNAME + ";" +
@@ -66,18 +66,18 @@ public class BretEnrollController {
 			ex.printStackTrace();
 		}
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnBretEnroll.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnBretLaunchIeClicked(Event e) {
-		getParentStage().hide();		
+		ControllerUtils.hideStages(getParentStage());		
 		btnBretLaunchIe.getStyleClass().remove("success");
 
 		driver = getDriver();
 		driver.get(BretSettings.ENROLL_PAGE_LINK);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnBretLaunchIe.getStyleClass().add("success");
 	}
 }

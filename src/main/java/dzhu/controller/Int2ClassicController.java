@@ -57,35 +57,35 @@ public class Int2ClassicController {
 	
 	@FXML
 	public void btnInt2LaunchClassicTakerClicked(Event e) throws FindFailed {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		try {
 			Runtime.getRuntime().exec("javaws " + Int2Settings.CLASSIC_TAKER_LINK);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 		//launchAndLoginGui(Int2Settings.CLASSICTAKER_USERNAME, Int2Settings.CLASSICTAKER_PASSWORD);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LaunchClassicTaker.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LaunchClassicMakerClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		try {
 			Runtime.getRuntime().exec("javaws " + Int2Settings.CLASSIC_MAKER_LINK);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LaunchClassicMaker.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LaunchQtpPortalClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
 		driver.get(GlobalSettings.QTP_PORTAL_LINK);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LaunchQtpPortal.getStyleClass().add("success");
 	}
 	

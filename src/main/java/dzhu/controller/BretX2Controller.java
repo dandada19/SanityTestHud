@@ -54,7 +54,7 @@ public class BretX2Controller {
 	
 	@FXML
 	public void btnBretSeleniumX2TestClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		btnBretSeleniumX2Test.getStyleClass().remove("success");
 		
 		driver = getDriver();
@@ -69,18 +69,18 @@ public class BretX2Controller {
         WebElement run = driver.findElement(byRun);
         run.click();
 
-        getParentStage().show();
+        ControllerUtils.showStages(getParentStage());
 		btnBretSeleniumX2Test.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnBretLaunchX2Clicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
         btnBretLaunchX2.getStyleClass().remove("success");
         
 		driver = getDriver();
         driver.get(BretSettings.X2_LINK);
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
         btnBretLaunchX2.getStyleClass().add("success");
 	}
 	

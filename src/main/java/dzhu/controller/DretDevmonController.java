@@ -32,20 +32,20 @@ public class DretDevmonController {
 	
 	@FXML
 	public void btnDretLaunchDevmonClicked(Event e){
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		try {
 			Runtime.getRuntime().exec("javaws " + DretSettings.DEVMON_LINK);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnDretLaunchDevmon.getStyleClass().add("success");
 	}
 
 
 	@FXML
 	public void btnDretLogonDevmonClicked(Event e){
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		
 		String agentArgs = DretSettings.DEVMONADMIN_USERNAME + ";" +
 						   DretSettings.DEVMONADMIN_PASSWORD;
@@ -58,7 +58,7 @@ public class DretDevmonController {
 			ex.printStackTrace();
 		}
 		
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnDretLogonDevmon.getStyleClass().add("success");
 	}
 }

@@ -57,7 +57,7 @@ public class PretFixController {
 	
 	@FXML
 	public void btnPretFixFXClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
         driver.get(PretSettings.FIX_FX_LINK);
         if(isLoginPageShown()) {
@@ -70,19 +70,19 @@ public class PretFixController {
         WebElement run = driver.findElement(byRun);
         run.click();
 
-        getParentStage().show();
+        ControllerUtils.showStages(getParentStage());
 		btnPretFixFX.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnPretLaunchTeamcityClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
         driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
         if(isLoginPageShown()) {
         	login();
         }
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
         btnPretLaunchTeamcity.getStyleClass().add("success");
 	}
 	

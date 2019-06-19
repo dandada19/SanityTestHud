@@ -24,19 +24,19 @@ public class Int2MarketDfController {
 	
 	@FXML
 	public void btnInt2LaunchMarketDfClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		try {
 			Runtime.getRuntime().exec("javaws " + Int2Settings.MDF_LINK);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LaunchMarketDf.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LogonMarketDfClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		
 		String agentArgs = Int2Settings.MDFADMIN_USERNAME + ";" +
 				   Int2Settings.MDFADMIN_PASSWORD;
@@ -49,7 +49,7 @@ public class Int2MarketDfController {
 			ex.printStackTrace();
 		}
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LogonMarketDf.getStyleClass().add("success");
 	}	
 }

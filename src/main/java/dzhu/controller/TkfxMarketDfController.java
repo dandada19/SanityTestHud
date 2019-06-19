@@ -22,7 +22,7 @@ public class TkfxMarketDfController {
 	
 	@FXML
 	public void btnTkfxLogonMarketDfClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		
 		String agentArgs = TkfxSettings.MDFADMIN_USERNAME + ";" +
 				   TkfxSettings.MDFADMIN_PASSWORD;
@@ -35,7 +35,7 @@ public class TkfxMarketDfController {
 			ex.printStackTrace();
 		}
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnTkfxLogonMarketDf.getStyleClass().add("success");
 	}	
 }

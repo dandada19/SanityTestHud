@@ -35,16 +35,16 @@ public class Int2WebAdminLoginController {
 	
 	@FXML
 	public void btnInt2LaunchWebAdminClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
 		driver.get(Int2Settings.WEBADMIN_LINK);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LaunchWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LogonWebAdminClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
 		Runnable run = () -> {
 			Screen s = new Screen();		
@@ -62,7 +62,7 @@ public class Int2WebAdminLoginController {
 		driver.get(Int2Settings.WEBADMIN_LINK);
 		
 		logonWebAdmin(Int2Settings.WEBADMIN_USERNAME, Int2Settings.WEBADMIN_PASSWORD);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LogonWebAdmin.getStyleClass().add("success");
 	}
 	

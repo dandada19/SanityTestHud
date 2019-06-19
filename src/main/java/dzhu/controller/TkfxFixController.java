@@ -57,7 +57,7 @@ public class TkfxFixController {
 	
 	@FXML
 	public void btnTkfxFixFXClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
         driver.get(TkfxSettings.FIX_FX_LINK);
         if(isLoginPageShown()) {
@@ -70,19 +70,19 @@ public class TkfxFixController {
         WebElement run = driver.findElement(byRun);
         run.click();
 
-        getParentStage().show();
+        ControllerUtils.showStages(getParentStage());
 		btnTkfxFixFX.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnTkfxLaunchTeamcityClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
         driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
         if(isLoginPageShown()) {
         	login();
         }
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
         btnTkfxLaunchTeamcity.getStyleClass().add("success");
 	}
 	

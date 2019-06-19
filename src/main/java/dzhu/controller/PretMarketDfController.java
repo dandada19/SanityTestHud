@@ -22,7 +22,7 @@ public class PretMarketDfController {
 	
 	@FXML
 	public void btnPretLogonMarketDfClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		
 		String agentArgs = PretSettings.MDFADMIN_USERNAME + ";" +
 				   PretSettings.MDFADMIN_PASSWORD;
@@ -35,7 +35,7 @@ public class PretMarketDfController {
 			ex.printStackTrace();
 		}
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnPretLogonMarketDf.getStyleClass().add("success");
 	}	
 }

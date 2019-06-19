@@ -39,16 +39,16 @@ public class PretWebAdminLoginController {
 	
 	@FXML
 	public void btnPretLaunchWebAdminClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
 		driver.get(PretSettings.WEBADMIN_LINK);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnPretLaunchWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnPretLogonWebAdminClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
 		/*
 		//comment this thread out, so user has to select cert manually.		
@@ -69,13 +69,13 @@ public class PretWebAdminLoginController {
 		driver.get(PretSettings.WEBADMIN_LINK);
 		
 		logonWebAdmin(PretSettings.WEBADMIN_USERNAME, PretSettings.WEBADMIN_PASSWORD);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnPretLogonWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnPretResetPinClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		lbPretWebadminResult.setText("");
 		
 		boolean ret = resetPin("qtpicuser" , PretSettings.ENROLLMENT_USERNAME, "test1234");
@@ -87,7 +87,7 @@ public class PretWebAdminLoginController {
 			btnPretResetPin.getStyleClass().remove("danger");
 			btnPretResetPin.getStyleClass().add("success");
 		}
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 	}
 	
 	private void logonWebAdmin(String user, String pwd) {

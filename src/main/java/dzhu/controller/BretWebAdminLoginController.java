@@ -39,16 +39,16 @@ public class BretWebAdminLoginController {
 	
 	@FXML
 	public void btnBretLaunchWebAdminClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
 		driver.get(BretSettings.WEBADMIN_LINK);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnBretLaunchWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnBretLogonWebAdminClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
 		/*
 		//comment this thread out, so user has to select cert manually.		
@@ -69,13 +69,13 @@ public class BretWebAdminLoginController {
 		driver.get(BretSettings.WEBADMIN_LINK);
 		
 		logonWebAdmin(BretSettings.WEBADMIN_USERNAME, BretSettings.WEBADMIN_PASSWORD);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnBretLogonWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnBretResetPinClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		lbBretWebadminResult.setText("");
 		
 		boolean ret = resetPin("qtpicuser" , BretSettings.ENROLLMENT_USERNAME, "test1234");
@@ -87,7 +87,7 @@ public class BretWebAdminLoginController {
 			btnBretResetPin.getStyleClass().remove("danger");
 			btnBretResetPin.getStyleClass().add("success");
 		}
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 	}
 	
 	private void logonWebAdmin(String user, String pwd) {

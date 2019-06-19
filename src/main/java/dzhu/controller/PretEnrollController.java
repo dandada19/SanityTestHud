@@ -51,7 +51,7 @@ public class PretEnrollController {
 	
 	@FXML
 	public void btnPretEnrollClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		btnPretEnroll.getStyleClass().remove("success");
 		
 		String agentArgs = PretSettings.ENROLLMENT_USERNAME + ";" +
@@ -66,18 +66,18 @@ public class PretEnrollController {
 			ex.printStackTrace();
 		}
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnPretEnroll.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnPretLaunchIeClicked(Event e) {
-		getParentStage().hide();		
+		ControllerUtils.hideStages(getParentStage());		
 		btnPretLaunchIe.getStyleClass().remove("success");
 
 		driver = getDriver();
 		driver.get(PretSettings.ENROLL_PAGE_LINK);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnPretLaunchIe.getStyleClass().add("success");
 	}
 }

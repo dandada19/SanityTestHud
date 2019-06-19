@@ -24,20 +24,20 @@ public class Int2DevmonController {
 	
 	@FXML
 	public void btnInt2LaunchDevmonClicked(Event e){
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		try {
 			Runtime.getRuntime().exec("javaws " + Int2Settings.DEVMON_LINK);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LaunchDevmon.getStyleClass().add("success");
 	}
 
 
 	@FXML
 	public void btnInt2LogonDevmonClicked(Event e){
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		
 		String agentArgs = Int2Settings.DEVMONADMIN_USERNAME + ";" +
 						   Int2Settings.DEVMONADMIN_PASSWORD;
@@ -50,7 +50,7 @@ public class Int2DevmonController {
 			ex.printStackTrace();
 		}
 		
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LogonDevmon.getStyleClass().add("success");
 	}
 }

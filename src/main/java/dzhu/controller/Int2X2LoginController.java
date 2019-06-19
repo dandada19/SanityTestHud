@@ -35,20 +35,20 @@ public class Int2X2LoginController {
 	
 	@FXML
 	public void btnInt2LaunchX2Clicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
 		driver.get(Int2Settings.X2_LINK);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LaunchX2.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LogonX2Clicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
 		driver.get(Int2Settings.X2_LINK);
 		logonX2(Int2Settings.X2TAKER_USERNAME, Int2Settings.X2TAKER_PASSWORD);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnInt2LogonX2.getStyleClass().add("success");
 	}
 	

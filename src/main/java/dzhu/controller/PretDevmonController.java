@@ -32,20 +32,20 @@ public class PretDevmonController {
 	
 	@FXML
 	public void btnPretLaunchDevmonClicked(Event e){
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		try {
 			Runtime.getRuntime().exec("javaws " + PretSettings.DEVMON_LINK);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnPretLaunchDevmon.getStyleClass().add("success");
 	}
 
 
 	@FXML
 	public void btnPretLogonDevmonClicked(Event e){
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		
 		String agentArgs = PretSettings.DEVMONADMIN_USERNAME + ";" +
 						   PretSettings.DEVMONADMIN_PASSWORD;
@@ -58,7 +58,7 @@ public class PretDevmonController {
 			ex.printStackTrace();
 		}
 		
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnPretLogonDevmon.getStyleClass().add("success");
 	}
 }

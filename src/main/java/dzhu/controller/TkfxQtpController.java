@@ -87,7 +87,7 @@ public class TkfxQtpController {
 	}
 
 	private void runQtpTest(Button btnClicked, String product, String stack, String suite, String test) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		btnClicked.getStyleClass().remove("success");
 		
 		driver = getDriver();
@@ -110,7 +110,7 @@ public class TkfxQtpController {
 		WebElement btnRun = wait.until(ExpectedConditions.elementToBeClickable(By.name("submit_name")));
 		btnRun.click();
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnClicked.getStyleClass().add("success");
 	}
 }

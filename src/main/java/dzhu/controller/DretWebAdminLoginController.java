@@ -39,16 +39,16 @@ public class DretWebAdminLoginController {
 	
 	@FXML
 	public void btnDretLaunchWebAdminClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
 		driver.get(DretSettings.WEBADMIN_LINK);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnDretLaunchWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnDretLogonWebAdminClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
 		/*
 		//comment this thread out, so user has to select cert manually.		
@@ -69,13 +69,13 @@ public class DretWebAdminLoginController {
 		driver.get(DretSettings.WEBADMIN_LINK);
 		
 		logonWebAdmin(DretSettings.WEBADMIN_USERNAME, DretSettings.WEBADMIN_PASSWORD);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnDretLogonWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnDretResetPinClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		lbDretWebadminResult.setText("");
 		
 		boolean ret = resetPin("qtpicuser" , DretSettings.ENROLLMENT_USERNAME, "test1234");
@@ -87,7 +87,7 @@ public class DretWebAdminLoginController {
 			btnDretResetPin.getStyleClass().remove("danger");
 			btnDretResetPin.getStyleClass().add("success");
 		}
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 	}
 	
 	private void logonWebAdmin(String user, String pwd) {

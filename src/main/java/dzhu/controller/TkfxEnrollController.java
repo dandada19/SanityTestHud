@@ -51,7 +51,7 @@ public class TkfxEnrollController {
 	
 	@FXML
 	public void btnTkfxEnrollClicked(Event e) {
-		getParentStage().hide();
+		ControllerUtils.hideStages(getParentStage());
 		btnTkfxEnroll.getStyleClass().remove("success");
 		
 		String agentArgs = TkfxSettings.ENROLLMENT_USERNAME + ";" +
@@ -66,18 +66,18 @@ public class TkfxEnrollController {
 			ex.printStackTrace();
 		}
 
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnTkfxEnroll.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnTkfxLaunchIeClicked(Event e) {
-		getParentStage().hide();		
+		ControllerUtils.hideStages(getParentStage());		
 		btnTkfxLaunchIe.getStyleClass().remove("success");
 
 		driver = getDriver();
 		driver.get(TkfxSettings.ENROLL_PAGE_LINK);
-		getParentStage().show();
+		ControllerUtils.showStages(getParentStage());
 		btnTkfxLaunchIe.getStyleClass().add("success");
 	}
 }
