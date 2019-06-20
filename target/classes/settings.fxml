@@ -74,6 +74,7 @@
         	
         </VBox>
     </Tab>
+    
     <Tab text="INT2">
 		<VBox spacing="4">
         	<padding>
@@ -315,6 +316,94 @@
         </VBox>
     </Tab>
     
+    <Tab text="LOFX">
+		<VBox spacing="4">
+        	<padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="20.0"/>
+            </padding>
+        	
+            <HBox>
+		        <ToggleButton mnemonicParsing="false" selected="false" styleClass="first, primary" text="Enrollment" prefWidth="130" onAction="#toggleButtonClick">	                
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </ToggleButton>
+	            <TextField fx:id="tfLofxEnrollmentUsername" promptText="User Name" styleClass="middle" prefWidth="120" editable="false">
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </TextField>
+	
+	            <TextField fx:id="tfLofxEnrollmentPassword" promptText="Password" styleClass="last" prefWidth="120" editable="false"/>
+	        </HBox>
+        	<Separator visible="false" />
+        	
+        	<HBox>
+		        <ToggleButton mnemonicParsing="false" selected="false" styleClass="first, primary" text="Classic Taker" prefWidth="130" onAction="#toggleButtonClick">	                
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </ToggleButton>
+	            <TextField fx:id="tfLofxClassicTakerUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </TextField>
+	
+	            <TextField fx:id="tfLofxClassicTakerPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
+	        </HBox>
+        	<Separator visible="false" />
+        	
+        	<HBox>
+		        <ToggleButton mnemonicParsing="false" selected="false" styleClass="first, primary" text="WebAdmin" prefWidth="130" onAction="#toggleButtonClick">	                
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </ToggleButton>
+	            <TextField fx:id="tfLofxWebAdminUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </TextField>
+	
+	            <TextField fx:id="tfLofxWebAdminPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
+	        </HBox>
+        	<Separator visible="false" />
+        	
+        	<HBox>
+		        <ToggleButton mnemonicParsing="false" selected="false" styleClass="first, primary" text="DEVMON Admin" prefWidth="130" onAction="#toggleButtonClick">	                
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </ToggleButton>
+	            <TextField fx:id="tfLofxDevmonAdminUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </TextField>
+	
+	            <TextField fx:id="tfLofxDevmonAdminPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
+	        </HBox>
+        	<Separator visible="false" />
+        	
+        	<HBox>
+		        <ToggleButton mnemonicParsing="false" selected="false" styleClass="first, primary" text="MDF Admin" prefWidth="130" onAction="#toggleButtonClick">	                
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </ToggleButton>
+	            <TextField fx:id="tfLofxMdfAdminUsername" promptText="User Name" styleClass="middle" prefWidth="120"  editable="false">
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </TextField>
+	
+	            <TextField fx:id="tfLofxMdfAdminPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
+	        </HBox>
+        	<Separator visible="false" />
+        	
+        </VBox>
+    </Tab>
     
     <Tab text="BRET">
     	<VBox spacing="4">

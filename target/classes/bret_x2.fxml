@@ -9,7 +9,7 @@
 	<Button fx:id="btnBretSeleniumX2Test" text="Selenium X2 Tests" onAction="#btnBretSeleniumX2TestClicked"/>
 	<Label wrapText="true" text="2. If Selemnium test failed, contact Rahul." />
 	<Label wrapText="true" text="3. Or you can manually login to X2 and do some trades" />
-	<Label text="    User Name: qtpbret_enroll" />
+	<Label text="    User Name: jbtaker1" />
 	<Label text="    Password: test1234" />
 	<Label text="    Cert: required" />
 	<Button fx:id="btnBretLaunchX2" text="Launch X2" onAction="#btnBretLaunchX2Clicked"/>

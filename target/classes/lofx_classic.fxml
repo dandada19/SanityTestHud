@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.LofxClassicController">
+
+	
+	<Label wrapText="true" text="Logon Classic Taker with your enroll account" />
+	<Label text="    User Name: test_lofxqatestxx" />
+	<Label text="    Password: test1234 (refer to settings)" />
+	<Label text="    Cert: Required" />
+	<Button fx:id="btnLofxLogonClassicTaker" text="Logon Classic Taker" onAction="#btnLofxLogonClassicTakerClicked"/>
+</VBox>
