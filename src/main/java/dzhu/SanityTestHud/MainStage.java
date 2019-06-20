@@ -252,12 +252,8 @@ public class MainStage {
 		TreeItem<CheckBox> lofxEnroll = new TreeItem<CheckBox>(new CheckBox("Enroll"));
 		TreeItem<CheckBox> lofxClassic = new TreeItem<CheckBox>(new CheckBox("Classic"));
 		TreeItem<CheckBox> lofxMdf = new TreeItem<CheckBox>(new CheckBox("MarketDF"));
-		TreeItem<CheckBox> lofxX2 = new TreeItem<CheckBox>(new CheckBox("X2"));
 		TreeItem<CheckBox> lofxJasper = new TreeItem<CheckBox>(new CheckBox("Jasper"));
-		TreeItem<CheckBox> lofxMobile = new TreeItem<CheckBox>(new CheckBox("Mobile"));
-		TreeItem<CheckBox> lofxGlobalCredit = new TreeItem<CheckBox>(new CheckBox("GlobalCredit"));
-		lofx.getChildren().addAll(lofxDevmon, lofxFIX, lofxWALogin, lofxEnroll, lofxClassic, lofxMdf, lofxX2, 
-				lofxJasper, lofxMobile, lofxGlobalCredit);
+		lofx.getChildren().addAll(lofxDevmon, lofxFIX, lofxWALogin, lofxEnroll, lofxClassic, lofxMdf, lofxJasper);
 		lofx.setExpanded(false);
 		return lofx;
 	}
@@ -273,9 +269,9 @@ public class MainStage {
 		TreeItem<CheckBox> bretFIX = new TreeItem<CheckBox>(new CheckBox("FIX"));
 		TreeItem<CheckBox> bretMdf = new TreeItem<CheckBox>(new CheckBox("MarketDF"));
 		TreeItem<CheckBox> bretX2 = new TreeItem<CheckBox>(new CheckBox("X2"));
-		TreeItem<CheckBox> bretMobile = new TreeItem<CheckBox>(new CheckBox("Mobile"));
+		//TreeItem<CheckBox> bretMobile = new TreeItem<CheckBox>(new CheckBox("Mobile"));
 		TreeItem<CheckBox> bretViking = new TreeItem<CheckBox>(new CheckBox("Viking"));
-		bret.getChildren().addAll(bretDevmon, bretWALogin, bretEnroll, bretQtp, bretFIX, bretMdf, bretX2, bretMobile, bretViking);
+		bret.getChildren().addAll(bretDevmon, bretWALogin, bretEnroll, bretQtp, bretFIX, bretMdf, bretX2, bretViking);
 		bret.setExpanded(false);
 		return bret;
 	}
@@ -410,6 +406,16 @@ public class MainStage {
 												+ lineBreak2 + "<font color=\"gray\">" + "Retail IC" + "</font>"
 												+ lineBreak2 + "<font color=\"gray\">" + "Retail Margin" + "</font>"
 												+ lineBreak2 + "<font color=\"gray\">" + "Retail WS" + "</font>"
+												;
+					}
+				}else if("INT2".equals(stack.getValue()) 
+						|| "PROD".equals(stack.getValue()) ) {
+					if(test.getValue().getText().contains("FIX")) {
+						stackResult = stackResult 
+												+ lineBreak2 + "<font color=\"gray\">" + "FIX FX Sanity" + "</font>"
+												+ lineBreak2 + "<font color=\"gray\">" + "FIX Treasury Sanity" + "</font>"
+												+ lineBreak2 + "<font color=\"gray\">" + "FIX Crypto Sanity" + "</font>"
+												+ lineBreak2 + "<font color=\"gray\">" + "FIX MTF Sanity" + "</font>"
 												;
 					}
 				}else {}

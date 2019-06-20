@@ -14,7 +14,5 @@
 	<Label wrapText="true" text="After click logon button below, you may need manually select the cert and click Allow button on popup." />
 	<Button fx:id="btnProdLogonWebAdmin" text="Logon WebAdmin" onAction="#btnProdLogonWebAdminClicked"/>
 	<Label wrapText="true" text="Make sure you logon to webadmin before click below button" />
-	<Button fx:id="btnProdResetPin" text="Reset Pin for Enroll" onAction="#btnProdResetPinClicked"/>	
-	<Label fx:id="lbProdWebadminResult" wrapText="true" text="" />
-	
+	<Button fx:id="btnProdResetPin" text="Reset Pin for Enroll" onAction="#btnProdResetPinClicked"/>
 </VBox>

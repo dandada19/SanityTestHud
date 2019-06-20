@@ -18,32 +18,31 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import dzhu.settings.GlobalSettings;
-import dzhu.settings.Int2Settings;
+import dzhu.settings.ProdSettings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Int2FixController {
+public class ProdFixController {
 	@FXML
-	private Label labelInt2FixFxStatus = null;
+	private Label labelProdFixFxStatus = null;
 	@FXML
-	private Label labelInt2FixTreasStatus = null;
+	private Label labelProdFixTreasStatus = null;
 	@FXML
-	private Button btnInt2FixFX = null;
+	private Button btnProdFixFX = null;
 	@FXML
-	private Button btnInt2FixTreas = null;
+	private Button btnProdFixTreas = null;
 	@FXML
-	private Button btnInt2LaunchTeamcity = null;
+	private Button btnProdLaunchTeamcity = null;
 	
 	private WebDriver driver=null;
-	final private String cookieFileName = "FixTeamcity.cookie";
 	private Stage parentStage = null;
 	
 	private Stage getParentStage() {
 		if(parentStage == null) {
-			parentStage = (Stage)labelInt2FixFxStatus.getScene().getWindow();
+			parentStage = (Stage)labelProdFixFxStatus.getScene().getWindow();
 		}
 		return parentStage;
 	}
@@ -53,7 +52,7 @@ public class Int2FixController {
 			return initDriver();
 		}else {
 			try {
-				driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
+				driver.get("https://teamcity.qcnx.eexchange.com");
 			}catch(Exception e){
 				//browser may be closed manually.
 				driver = initDriver();
@@ -70,10 +69,10 @@ public class Int2FixController {
 	}
 	
 	@FXML
-	public void btnInt2FixFXClicked(Event e) {
+	public void btnProdFixFXClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
-        driver.get(Int2Settings.FIX_FX_LINK);
+        driver.get(ProdSettings.FIX_FX_LINK);
         if(isLoginPageShown()) {
         	login();
         }
@@ -85,13 +84,13 @@ public class Int2FixController {
         run.click();
 
         ControllerUtils.showStages(getParentStage());
-		btnInt2FixFX.getStyleClass().add("success");
+		btnProdFixFX.getStyleClass().add("success");
 	}
 	@FXML
-	public void btnInt2FixTreasClicked(Event e) {
+	public void btnProdFixTreasClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
-		driver.get(Int2Settings.FIX_TREASURY_LINK);        
+		driver.get(ProdSettings.FIX_TREASURY_LINK);        
         if(isLoginPageShown()) {
         	login();
         }
@@ -103,10 +102,10 @@ public class Int2FixController {
         run.click();
 
 		ControllerUtils.showStages(getParentStage());
-		btnInt2FixTreas.getStyleClass().add("success");
+		btnProdFixTreas.getStyleClass().add("success");
 	}
 	@FXML
-	public void btnInt2LaunchTeamcityClicked(Event e) {
+	public void btnProdLaunchTeamcityClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
         driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
@@ -115,7 +114,7 @@ public class Int2FixController {
         }
 
 		ControllerUtils.showStages(getParentStage());
-        btnInt2LaunchTeamcity.getStyleClass().add("success");
+        btnProdLaunchTeamcity.getStyleClass().add("success");
 	}
 	
 	private void login() {
@@ -126,7 +125,7 @@ public class Int2FixController {
         WebElement submitLogin = driver.findElement(By.name("submitLogin"));
         submitLogin.click();
         
-        //saveCookieDate();
+        saveCookieDate();
 	}
 	
 	private boolean isLoginPageShown() {
@@ -136,56 +135,5 @@ public class Int2FixController {
         }
         return false;
 	}
-	
-	@SuppressWarnings({ "unused" })
-	private void saveCookieDate() {
-		File file = new File(cookieFileName);
-		try {
-			file.delete();
-			file.createNewFile();
-			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-			for(Cookie k : driver.manage().getCookies()) {
-				bw.write(k.getName()+";"+k.getValue()+";"+k.getDomain()+";"+
-						 k.getPath()+";"+k.getExpiry()+";"+k.isSecure());
-				bw.newLine();
-			}
-			bw.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@SuppressWarnings({ "deprecation", "unused" })
-	private void addCookieToDriver() {
-		try{
-			File file = new File(cookieFileName);
-			if(!file.exists()) {
-				return;
-			}
-			driver.manage().deleteAllCookies();
-			FileReader fileReader = new FileReader(file);
-			BufferedReader br = new BufferedReader(fileReader);
-			String strLine;
-			while((strLine = br.readLine()) != null) {
-				StringTokenizer tokens = new StringTokenizer(strLine, ";");
-				while(tokens.hasMoreTokens()) {
-					String name = tokens.nextToken();
-					String value = tokens.nextToken();
-					String domain = tokens.nextToken();
-					String path = tokens.nextToken();
-					String tmpExpiry = tokens.nextToken();
-					Date expiry = null;
-					if("null".equals(tmpExpiry) == false) {
-						expiry = new Date(tmpExpiry);
-					}
-					Boolean isSecure = new Boolean(tokens.nextToken());
-					Cookie k = new Cookie(name, value, domain, path, expiry, isSecure);
-					driver.manage().addCookie(k);
-				}
-			}
-			br.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 }

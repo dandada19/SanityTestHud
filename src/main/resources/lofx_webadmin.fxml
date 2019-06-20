@@ -5,16 +5,16 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox"
 		stylesheets="@sidestage.css, @bootstrap3.css" 
-		fx:controller="dzhu.controller.ProdWebAdminLoginController">
+		fx:controller="dzhu.controller.LofxWebAdminLoginController">
 
 	<Label text="Logon to WebAdmin" />
-	<Label text="    User Name: qalhubbank" />
-	<Label text="    Password: test1234 (refer to settings)"/>
+	<Label text="    User Name: qaltesthubbank" />
+	<Label text="    Password: Test1234 (refer to settings)"/>
 	<Label text="    Cert: Required" />
 	<Label wrapText="true" text="After click logon button below, you may need manually select the cert and click Allow button on popup." />
-	<Button fx:id="btnProdLogonWebAdmin" text="Logon WebAdmin" onAction="#btnProdLogonWebAdminClicked"/>
+	<Button fx:id="btnLofxLogonWebAdmin" text="Logon WebAdmin" onAction="#btnLofxLogonWebAdminClicked"/>
 	<Label wrapText="true" text="Make sure you logon to webadmin before click below button" />
-	<Button fx:id="btnProdResetPin" text="Reset Pin for Enroll" onAction="#btnProdResetPinClicked"/>	
-	<Label fx:id="lbProdWebadminResult" wrapText="true" text="" />
+	<Button fx:id="btnLofxResetPin" text="Reset Pin for Enroll" onAction="#btnLofxResetPinClicked"/>	
+	<Label fx:id="lbLofxWebadminResult" wrapText="true" text="" />
 	
 </VBox>

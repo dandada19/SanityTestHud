@@ -16,7 +16,9 @@ import dzhu.settings.BretSettings;
 import dzhu.settings.DretSettings;
 import dzhu.settings.GlobalSettings;
 import dzhu.settings.Int2Settings;
+import dzhu.settings.LofxSettings;
 import dzhu.settings.PretSettings;
+import dzhu.settings.ProdSettings;
 import dzhu.settings.SettingsUtil;
 import dzhu.settings.TkfxSettings;
 import javafx.event.Event;
@@ -53,6 +55,34 @@ public class SettingsController {
 		map.put("tfInt2DevmonAdminPassword", "Int2Settings.DEVMONADMIN_PASSWORD");
 		map.put("tfInt2MdfAdminUsername", "Int2Settings.MDFADMIN_USERNAME");
 		map.put("tfInt2MdfAdminPassword", "Int2Settings.MDFADMIN_PASSWORD");
+		
+		//PROD
+		map.put("tfProdEnrollmentUsername", "ProdSettings.ENROLLMENT_USERNAME");
+		map.put("tfProdEnrollmentPassword", "ProdSettings.ENROLLMENT_PASSWORD");
+		map.put("tfProdClassicTakerUsername", "ProdSettings.CLASSICTAKER_USERNAME");
+		map.put("tfProdClassicTakerPassword", "ProdSettings.CLASSICTAKER_PASSWORD");
+		map.put("tfProdX2TakerUsername", "ProdSettings.X2TAKER_USERNAME");
+		map.put("tfProdX2TakerPassword", "ProdSettings.X2TAKER_PASSWORD");
+		map.put("tfProdWebAdminUsername", "ProdSettings.WEBADMIN_USERNAME");
+		map.put("tfProdWebAdminPassword", "ProdSettings.WEBADMIN_PASSWORD");
+		map.put("tfBretMobileUsername", "ProdSettings.MOBILE_USERNAME");
+		map.put("tfBretMobilePassword", "ProdSettings.MOBILE_PASSWORD");
+		map.put("tfProdDevmonAdminUsername", "ProdSettings.DEVMONADMIN_USERNAME");
+		map.put("tfProdDevmonAdminPassword", "ProdSettings.DEVMONADMIN_PASSWORD");
+		map.put("tfProdMdfAdminUsername", "ProdSettings.MDFADMIN_USERNAME");
+		map.put("tfProdMdfAdminPassword", "ProdSettings.MDFADMIN_PASSWORD");
+		
+		//LOFX
+		map.put("tfLofxEnrollmentUsername", "LofxSettings.ENROLLMENT_USERNAME");
+		map.put("tfLofxEnrollmentPassword", "LofxSettings.ENROLLMENT_PASSWORD");
+		map.put("tfLofxClassicTakerUsername", "LofxSettings.CLASSICTAKER_USERNAME");
+		map.put("tfLofxClassicTakerPassword", "LofxSettings.CLASSICTAKER_PASSWORD");
+		map.put("tfLofxWebAdminUsername", "LofxSettings.WEBADMIN_USERNAME");
+		map.put("tfLofxWebAdminPassword", "LofxSettings.WEBADMIN_PASSWORD");
+		map.put("tfLofxDevmonAdminUsername", "LofxSettings.DEVMONADMIN_USERNAME");
+		map.put("tfLofxDevmonAdminPassword", "LofxSettings.DEVMONADMIN_PASSWORD");
+		map.put("tfLofxMdfAdminUsername", "LofxSettings.MDFADMIN_USERNAME");
+		map.put("tfLofxMdfAdminPassword", "LofxSettings.MDFADMIN_PASSWORD");
 		
 		//BRET
 		map.put("tfBretEnrollmentUsername", "BretSettings.ENROLLMENT_USERNAME");
@@ -115,6 +145,8 @@ public class SettingsController {
     
 	@FXML
 	private TabPane rootTabPane = null;
+	
+	//Global
 	@FXML
 	private TextField tfGlobalFixPortalUsername = null;
 	@FXML
@@ -124,7 +156,6 @@ public class SettingsController {
 	@FXML
 	private TextField tfGlobalDevPortalPassword = null;	
 
-	
 	//INT2
 	@FXML
 	private TextField tfInt2EnrollmentUsername = null;
@@ -154,6 +185,58 @@ public class SettingsController {
 	private TextField tfInt2MdfAdminUsername = null;
 	@FXML
 	private TextField tfInt2MdfAdminPassword = null;
+	
+	//PROD
+	@FXML
+	private TextField tfProdEnrollmentUsername = null;
+	@FXML
+	private TextField tfProdEnrollmentPassword = null;
+	@FXML
+	private TextField tfProdClassicTakerUsername = null;
+	@FXML
+	private TextField tfProdClassicTakerPassword = null;
+	@FXML
+	private TextField tfProdX2TakerUsername = null;
+	@FXML
+	private TextField tfProdX2TakerPassword = null;
+	@FXML
+	private TextField tfProdMobileUsername = null;
+	@FXML
+	private TextField tfProdMobilePassword = null;
+	@FXML
+	private TextField tfProdWebAdminUsername = null;
+	@FXML
+	private TextField tfProdWebAdminPassword = null;
+	@FXML
+	private TextField tfProdDevmonAdminUsername = null;
+	@FXML
+	private TextField tfProdDevmonAdminPassword = null;
+	@FXML
+	private TextField tfProdMdfAdminUsername = null;
+	@FXML
+	private TextField tfProdMdfAdminPassword = null;
+	
+	//LOFX
+	@FXML
+	private TextField tfLofxEnrollmentUsername = null;
+	@FXML
+	private TextField tfLofxEnrollmentPassword = null;
+	@FXML
+	private TextField tfLofxClassicTakerUsername = null;
+	@FXML
+	private TextField tfLofxClassicTakerPassword = null;
+	@FXML
+	private TextField tfLofxWebAdminUsername = null;
+	@FXML
+	private TextField tfLofxWebAdminPassword = null;
+	@FXML
+	private TextField tfLofxDevmonAdminUsername = null;
+	@FXML
+	private TextField tfLofxDevmonAdminPassword = null;
+	@FXML
+	private TextField tfLofxMdfAdminUsername = null;
+	@FXML
+	private TextField tfLofxMdfAdminPassword = null;
 	
 	//BRET
 	@FXML
@@ -307,6 +390,34 @@ public class SettingsController {
 		tfInt2DevmonAdminPassword.setText(Int2Settings.DEVMONADMIN_PASSWORD);		
 		tfInt2MdfAdminUsername.setText(Int2Settings.MDFADMIN_USERNAME);		
 		tfInt2MdfAdminPassword.setText(Int2Settings.MDFADMIN_PASSWORD);
+		
+		//PROD
+		tfProdEnrollmentUsername.setText(ProdSettings.ENROLLMENT_USERNAME);		
+		tfProdEnrollmentPassword.setText(ProdSettings.ENROLLMENT_PASSWORD);		
+		tfProdClassicTakerUsername.setText(ProdSettings.CLASSICTAKER_USERNAME);		
+		tfProdClassicTakerPassword.setText(ProdSettings.CLASSICTAKER_PASSWORD);		
+		tfProdMobileUsername.setText(ProdSettings.MOBILE_USERNAME);		
+		tfProdMobilePassword.setText(ProdSettings.MOBILE_PASSWORD);		
+		tfProdX2TakerUsername.setText(ProdSettings.X2TAKER_USERNAME);		
+		tfProdX2TakerPassword.setText(ProdSettings.X2TAKER_PASSWORD);		
+		tfProdWebAdminUsername.setText(ProdSettings.WEBADMIN_USERNAME);		
+		tfProdWebAdminPassword.setText(ProdSettings.WEBADMIN_PASSWORD);		
+		tfProdDevmonAdminUsername.setText(ProdSettings.DEVMONADMIN_USERNAME);		
+		tfProdDevmonAdminPassword.setText(ProdSettings.DEVMONADMIN_PASSWORD);		
+		tfProdMdfAdminUsername.setText(ProdSettings.MDFADMIN_USERNAME);		
+		tfProdMdfAdminPassword.setText(ProdSettings.MDFADMIN_PASSWORD);
+		
+		//LOFX
+		tfLofxEnrollmentUsername.setText(LofxSettings.ENROLLMENT_USERNAME);
+		tfLofxEnrollmentPassword.setText(LofxSettings.ENROLLMENT_PASSWORD);
+		tfLofxClassicTakerUsername.setText(LofxSettings.CLASSICTAKER_USERNAME);
+		tfLofxClassicTakerPassword.setText(LofxSettings.CLASSICTAKER_PASSWORD);	
+		tfLofxWebAdminUsername.setText(LofxSettings.WEBADMIN_USERNAME);		
+		tfLofxWebAdminPassword.setText(LofxSettings.WEBADMIN_PASSWORD);		
+		tfLofxDevmonAdminUsername.setText(LofxSettings.DEVMONADMIN_USERNAME);		
+		tfLofxDevmonAdminPassword.setText(LofxSettings.DEVMONADMIN_PASSWORD);		
+		tfLofxMdfAdminUsername.setText(LofxSettings.MDFADMIN_USERNAME);		
+		tfLofxMdfAdminPassword.setText(LofxSettings.MDFADMIN_PASSWORD);
 		
 		//BRET
 		tfBretEnrollmentUsername.setText(BretSettings.ENROLLMENT_USERNAME);		

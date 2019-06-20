@@ -18,32 +18,23 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import dzhu.settings.GlobalSettings;
-import dzhu.settings.Int2Settings;
+import dzhu.settings.ProdSettings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Int2FixController {
+public class ProdGlobalCreditController {
 	@FXML
-	private Label labelInt2FixFxStatus = null;
-	@FXML
-	private Label labelInt2FixTreasStatus = null;
-	@FXML
-	private Button btnInt2FixFX = null;
-	@FXML
-	private Button btnInt2FixTreas = null;
-	@FXML
-	private Button btnInt2LaunchTeamcity = null;
+	private Button btnProdFixGlobalCredit = null;
 	
 	private WebDriver driver=null;
-	final private String cookieFileName = "FixTeamcity.cookie";
 	private Stage parentStage = null;
 	
 	private Stage getParentStage() {
 		if(parentStage == null) {
-			parentStage = (Stage)labelInt2FixFxStatus.getScene().getWindow();
+			parentStage = (Stage)labelProdFixFxStatus.getScene().getWindow();
 		}
 		return parentStage;
 	}
@@ -70,10 +61,10 @@ public class Int2FixController {
 	}
 	
 	@FXML
-	public void btnInt2FixFXClicked(Event e) {
+	public void btnProdFixGlobalCreditClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
 		driver = getDriver();
-        driver.get(Int2Settings.FIX_FX_LINK);
+        driver.get(ProdSettings.FIX_FX_LINK);
         if(isLoginPageShown()) {
         	login();
         }
@@ -85,37 +76,7 @@ public class Int2FixController {
         run.click();
 
         ControllerUtils.showStages(getParentStage());
-		btnInt2FixFX.getStyleClass().add("success");
-	}
-	@FXML
-	public void btnInt2FixTreasClicked(Event e) {
-		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		driver.get(Int2Settings.FIX_TREASURY_LINK);        
-        if(isLoginPageShown()) {
-        	login();
-        }
-
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
-        wait.until(ExpectedConditions.elementToBeClickable(byRun));
-        WebElement run = driver.findElement(byRun);
-        run.click();
-
-		ControllerUtils.showStages(getParentStage());
-		btnInt2FixTreas.getStyleClass().add("success");
-	}
-	@FXML
-	public void btnInt2LaunchTeamcityClicked(Event e) {
-		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-        driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
-
-		ControllerUtils.showStages(getParentStage());
-        btnInt2LaunchTeamcity.getStyleClass().add("success");
+		btnProdFixFX.getStyleClass().add("success");
 	}
 	
 	private void login() {
@@ -126,7 +87,7 @@ public class Int2FixController {
         WebElement submitLogin = driver.findElement(By.name("submitLogin"));
         submitLogin.click();
         
-        //saveCookieDate();
+        saveCookieDate();
 	}
 	
 	private boolean isLoginPageShown() {
@@ -137,7 +98,6 @@ public class Int2FixController {
         return false;
 	}
 	
-	@SuppressWarnings({ "unused" })
 	private void saveCookieDate() {
 		File file = new File(cookieFileName);
 		try {
@@ -155,37 +115,4 @@ public class Int2FixController {
 		}
 	}
 	
-	@SuppressWarnings({ "deprecation", "unused" })
-	private void addCookieToDriver() {
-		try{
-			File file = new File(cookieFileName);
-			if(!file.exists()) {
-				return;
-			}
-			driver.manage().deleteAllCookies();
-			FileReader fileReader = new FileReader(file);
-			BufferedReader br = new BufferedReader(fileReader);
-			String strLine;
-			while((strLine = br.readLine()) != null) {
-				StringTokenizer tokens = new StringTokenizer(strLine, ";");
-				while(tokens.hasMoreTokens()) {
-					String name = tokens.nextToken();
-					String value = tokens.nextToken();
-					String domain = tokens.nextToken();
-					String path = tokens.nextToken();
-					String tmpExpiry = tokens.nextToken();
-					Date expiry = null;
-					if("null".equals(tmpExpiry) == false) {
-						expiry = new Date(tmpExpiry);
-					}
-					Boolean isSecure = new Boolean(tokens.nextToken());
-					Cookie k = new Cookie(name, value, domain, path, expiry, isSecure);
-					driver.manage().addCookie(k);
-				}
-			}
-			br.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 }

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableView?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.ProdGlobalCreditController">
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.ProdFixController">
 
 	<Label wrapText="true" text="1. Run FIX global credit sanity, make sure TKFX/LOFX are online"/>
 	<Button fx:id="btnProdFixGlobalCredit" text="Run PROD Global Credit" onAction="#btnProdFixGlobalCreditClicked"/>
