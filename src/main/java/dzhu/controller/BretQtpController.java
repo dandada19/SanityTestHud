@@ -71,7 +71,7 @@ public class BretQtpController {
 	}
 	@FXML
 	public void btnBretQtpE2EELoginClicked(Event e) {
-		runQtpTest(btnBretQtpRetailIc, "FX_RetailIC", "BRET", "SMOKE", "qtpGr_E2EELogin");
+		runQtpTest(btnBretQtpE2EELogin, "FX_RetailIC", "BRET", "SMOKE", "qtpGr_E2EELogin");
 	}
 	@FXML
 	public void btnBretQtpRetailMarginClicked(Event e) {

@@ -1,8 +1,12 @@
-For DEVMON/ENROLL automation, you need:
+Copy the whole folder to your local, and double click SanityTestHud.jar to run.
+
+Check your settings are correct.
+
+To enable DEVMON/ENROLL automation, you need:
 
 1. go to your jre/lib/security folder.
 
-similar to C:\Program Files\Java\jre1.8.0_211\lib\security
+	similar to C:\Program Files\Java\jre1.8.0_211\lib\security
 
 2. backup your javaws.policy
 

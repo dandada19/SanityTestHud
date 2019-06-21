@@ -71,7 +71,7 @@ public class TkfxQtpController {
 	}
 	@FXML
 	public void btnTkfxQtpE2EELoginClicked(Event e) {
-		runQtpTest(btnTkfxQtpRetailIc, "FX_RetailIC", "TKFX", "SMOKE", "qtpGr_E2EELogin");
+		runQtpTest(btnTkfxQtpE2EELogin, "FX_RetailIC", "TKFX", "SMOKE", "qtpGr_E2EELogin");
 	}
 	@FXML
 	public void btnTkfxQtpRetailMarginClicked(Event e) {

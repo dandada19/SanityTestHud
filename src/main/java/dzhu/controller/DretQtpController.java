@@ -71,7 +71,7 @@ public class DretQtpController {
 	}
 	@FXML
 	public void btnDretQtpE2EELoginClicked(Event e) {
-		runQtpTest(btnDretQtpRetailIc, "FX_RetailIC", "DRET", "SMOKE", "qtpGr_E2EELogin");
+		runQtpTest(btnDretQtpE2EELogin, "FX_RetailIC", "DRET", "SMOKE", "qtpGr_E2EELogin");
 	}
 	@FXML
 	public void btnDretQtpRetailMarginClicked(Event e) {

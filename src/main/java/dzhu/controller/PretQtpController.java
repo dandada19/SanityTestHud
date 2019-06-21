@@ -71,7 +71,7 @@ public class PretQtpController {
 	}
 	@FXML
 	public void btnPretQtpE2EELoginClicked(Event e) {
-		runQtpTest(btnPretQtpRetailIc, "FX_RetailIC", "PRET", "SMOKE", "qtpGr_E2EELogin");
+		runQtpTest(btnPretQtpE2EELogin, "FX_RetailIC", "PRET", "SMOKE", "qtpGr_E2EELogin");
 	}
 	@FXML
 	public void btnPretQtpRetailMarginClicked(Event e) {
