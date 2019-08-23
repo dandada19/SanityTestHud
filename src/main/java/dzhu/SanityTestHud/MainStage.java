@@ -197,7 +197,7 @@ public class MainStage {
 						sideStage.toFront();
 					}
 				});
-		stage.setAlwaysOnTop(true);
+		stage.setAlwaysOnTop(false);
 		stage.show();
 	}
 	
@@ -206,7 +206,7 @@ public class MainStage {
 			sideStage = new Stage();
 		}
 		sideStage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("idea.png")));
-		sideStage.setAlwaysOnTop(true);
+		sideStage.setAlwaysOnTop(false);
 		sideStage.initStyle(StageStyle.DECORATED);
 		sideStage.setWidth(400);
 	}
@@ -221,7 +221,7 @@ public class MainStage {
 		TreeItem<CheckBox> int2X2Login = new TreeItem<CheckBox>(new CheckBox("X2Login"));
 		TreeItem<CheckBox> int2WALogin = new TreeItem<CheckBox>(new CheckBox("WebAdmin"));
 		TreeItem<CheckBox> int2Jasper = new TreeItem<CheckBox>(new CheckBox("Jasper"));
-		int2.getChildren().addAll(int2FIX, int2Devmon, int2Enroll, int2Classic, int2Mdf, int2X2Login, int2WALogin, int2Jasper);
+		int2.getChildren().addAll(int2Devmon, int2FIX, int2Enroll, int2Classic, int2Mdf, int2X2Login, int2WALogin, int2Jasper);
 		int2.setExpanded(false);
 		return int2;
 	}

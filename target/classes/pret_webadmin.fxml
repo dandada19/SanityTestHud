@@ -8,8 +8,8 @@
 		fx:controller="dzhu.controller.PretWebAdminLoginController">
 
 	<Label text="Successfully Logon to WebAdmin" />
-	<Label text="    User Name: qapretvr" />
-	<Label text="    Password: test1234" />
+	<Label text="    User Name: qa_rnmargin2" />
+	<Label text="    Password: Test1234" />
 	<Label text="    Cert: Required" />
 	<Label wrapText="true" text="After click logon button below, you may need manually select the cert and click Allow button on popup." />
 	<Button fx:id="btnPretLogonWebAdmin" text="Logon WebAdmin" onAction="#btnPretLogonWebAdminClicked"/>

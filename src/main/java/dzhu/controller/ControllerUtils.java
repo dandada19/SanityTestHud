@@ -18,6 +18,7 @@ public class ControllerUtils {
 	}
 	public static void showStages(Stage... stages) {
 		for(Stage s : stages) {
+			s.setHeight(650);
 			s.show();
 		}
 		mainStage.show();
