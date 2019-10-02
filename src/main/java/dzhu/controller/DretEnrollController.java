@@ -1,18 +1,23 @@
 package dzhu.controller;
 
-import java.io.IOException;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
 import dzhu.settings.DretSettings;
+import dzhu.settings.GlobalSettings;
+import dzhu.settings.SettingsUtil;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class DretEnrollController {
+	@FXML
+	private Label lb1=null;
+	@FXML
+	private Label lb2=null;
 	@FXML
 	private Button btnDretEnroll=null;
 	@FXML
@@ -20,6 +25,13 @@ public class DretEnrollController {
 	
 	private WebDriver driver = null;
 	private Stage parentStage = null;
+	
+	@FXML
+	public void initialize() {
+		//replace [#BretSettings.ENROLLMENT_USERNAME#] with actual username
+		lb1.setText(SettingsUtil.replaceTextWithActualUserSettings(lb1.getText()));
+		lb2.setText(SettingsUtil.replaceTextWithActualUserSettings(lb2.getText()));
+	}
 	
 	private Stage getParentStage() {
 		if(parentStage == null) {
@@ -52,19 +64,10 @@ public class DretEnrollController {
 	@FXML
 	public void btnDretEnrollClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		btnDretEnroll.getStyleClass().remove("success");
-		
-		String agentArgs = DretSettings.ENROLLMENT_USERNAME + ";" +
-						   "test1234" + ";" + 
-						   "qa@currenex.com";
-		
-		try {
-			Runtime.getRuntime().exec("cmd.exe /c set JAVA_TOOL_OPTIONS=-javaagent:EnrollAgent.jar" +
-					"=" + agentArgs +
-					"&& javaws " + DretSettings.ENROLL_APP_LINK);
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		btnDretEnroll.getStyleClass().remove("success");		
+
+		ControllerUtils.doEnroll(DretSettings.ENROLL_PAGE_LINK, 
+				DretSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
 
 		ControllerUtils.showStages(getParentStage());
 		btnDretEnroll.getStyleClass().add("success");

@@ -7,12 +7,19 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
 import dzhu.settings.BretSettings;
+import dzhu.settings.GlobalSettings;
+import dzhu.settings.SettingsUtil;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class BretEnrollController {
+	@FXML
+	private Label lb1=null;
+	@FXML
+	private Label lb2=null;
 	@FXML
 	private Button btnBretEnroll=null;
 	@FXML
@@ -20,6 +27,14 @@ public class BretEnrollController {
 	
 	private WebDriver driver = null;
 	private Stage parentStage = null;
+	
+	@FXML
+	public void initialize() {
+		//replace [#BretSettings.ENROLLMENT_USERNAME#] with actual username
+		lb1.setText(SettingsUtil.replaceTextWithActualUserSettings(lb1.getText()));
+		lb2.setText(SettingsUtil.replaceTextWithActualUserSettings(lb2.getText()));
+	}
+	
 	
 	private Stage getParentStage() {
 		if(parentStage == null) {
@@ -42,15 +57,39 @@ public class BretEnrollController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() {		
 		InternetExplorerOptions options = new InternetExplorerOptions();
 		options.ignoreZoomSettings();
+		options.requireWindowFocus();
 		driver = new InternetExplorerDriver(options);
 		return driver;
 	}
 	
 	@FXML
 	public void btnBretEnrollClicked(Event e) {
+		ControllerUtils.hideStages(getParentStage());
+		btnBretEnroll.getStyleClass().remove("success");
+		
+		ControllerUtils.doEnroll(BretSettings.ENROLL_PAGE_LINK, 
+				BretSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
+
+		ControllerUtils.showStages(getParentStage());
+		btnBretEnroll.getStyleClass().add("success");
+	}
+	
+	@FXML
+	public void btnBretLaunchIeClicked(Event e) {
+		ControllerUtils.hideStages(getParentStage());		
+		btnBretLaunchIe.getStyleClass().remove("success");
+
+		driver = getDriver();
+		driver.get(BretSettings.ENROLL_PAGE_LINK);
+		ControllerUtils.showStages(getParentStage());
+		btnBretLaunchIe.getStyleClass().add("success");
+	}
+	
+	@Deprecated
+	public void btnBretEnrollClicked_old(Event e) {
 		ControllerUtils.hideStages(getParentStage());
 		btnBretEnroll.getStyleClass().remove("success");
 		
@@ -68,16 +107,5 @@ public class BretEnrollController {
 
 		ControllerUtils.showStages(getParentStage());
 		btnBretEnroll.getStyleClass().add("success");
-	}
-	
-	@FXML
-	public void btnBretLaunchIeClicked(Event e) {
-		ControllerUtils.hideStages(getParentStage());		
-		btnBretLaunchIe.getStyleClass().remove("success");
-
-		driver = getDriver();
-		driver.get(BretSettings.ENROLL_PAGE_LINK);
-		ControllerUtils.showStages(getParentStage());
-		btnBretLaunchIe.getStyleClass().add("success");
 	}
 }

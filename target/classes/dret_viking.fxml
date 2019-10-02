@@ -9,6 +9,6 @@
 	<Hyperlink fx:id="linkDretVikingInstall" wrapText="true" text="http://www.vikingfx.com/download/install/VikingFXTrader_install.exe" onAction="#linkDretVikingInstallClicked"/>
 	<Label wrapText="true" text="2. Start Viking client and do some trades, check trades can be done and chart is shown." />
 	<Label text="    Stack: Demo" />
-	<Label text="    User Name: iMobile1015v (or fastu1rahul)" />
-	<Label text="    Password: Test1234 (or Test1234)" />
+	<Label fx:id="lb1" text="    User Name: [#DretSettings.VIKING_USERNAME#] (or fastu1rahul)" />
+	<Label fx:id="lb2" text="    Password: [#DretSettings.VIKING_PASSWORD#] (or Test1234)" />
 </VBox>

@@ -18,6 +18,7 @@ public class GlobalSettings {
 	public static String FIXPORTAL_PASSWORD;
 	public static String DEVPORTAL_USERNAME;
 	public static String DEVPORTAL_PASSWORD;
+	public static String COMMON_PIN="test1234";
 	
 	public static String EMAIL_TO_LIST_PROD = "IQA-internal <QA-internal@globallink.com>; TechOps <techops@globallink.com>; "
 			+ "Development <dev@globallink.com>; tradeops2 <tradeops@currenex.com>; DBAs <DBAs@globallink.com>; network <network@eexchange.com>";

@@ -76,4 +76,24 @@ public class SettingsUtil {
 			return "ERROR";
 		}
 	}
+	
+	public static String replaceTextWithActualUserSettings(String text) {
+		String retText = null;
+		if(text.contains("[#") && text.contains("#]")) {
+			try {
+				String fullName = text.substring(text.indexOf("[#")+2, text.indexOf("#]"));
+				String className = fullName.split("\\.")[0];
+				String fieldName = fullName.split("\\.")[1];
+				Field f = Class.forName("dzhu.settings."+className).getField(fieldName);
+				Class<?> t = f.getType();
+				if(t.equals(String.class)) {
+					Object value = f.get(null);
+					retText = text.replace("[#"+fullName+"#]", value.toString());
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return retText;
+	}
 }

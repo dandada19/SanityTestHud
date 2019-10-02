@@ -16,7 +16,7 @@ public class BretSettings {
 	public static final String CLASSIC_MAKER_LINK = BASE_LINK+"/webstart/provider.jnlp";
 	public static final String MDF_LINK = BASE_LINK+"/webstart/marketdatafeedclient.jnlp";
 	public static final String ENROLL_APP_LINK = BASE_LINK+"/webstart/enroll.jnlp";
-	public static final String ENROLL_PAGE_LINK = BASE_LINK+"/enroll-bret/enroll.html";
+	public static final String ENROLL_PAGE_LINK = BASE_LINK+"/enroll/";
 	public static final String X2_LINK = BASE_LINK+"/x2/login.html";
 	public static final String WEBADMIN_LINK = BASE_LINK+"/webadmin2/app/login";
 	

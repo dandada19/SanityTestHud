@@ -8,8 +8,8 @@
 		fx:controller="dzhu.controller.DretWebAdminLoginController">
 
 	<Label text="Successfully Logon to WebAdmin" />
-	<Label text="    User Name: qadretvr" />
-	<Label text="    Password: test1234" />
+	<Label fx:id="lb1" text="    User Name: [#DretSettings.WEBADMIN_USERNAME#]" />
+	<Label fx:id="lb2" text="    Password: [#DretSettings.WEBADMIN_PASSWORD#]" />
 	<Label text="    Cert: Required" />
 	<Label wrapText="true" text="After click logon button below, you may need manually select the cert and click Allow button on popup." />
 	<Button fx:id="btnDretLogonWebAdmin" text="Logon WebAdmin" onAction="#btnDretLogonWebAdminClicked"/>
