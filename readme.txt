@@ -11,3 +11,5 @@ To enable DEVMON/ENROLL automation, you need:
 2. backup your javaws.policy
 
 3. copy the javaws.policy to that folder.
+
+4. check your environment, make C:\Program Files\Java\jre1.8.0_221\bin to the top of the <path>, the system update will reset and mess up the path periodically.
