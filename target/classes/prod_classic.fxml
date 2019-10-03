@@ -7,8 +7,8 @@
 
 	
 	<Label wrapText="true" text="1. Logon Classic Taker with your enroll account" />
-	<Label text="    User Name: qatestxx" />
-	<Label text="    Password: Test1234 (refer to settings)" />
+	<Label fx:id="lb1" text="    User Name: [#ProdSettings.CLASSICTAKER_USERNAME#]" />
+	<Label fx:id="lb2" text="    Password: [#ProdSettings.CLASSICTAKER_PASSWORD#]" />
 	<Label text="    Cert: Required" />
 	<Button fx:id="btnProdLogonClassicTaker" text="Launch Classic Taker" onAction="#btnProdLogonClassicTakerClicked"/>
 	<Label text="2. Execute RFQ SP/FWD/SWAP orders" />

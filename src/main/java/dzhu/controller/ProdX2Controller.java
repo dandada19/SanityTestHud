@@ -10,12 +10,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import dzhu.settings.GlobalSettings;
 import dzhu.settings.ProdSettings;
+import dzhu.settings.SettingsUtil;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class ProdX2Controller {
+	@FXML
+	private Label lb1=null;
+	@FXML
+	private Label lb2=null;
 	@FXML
 	private Button btnProdSeleniumX2Test = null;
 	@FXML
@@ -23,6 +29,13 @@ public class ProdX2Controller {
 	
 	private WebDriver driver=null;
 	private Stage parentStage = null;
+	
+	@FXML
+	public void initialize() {
+		lb1.setText(SettingsUtil.replaceTextWithActualUserSettings(lb1.getText()));
+		lb2.setText(SettingsUtil.replaceTextWithActualUserSettings(lb2.getText()));
+	}
+	
 	
 	private Stage getParentStage() {
 		if(parentStage == null) {

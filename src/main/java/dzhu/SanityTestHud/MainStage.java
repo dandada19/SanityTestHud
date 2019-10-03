@@ -422,7 +422,9 @@ public class MainStage {
 			}
 			
 			if(isTested) {
-				stackResult = "<strong>"+stack.getValue() + " is updated to <Check Version>"+"</strong><br>" + stackResult;
+				stackResult = "<strong>"+stack.getValue() + " is updated to " +
+						EmailUtils.getStackVersion(stack.getValue().toString()) + 
+						"</strong><br>" + stackResult;
 				result += stackResult + "<br><br><br>";
 				testedStacks += stack.getValue() + "/";
 			}

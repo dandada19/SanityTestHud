@@ -21,5 +21,6 @@ public class App extends Application
 		MainStage mainStage = new MainStage();
 		mainStage.setStage(primaryStage);
 		mainStage.draw();
+		EmailUtils.initializeDriver();
 	}
 }

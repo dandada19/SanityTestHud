@@ -78,8 +78,7 @@ public class SettingsUtil {
 	}
 	
 	public static String replaceTextWithActualUserSettings(String text) {
-		String retText = null;
-		if(text.contains("[#") && text.contains("#]")) {
+		while (text.contains("[#") && text.contains("#]")) {
 			try {
 				String fullName = text.substring(text.indexOf("[#")+2, text.indexOf("#]"));
 				String className = fullName.split("\\.")[0];
@@ -88,12 +87,12 @@ public class SettingsUtil {
 				Class<?> t = f.getType();
 				if(t.equals(String.class)) {
 					Object value = f.get(null);
-					retText = text.replace("[#"+fullName+"#]", value.toString());
+					text = text.replace("[#"+fullName+"#]", value.toString());
 				}
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return retText;
+		return text;
 	}
 }

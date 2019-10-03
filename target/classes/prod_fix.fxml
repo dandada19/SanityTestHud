@@ -9,12 +9,8 @@
 
 	<Label text="1. Run PROD Sanity" />
 	<Button fx:id="btnProdFixFX" text="Run PROD FX Sanity" onAction="#btnProdFixFXClicked"/>
-	<Label text="2. Run PROD Treasury Sanity" />
-	<Button fx:id="btnProdFixTreas" text="Run PROD Treasury Sanity" onAction="#btnProdFixTreasClicked"/>
-	<Label text="4. Run PROD Crypto Sanity" />
-	<Button fx:id="btnProdFixCrypto" text="Run PROD Crypto Sanity" onAction="#btnProdFixCryptoClicked"/>
-	<Label text="5. Check results in 25 minutes" />
-	<Label text="6. Contact Jeff/Dan if fail" />
+	<Label text="2. Check results in 15 minutes" />
+	<Label text="3. Contact Jeff/Dan if fail" />
 	<Button fx:id="btnProdLaunchTeamcity" text="Launch FIX portal page" onAction="#btnProdLaunchTeamcityClicked"/>
 	<Label fx:id="labelProdFixFxStatus" text="" />
 	<Label fx:id="labelProdFixTreasStatus" text="" />

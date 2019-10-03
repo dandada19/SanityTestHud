@@ -12,12 +12,18 @@ import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 
 import dzhu.settings.Int2Settings;
+import dzhu.settings.SettingsUtil;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class Int2X2LoginController {
+	@FXML
+	private Label lb1=null;
+	@FXML
+	private Label lb2=null;
 	@FXML
 	private Button btnInt2LaunchX2=null;
 	@FXML
@@ -25,6 +31,12 @@ public class Int2X2LoginController {
 	
 	private WebDriver driver = null;
 	private Stage parentStage = null;
+
+	@FXML
+	public void initialize() {
+		lb1.setText(SettingsUtil.replaceTextWithActualUserSettings(lb1.getText()));
+		lb2.setText(SettingsUtil.replaceTextWithActualUserSettings(lb2.getText()));
+	}
 	
 	private Stage getParentStage() {
 		if(parentStage == null) {

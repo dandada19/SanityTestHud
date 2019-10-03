@@ -6,8 +6,8 @@
 <VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.Int2WebAdminLoginController">
 
 	<Label text="Successfully Logon to WebAdmin" />
-	<Label text="    User Name: qawebadmindz" />
-	<Label text="    Password: test1234" />
+	<Label fx:id="lb1" text="    User Name: [#Int2Settings.WEBADMIN_USERNAME#]" />
+	<Label fx:id="lb2" text="    Password: [#Int2Settings.WEBADMIN_PASSWORD#]" />
 	<Label text="    Cert: NONE" />
 	<Button fx:id="btnInt2LaunchWebAdmin" text="Launch WebAdmin" onAction="#btnInt2LaunchWebAdminClicked"/>
 	<Button fx:id="btnInt2LogonWebAdmin" text="Logon WebAdmin" onAction="#btnInt2LogonWebAdminClicked"/>

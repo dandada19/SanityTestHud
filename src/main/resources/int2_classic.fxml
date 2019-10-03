@@ -7,9 +7,9 @@
 
 	
 	<Label text="1. Launch Classic Taker" />
-	<Label text="   qtpint2_enroll/test1234" />
+	<Label fx:id="lb1" text="   [#Int2Settings.CLASSICTAKER_USERNAME#]/[#Int2Settings.CLASSICTAKER_PASSWORD#]" />
 	<Label text="2. Launch Classic Maker" />
-	<Label text="   qalbank3u1/test1234" />
+	<Label fx:id="lb2" text="   [#Int2Settings.CLASSICMAKER_USERNAME#]/[#Int2Settings.CLASSICMAKER_PASSWORD#]" />
 	<Label text="3. Execute ESP and RFQ orders" />
 	<Button fx:id="btnInt2LaunchClassicTaker" text="Launch Classic Taker" onAction="#btnInt2LaunchClassicTakerClicked"/>
 	<Button fx:id="btnInt2LaunchClassicMaker" text="Launch Classic Maker" onAction="#btnInt2LaunchClassicMakerClicked"/>

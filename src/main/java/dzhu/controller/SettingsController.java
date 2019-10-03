@@ -489,9 +489,7 @@ public class SettingsController {
 		n.focusedProperty().addListener(
 				(obs, oldVal, newVal)->{
 					if(newVal==false) {
-			            System.out.println(n.getId());
 			            String property = mapControl2Property.get(n.getId());
-			            System.out.println(property);
 			            if (property==null) {
 			            	return;
 			            }

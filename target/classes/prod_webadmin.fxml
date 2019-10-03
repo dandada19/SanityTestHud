@@ -8,8 +8,8 @@
 		fx:controller="dzhu.controller.ProdWebAdminLoginController">
 
 	<Label text="Logon to WebAdmin" />
-	<Label text="    User Name: qalhubbank" />
-	<Label text="    Password: test1234 (refer to settings)"/>
+	<Label fx:id="lb1" text="    User Name: [#ProdSettings.WEBADMIN_USERNAME#]" />
+	<Label fx:id="lb2" text="    Password: [#ProdSettings.WEBADMIN_PASSWORD#]"/>
 	<Label text="    Cert: Required" />
 	<Label wrapText="true" text="After click logon button below, you may need manually select the cert and click Allow button on popup." />
 	<Button fx:id="btnProdLogonWebAdmin" text="Logon WebAdmin" onAction="#btnProdLogonWebAdminClicked"/>

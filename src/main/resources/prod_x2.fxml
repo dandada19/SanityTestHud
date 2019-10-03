@@ -9,8 +9,8 @@
 	<Button fx:id="btnProdSeleniumX2Test" text="Selenium X2 Tests" onAction="#btnProdSeleniumX2TestClicked"/>
 	<Label wrapText="true" text="2. If Selemnium test failed, contact Rahul." />
 	<Label wrapText="true" text="3. Or you can manually login to X2 and do some trades" />
-	<Label text="    User Name: your enroll account-qatestxx" />
-	<Label text="    Password: Test1234 (refer to settings)" />
+	<Label fx:id="lb1" text="    User Name: [#ProdSettings.X2TAKER_USERNAME#]" />
+	<Label fx:id="lb2" text="    Password: [#ProdSettings.X2TAKER_PASSWORD#]" />
 	<Label text="    Cert: required" />
 	<Button fx:id="btnProdLogonX2" text="Logon X2" onAction="#btnProdLogonX2Clicked"/>
 </VBox>
