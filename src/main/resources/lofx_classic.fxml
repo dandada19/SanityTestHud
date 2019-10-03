@@ -7,8 +7,8 @@
 
 	
 	<Label wrapText="true" text="Logon Classic Taker with your enroll account" />
-	<Label text="    User Name: test_lofxqatestxx" />
-	<Label text="    Password: test1234 (refer to settings)" />
+	<Label fx:id="lb1" text="    User Name: [#LofxSettings.CLASSICTAKER_USERNAME#]" />
+	<Label fx:id="lb2" text="    Password: [#LofxSettings.CLASSICTAKER_PASSWORD#]" />
 	<Label text="    Cert: Required" />
 	<Button fx:id="btnLofxLogonClassicTaker" text="Logon Classic Taker" onAction="#btnLofxLogonClassicTakerClicked"/>
 </VBox>

@@ -5,9 +5,9 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.TkfxEnrollController">
 	
-	<Label wrapText="true" text="1. You should have reset pin of qtptkfx_enroll on WebAdmin " />	
+	<Label fx:id="lb1" wrapText="true" text="1. You should have reset pin of [#TkfxSettings.ENROLLMENT_USERNAME#] on WebAdmin " />	
 	<Label wrapText="true" text="2. Click below button to enroll" />
 	<Button fx:id="btnTkfxEnroll" text="Enroll" onAction="#btnTkfxEnrollClicked"/>
-	<Label wrapText="true" text="3. Go to IE and remove old cert of qtptkfx_enroll" />
+	<Label fx:id="lb2" wrapText="true" text="3. Go to IE and remove old cert of [#TkfxSettings.ENROLLMENT_USERNAME#]" />
 	<Button fx:id="btnTkfxLaunchIe" text="Launch IE" onAction="#btnTkfxLaunchIeClicked"/>
 </VBox>

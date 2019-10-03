@@ -1,18 +1,24 @@
 package dzhu.controller;
 
-import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
+import dzhu.settings.GlobalSettings;
+import dzhu.settings.SettingsUtil;
 import dzhu.settings.TkfxSettings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class TkfxEnrollController {
+	@FXML
+	private Label lb1=null;
+	@FXML
+	private Label lb2=null;
 	@FXML
 	private Button btnTkfxEnroll=null;
 	@FXML
@@ -20,6 +26,12 @@ public class TkfxEnrollController {
 	
 	private WebDriver driver = null;
 	private Stage parentStage = null;
+	
+	@FXML
+	public void initialize() {
+		lb1.setText(SettingsUtil.replaceTextWithActualUserSettings(lb1.getText()));
+		lb2.setText(SettingsUtil.replaceTextWithActualUserSettings(lb2.getText()));
+	}
 	
 	private Stage getParentStage() {
 		if(parentStage == null) {
@@ -53,21 +65,18 @@ public class TkfxEnrollController {
 	public void btnTkfxEnrollClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
 		btnTkfxEnroll.getStyleClass().remove("success");
-		
-		String agentArgs = TkfxSettings.ENROLLMENT_USERNAME + ";" +
-						   "test1234" + ";" + 
-						   "qa@currenex.com";
-		
-		try {
-			Runtime.getRuntime().exec("cmd.exe /c set JAVA_TOOL_OPTIONS=-javaagent:EnrollAgent.jar" +
-					"=" + agentArgs +
-					"&& javaws " + TkfxSettings.ENROLL_APP_LINK);
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
 
+		boolean ret = ControllerUtils.doEnroll(TkfxSettings.ENROLL_PAGE_LINK, 
+				TkfxSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
+		
 		ControllerUtils.showStages(getParentStage());
-		btnTkfxEnroll.getStyleClass().add("success");
+		if(ret) {
+			btnTkfxEnroll.getStyleClass().remove("danger");
+			btnTkfxEnroll.getStyleClass().add("success");
+		}else {
+			btnTkfxEnroll.getStyleClass().remove("success");
+			btnTkfxEnroll.getStyleClass().add("danger");
+		}
 	}
 	
 	@FXML

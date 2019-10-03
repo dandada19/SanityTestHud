@@ -79,10 +79,16 @@ public class Int2EnrollController {
 		ControllerUtils.hideStages(getParentStage());
 		btnInt2LaunchEnrollApp.getStyleClass().remove("success");
 		
-		ControllerUtils.doEnroll(Int2Settings.ENROLL_PAGE_LINK, 
+		boolean ret = ControllerUtils.doEnroll(Int2Settings.ENROLL_PAGE_LINK, 
 				Int2Settings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
 
 		ControllerUtils.showStages(getParentStage());
-		btnInt2LaunchEnrollApp.getStyleClass().add("success");
+		if(ret) {
+			btnInt2LaunchEnrollApp.getStyleClass().remove("danger");
+			btnInt2LaunchEnrollApp.getStyleClass().add("success");
+		}else {
+			btnInt2LaunchEnrollApp.getStyleClass().remove("success");
+			btnInt2LaunchEnrollApp.getStyleClass().add("danger");
+		}
 	}
 }

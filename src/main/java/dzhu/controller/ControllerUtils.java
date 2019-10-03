@@ -29,18 +29,24 @@ public class ControllerUtils {
 		}
 		mainStage.show();
 	}
-	public static void doEnroll(String enrollPageAddress, String id, String pin) {
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--start-maximized");
-		WebDriver chromeDriver = new ChromeDriver(options);
-		chromeDriver.get(enrollPageAddress);
-		WebElement cbAgree = chromeDriver.findElement(By.name("agreed"));
-		cbAgree.click();
-		WebElement inputId = chromeDriver.findElement(By.name("login"));
-		inputId.sendKeys(id);
-        WebElement inputPin = chromeDriver.findElement(By.name("pin"));
-        inputPin.sendKeys(pin);
-        WebElement submitLogin = chromeDriver.findElement(By.xpath("//button[text()='Enroll']"));
-        submitLogin.click();	
+	public static boolean doEnroll(String enrollPageAddress, String id, String pin) {
+		try {
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--start-maximized");
+			WebDriver chromeDriver = new ChromeDriver(options);
+			chromeDriver.get(enrollPageAddress);
+			WebElement cbAgree = chromeDriver.findElement(By.name("agreed"));
+			cbAgree.click();
+			WebElement inputId = chromeDriver.findElement(By.name("login"));
+			inputId.sendKeys(id);
+	        WebElement inputPin = chromeDriver.findElement(By.name("pin"));
+	        inputPin.sendKeys(pin);
+	        WebElement submitLogin = chromeDriver.findElement(By.xpath("//button[text()='Enroll']"));
+	        submitLogin.click();	
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 }

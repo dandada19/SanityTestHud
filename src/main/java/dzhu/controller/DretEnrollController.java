@@ -66,11 +66,17 @@ public class DretEnrollController {
 		ControllerUtils.hideStages(getParentStage());
 		btnDretEnroll.getStyleClass().remove("success");		
 
-		ControllerUtils.doEnroll(DretSettings.ENROLL_PAGE_LINK, 
+		boolean ret = ControllerUtils.doEnroll(DretSettings.ENROLL_PAGE_LINK, 
 				DretSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
 
 		ControllerUtils.showStages(getParentStage());
-		btnDretEnroll.getStyleClass().add("success");
+		if(ret) {
+			btnDretEnroll.getStyleClass().remove("danger");
+			btnDretEnroll.getStyleClass().add("success");
+		}else {
+			btnDretEnroll.getStyleClass().remove("danger");
+			btnDretEnroll.getStyleClass().add("fail");
+		}
 	}
 	
 	@FXML

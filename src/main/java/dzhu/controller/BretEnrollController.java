@@ -70,11 +70,17 @@ public class BretEnrollController {
 		ControllerUtils.hideStages(getParentStage());
 		btnBretEnroll.getStyleClass().remove("success");
 		
-		ControllerUtils.doEnroll(BretSettings.ENROLL_PAGE_LINK, 
+		boolean ret = ControllerUtils.doEnroll(BretSettings.ENROLL_PAGE_LINK, 
 				BretSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
 
 		ControllerUtils.showStages(getParentStage());
-		btnBretEnroll.getStyleClass().add("success");
+		if(ret) {
+			btnBretEnroll.getStyleClass().remove("danger");
+			btnBretEnroll.getStyleClass().add("success");
+		}else {
+			btnBretEnroll.getStyleClass().remove("danger");
+			btnBretEnroll.getStyleClass().add("fail");
+		}
 	}
 	
 	@FXML

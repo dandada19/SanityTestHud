@@ -1,11 +1,10 @@
 package dzhu.controller;
 
-import java.io.IOException;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
+import dzhu.settings.GlobalSettings;
 import dzhu.settings.ProdSettings;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -53,21 +52,19 @@ public class ProdEnrollController {
 	public void btnProdEnrollClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
 		btnProdEnroll.getStyleClass().remove("success");
-		
-		String agentArgs = ProdSettings.ENROLLMENT_USERNAME + ";" +
-						   "test1234" + ";" + 
-						   "qa@currenex.com";
-		
-		try {
-			Runtime.getRuntime().exec("cmd.exe /c set JAVA_TOOL_OPTIONS=-javaagent:EnrollAgent.jar" +
-					"=" + agentArgs +
-					"&& javaws " + ProdSettings.ENROLL_APP_LINK);
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+
+		boolean ret = ControllerUtils.doEnroll(ProdSettings.ENROLL_PAGE_LINK, 
+				ProdSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
 
 		ControllerUtils.showStages(getParentStage());
-		btnProdEnroll.getStyleClass().add("success");
+
+		if(ret) {
+			btnProdEnroll.getStyleClass().remove("danger");
+			btnProdEnroll.getStyleClass().add("success");
+		}else {
+			btnProdEnroll.getStyleClass().remove("success");
+			btnProdEnroll.getStyleClass().add("danger");
+		}
 	}
 	
 	@FXML

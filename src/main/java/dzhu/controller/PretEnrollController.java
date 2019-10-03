@@ -1,18 +1,23 @@
 package dzhu.controller;
 
-import java.io.IOException;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
+import dzhu.settings.GlobalSettings;
 import dzhu.settings.PretSettings;
+import dzhu.settings.SettingsUtil;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class PretEnrollController {
+	@FXML
+	private Label lb1=null;
+	@FXML
+	private Label lb2=null;
 	@FXML
 	private Button btnPretEnroll=null;
 	@FXML
@@ -20,6 +25,12 @@ public class PretEnrollController {
 	
 	private WebDriver driver = null;
 	private Stage parentStage = null;
+	
+	@FXML
+	public void initialize() {
+		lb1.setText(SettingsUtil.replaceTextWithActualUserSettings(lb1.getText()));
+		lb2.setText(SettingsUtil.replaceTextWithActualUserSettings(lb2.getText()));
+	}
 	
 	private Stage getParentStage() {
 		if(parentStage == null) {
@@ -53,21 +64,18 @@ public class PretEnrollController {
 	public void btnPretEnrollClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
 		btnPretEnroll.getStyleClass().remove("success");
-		
-		String agentArgs = PretSettings.ENROLLMENT_USERNAME + ";" +
-						   "test1234" + ";" + 
-						   "qa@currenex.com";
-		
-		try {
-			Runtime.getRuntime().exec("cmd.exe /c set JAVA_TOOL_OPTIONS=-javaagent:EnrollAgent.jar" +
-					"=" + agentArgs +
-					"&& javaws " + PretSettings.ENROLL_APP_LINK);
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+
+		boolean ret = ControllerUtils.doEnroll(PretSettings.ENROLL_PAGE_LINK, 
+				PretSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
 
 		ControllerUtils.showStages(getParentStage());
-		btnPretEnroll.getStyleClass().add("success");
+		if(ret) {
+			btnPretEnroll.getStyleClass().remove("danger");
+			btnPretEnroll.getStyleClass().add("success");
+		}else {
+			btnPretEnroll.getStyleClass().remove("success");
+			btnPretEnroll.getStyleClass().add("danger");
+		}
 	}
 	
 	@FXML

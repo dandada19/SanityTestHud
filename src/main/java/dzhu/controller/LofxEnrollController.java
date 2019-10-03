@@ -1,18 +1,23 @@
 package dzhu.controller;
 
-import java.io.IOException;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 
+import dzhu.settings.GlobalSettings;
 import dzhu.settings.LofxSettings;
+import dzhu.settings.SettingsUtil;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class LofxEnrollController {
+	@FXML
+	private Label lb1=null;
+	@FXML
+	private Label lb2=null;
 	@FXML
 	private Button btnLofxEnroll=null;
 	@FXML
@@ -20,6 +25,12 @@ public class LofxEnrollController {
 	
 	private WebDriver driver = null;
 	private Stage parentStage = null;
+	
+	@FXML
+	public void initialize() {
+		lb1.setText(SettingsUtil.replaceTextWithActualUserSettings(lb1.getText()));
+		lb2.setText(SettingsUtil.replaceTextWithActualUserSettings(lb2.getText()));
+	}
 	
 	private Stage getParentStage() {
 		if(parentStage == null) {
@@ -54,20 +65,18 @@ public class LofxEnrollController {
 		ControllerUtils.hideStages(getParentStage());
 		btnLofxEnroll.getStyleClass().remove("success");
 		
-		String agentArgs = LofxSettings.ENROLLMENT_USERNAME + ";" +
-						   "test1234" + ";" + 
-						   "qa@currenex.com";
-		
-		try {
-			Runtime.getRuntime().exec("cmd.exe /c set JAVA_TOOL_OPTIONS=-javaagent:EnrollAgent.jar" +
-					"=" + agentArgs +
-					"&& javaws " + LofxSettings.ENROLL_APP_LINK);
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+
+		boolean ret = ControllerUtils.doEnroll(LofxSettings.ENROLL_PAGE_LINK, 
+				LofxSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
 
 		ControllerUtils.showStages(getParentStage());
-		btnLofxEnroll.getStyleClass().add("success");
+		if(ret) {
+			btnLofxEnroll.getStyleClass().remove("danger");
+			btnLofxEnroll.getStyleClass().add("success");
+		}else {
+			btnLofxEnroll.getStyleClass().remove("success");
+			btnLofxEnroll.getStyleClass().add("danger");
+		}
 	}
 	
 	@FXML
