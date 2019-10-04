@@ -44,7 +44,7 @@ public class ProdX2Controller {
 		return parentStage;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -58,7 +58,7 @@ public class ProdX2Controller {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
@@ -68,37 +68,47 @@ public class ProdX2Controller {
 	@FXML
 	public void btnProdSeleniumX2TestClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		btnProdSeleniumX2Test.getStyleClass().remove("success");
-		
-		driver = getDriver();
-        driver.get(ProdSettings.SELENIUM_X2_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
-
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
-        wait.until(ExpectedConditions.elementToBeClickable(byRun));
-        WebElement run = driver.findElement(byRun);
-        run.click();
-
+		try {
+			driver = getDriver();
+	        driver.get(ProdSettings.SELENIUM_X2_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+	
+	        WebDriverWait wait = new WebDriverWait(driver, 30);
+	        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
+	        wait.until(ExpectedConditions.elementToBeClickable(byRun));
+	        WebElement run = driver.findElement(byRun);
+	        run.click();
+		}catch (Exception ex) {
+	        ControllerUtils.showStages(getParentStage());
+			btnProdSeleniumX2Test.getStyleClass().remove("success");
+			btnProdSeleniumX2Test.getStyleClass().add("danger");
+			return;
+		}
         ControllerUtils.showStages(getParentStage());
+		btnProdSeleniumX2Test.getStyleClass().remove("danger");
 		btnProdSeleniumX2Test.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnProdLogonX2Clicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		btnProdLogonX2.getStyleClass().remove("success");
-        
-		driver = getDriver();
-        driver.get(ProdSettings.X2_LINK);
-        logonX2(ProdSettings.X2TAKER_USERNAME, ProdSettings.X2TAKER_PASSWORD);
-        
+        try {
+			driver = getDriver();
+	        driver.get(ProdSettings.X2_LINK);
+	        logonX2(ProdSettings.X2TAKER_USERNAME, ProdSettings.X2TAKER_PASSWORD);
+        }catch (Exception ex) {
+    		ControllerUtils.showStages(getParentStage());
+    		btnProdLogonX2.getStyleClass().remove("success");
+            btnProdLogonX2.getStyleClass().add("danger");
+            return;
+		}    
 		ControllerUtils.showStages(getParentStage());
+		btnProdLogonX2.getStyleClass().remove("danger");
         btnProdLogonX2.getStyleClass().add("success");
 	}
 	
-	private void login() {
+	private void login() throws Exception{
 		WebElement username = driver.findElement(By.name("username"));
         username.sendKeys(GlobalSettings.FIXPORTAL_USERNAME);
         WebElement password = driver.findElement(By.name("password"));
@@ -115,7 +125,7 @@ public class ProdX2Controller {
         return false;
 	}
 	
-	private void logonX2(String user, String pwd) {
+	private void logonX2(String user, String pwd) throws Exception{
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		By byRun = By.cssSelector("input[placeholder='Username']");
 		wait.until(ExpectedConditions.elementToBeClickable(byRun));

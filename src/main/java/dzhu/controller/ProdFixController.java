@@ -40,7 +40,7 @@ public class ProdFixController {
 		return parentStage;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -54,7 +54,7 @@ public class ProdFixController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
@@ -63,63 +63,86 @@ public class ProdFixController {
 	
 	@FXML
 	public void btnProdFixFXClicked(Event e) {
-		btnProdFixFX.getStyleClass().remove("success");
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-        driver.get(ProdSettings.FIX_FX_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
-
-        clickRun();
-
+		try {
+			driver = getDriver();
+	        driver.get(ProdSettings.FIX_FX_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+	        clickRun();
+		}catch(Exception ex) {
+	        ControllerUtils.showStages(getParentStage());
+			btnProdFixFX.getStyleClass().remove("success");
+			btnProdFixFX.getStyleClass().add("danger");
+			return;
+		}
         ControllerUtils.showStages(getParentStage());
+		btnProdFixFX.getStyleClass().remove("danger");
 		btnProdFixFX.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnProdFixTreasClicked(Event e) {
-		btnProdFixTreas.getStyleClass().remove("success");
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		driver.get(ProdSettings.FIX_TREASURY_LINK);        
-        if(isLoginPageShown()) {
-        	login();
-        }
-
-        clickRun();
-
+		try {
+			driver = getDriver();
+	        driver.get(ProdSettings.FIX_TREASURY_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+	        clickRun();
+		}catch(Exception ex) {
+	        ControllerUtils.showStages(getParentStage());
+			btnProdFixTreas.getStyleClass().remove("success");
+	        btnProdFixTreas.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnProdFixTreas.getStyleClass().remove("danger");
 		btnProdFixTreas.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnProdFixCryptoClicked(Event e) {
-		btnProdFixCrypto.getStyleClass().remove("success");
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-        driver.get(ProdSettings.FIX_CRYPTO_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
-
-        clickRun();
-
+		try {
+			driver = getDriver();
+	        driver.get(ProdSettings.FIX_CRYPTO_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+	        clickRun();
+		}catch(Exception ex) {
+	        ControllerUtils.showStages(getParentStage());
+	        btnProdFixCrypto.getStyleClass().remove("success");
+	        btnProdFixCrypto.getStyleClass().add("danger");
+			return;
+		}
         ControllerUtils.showStages(getParentStage());
-		btnProdFixFX.getStyleClass().add("success");
+		btnProdFixCrypto.getStyleClass().remove("danger");
+		btnProdFixCrypto.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnProdLaunchTeamcityClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-        driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
-
+		try {
+			driver = getDriver();
+	        driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			ControllerUtils.showStages(getParentStage());
+	        btnProdLaunchTeamcity.getStyleClass().remove("success");
+	        btnProdLaunchTeamcity.getStyleClass().add("danger");
+	        return;
+		}
 		ControllerUtils.showStages(getParentStage());
+        btnProdLaunchTeamcity.getStyleClass().remove("danger");
         btnProdLaunchTeamcity.getStyleClass().add("success");
 	}
 	
-	private void login() {
+	private void login() throws Exception{
 		WebElement username = driver.findElement(By.name("username"));
         username.sendKeys(GlobalSettings.FIXPORTAL_USERNAME);
         WebElement password = driver.findElement(By.name("password"));
@@ -128,7 +151,7 @@ public class ProdFixController {
         submitLogin.click();
 	}
 	
-	private void clickRun() {
+	private void clickRun() throws Exception{
 		WebDriverWait wait = new WebDriverWait(driver, 30);
         By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
         wait.until(ExpectedConditions.elementToBeClickable(byRun));

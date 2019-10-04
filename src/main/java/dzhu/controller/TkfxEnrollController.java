@@ -40,7 +40,7 @@ public class TkfxEnrollController {
 		return parentStage;
 	}
 	
-	public WebDriver getDriver() {
+	public WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -54,7 +54,7 @@ public class TkfxEnrollController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		InternetExplorerOptions options = new InternetExplorerOptions();
 		options.ignoreZoomSettings();
 		driver = new InternetExplorerDriver(options);
@@ -64,7 +64,6 @@ public class TkfxEnrollController {
 	@FXML
 	public void btnTkfxEnrollClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		btnTkfxEnroll.getStyleClass().remove("success");
 
 		boolean ret = ControllerUtils.doEnroll(TkfxSettings.ENROLL_PAGE_LINK, 
 				TkfxSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
@@ -81,12 +80,18 @@ public class TkfxEnrollController {
 	
 	@FXML
 	public void btnTkfxLaunchIeClicked(Event e) {
-		ControllerUtils.hideStages(getParentStage());		
-		btnTkfxLaunchIe.getStyleClass().remove("success");
-
-		driver = getDriver();
-		driver.get(TkfxSettings.ENROLL_PAGE_LINK);
+		ControllerUtils.hideStages(getParentStage());
+		try {
+			driver = getDriver();
+			driver.get(TkfxSettings.ENROLL_PAGE_LINK);
+		}catch (Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnTkfxLaunchIe.getStyleClass().remove("success");
+			btnTkfxLaunchIe.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnTkfxLaunchIe.getStyleClass().remove("danger");
 		btnTkfxLaunchIe.getStyleClass().add("success");
 	}
 }

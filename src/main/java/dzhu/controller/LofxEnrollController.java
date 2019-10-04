@@ -39,7 +39,7 @@ public class LofxEnrollController {
 		return parentStage;
 	}
 	
-	public WebDriver getDriver() {
+	public WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -53,7 +53,7 @@ public class LofxEnrollController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		InternetExplorerOptions options = new InternetExplorerOptions();
 		options.ignoreZoomSettings();
 		driver = new InternetExplorerDriver(options);
@@ -63,8 +63,6 @@ public class LofxEnrollController {
 	@FXML
 	public void btnLofxEnrollClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		btnLofxEnroll.getStyleClass().remove("success");
-		
 
 		boolean ret = ControllerUtils.doEnroll(LofxSettings.ENROLL_PAGE_LINK, 
 				LofxSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
@@ -81,12 +79,18 @@ public class LofxEnrollController {
 	
 	@FXML
 	public void btnLofxLaunchIeClicked(Event e) {
-		ControllerUtils.hideStages(getParentStage());		
-		btnLofxLaunchIe.getStyleClass().remove("success");
-
-		driver = getDriver();
-		driver.get(LofxSettings.ENROLL_PAGE_LINK);
+		ControllerUtils.hideStages(getParentStage());
+		try {
+			driver = getDriver();
+			driver.get(LofxSettings.ENROLL_PAGE_LINK);
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnLofxLaunchIe.getStyleClass().remove("success");
+			btnLofxLaunchIe.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnLofxLaunchIe.getStyleClass().remove("danger");
 		btnLofxLaunchIe.getStyleClass().add("success");
 	}
 }

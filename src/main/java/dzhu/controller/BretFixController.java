@@ -34,7 +34,7 @@ public class BretFixController {
 		return parentStage;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -48,7 +48,7 @@ public class BretFixController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
@@ -58,35 +58,50 @@ public class BretFixController {
 	@FXML
 	public void btnBretFixFXClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-        driver.get(BretSettings.FIX_FX_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
-
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
-        wait.until(ExpectedConditions.elementToBeClickable(byRun));
-        WebElement run = driver.findElement(byRun);
-        run.click();
-
+		try {
+			driver = getDriver();
+	        driver.get(BretSettings.FIX_FX_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+	
+	        WebDriverWait wait = new WebDriverWait(driver, 30);
+	        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
+	        wait.until(ExpectedConditions.elementToBeClickable(byRun));
+	        WebElement run = driver.findElement(byRun);
+	        run.click();
+		}catch(Exception ex) {
+	        ControllerUtils.showStages(getParentStage());
+			btnBretFixFX.getStyleClass().remove("success");
+			btnBretFixFX.getStyleClass().add("danger");
+			return;
+		}
         ControllerUtils.showStages(getParentStage());
+		btnBretFixFX.getStyleClass().remove("danger");
 		btnBretFixFX.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnBretLaunchTeamcityClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-        driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
+		try {
+			driver = getDriver();
+	        driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+	        btnBretLaunchTeamcity.getStyleClass().remove("success");
+	        btnBretLaunchTeamcity.getStyleClass().add("danger");
+	        return;
+		}
 
 		ControllerUtils.showStages(getParentStage());
+        btnBretLaunchTeamcity.getStyleClass().remove("danger");
         btnBretLaunchTeamcity.getStyleClass().add("success");
 	}
 	
-	private void login() {
+	private void login() throws Exception{
 		WebElement username = driver.findElement(By.name("username"));
         username.sendKeys(GlobalSettings.FIXPORTAL_USERNAME);
         WebElement password = driver.findElement(By.name("password"));
@@ -103,5 +118,4 @@ public class BretFixController {
         return false;
 	}
 
-	
 }

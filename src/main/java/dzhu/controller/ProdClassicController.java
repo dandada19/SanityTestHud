@@ -39,7 +39,7 @@ public class ProdClassicController {
 		return parentStage;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -53,7 +53,7 @@ public class ProdClassicController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
@@ -62,19 +62,23 @@ public class ProdClassicController {
 	
 	@FXML
 	public void btnProdLogonClassicTakerClicked(Event e) {
-		btnProdLogonClassicTaker.getStyleClass().remove("success");
 		ControllerUtils.hideStages(getParentStage());
-		
-		driver = getDriver();
-        driver.get(ProdSettings.CLASSIC_TAKER_LINK);
-        
-        loginTakerFromWeb(ProdSettings.CLASSICTAKER_USERNAME, ProdSettings.CLASSICTAKER_PASSWORD);
-		
+		try {
+			driver = getDriver();
+	        driver.get(ProdSettings.CLASSIC_TAKER_LINK);
+	        loginTakerFromWeb(ProdSettings.CLASSICTAKER_USERNAME, ProdSettings.CLASSICTAKER_PASSWORD);
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnProdLogonClassicTaker.getStyleClass().remove("success");
+			btnProdLogonClassicTaker.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnProdLogonClassicTaker.getStyleClass().remove("danger");
 		btnProdLogonClassicTaker.getStyleClass().add("success");
 	}
 	
-	private void loginTakerFromWeb(String user, String pwd) {
+	private void loginTakerFromWeb(String user, String pwd) throws Exception{
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		By by = By.name("username");
 		wait.until(ExpectedConditions.elementToBeClickable(by));

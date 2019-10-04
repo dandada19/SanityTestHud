@@ -43,7 +43,7 @@ public class BretEnrollController {
 		return parentStage;
 	}
 	
-	public WebDriver getDriver() {
+	public WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -57,7 +57,7 @@ public class BretEnrollController {
 		}
 	}
 	
-	private WebDriver initDriver() {		
+	private WebDriver initDriver() throws Exception{
 		InternetExplorerOptions options = new InternetExplorerOptions();
 		options.ignoreZoomSettings();
 		options.requireWindowFocus();
@@ -78,19 +78,26 @@ public class BretEnrollController {
 			btnBretEnroll.getStyleClass().remove("danger");
 			btnBretEnroll.getStyleClass().add("success");
 		}else {
-			btnBretEnroll.getStyleClass().remove("danger");
-			btnBretEnroll.getStyleClass().add("fail");
+			btnBretEnroll.getStyleClass().remove("success");
+			btnBretEnroll.getStyleClass().add("danger");
 		}
 	}
 	
 	@FXML
 	public void btnBretLaunchIeClicked(Event e) {
-		ControllerUtils.hideStages(getParentStage());		
-		btnBretLaunchIe.getStyleClass().remove("success");
-
-		driver = getDriver();
-		driver.get(BretSettings.ENROLL_PAGE_LINK);
+		ControllerUtils.hideStages(getParentStage());
+		try {
+			driver = getDriver();
+			driver.get(BretSettings.ENROLL_PAGE_LINK);
+		}catch (Exception ex) {
+			ex.printStackTrace();
+			ControllerUtils.showStages(getParentStage());
+			btnBretLaunchIe.getStyleClass().remove("success");
+			btnBretLaunchIe.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnBretLaunchIe.getStyleClass().remove("danger");
 		btnBretLaunchIe.getStyleClass().add("success");
 	}
 	

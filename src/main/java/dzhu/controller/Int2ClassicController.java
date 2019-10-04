@@ -46,7 +46,7 @@ public class Int2ClassicController {
 		return parentStage;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -60,7 +60,7 @@ public class Int2ClassicController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
@@ -95,9 +95,17 @@ public class Int2ClassicController {
 	@FXML
 	public void btnInt2LaunchQtpPortalClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		driver.get(GlobalSettings.QTP_PORTAL_LINK);
+		try {
+			driver = getDriver();
+			driver.get(GlobalSettings.QTP_PORTAL_LINK);
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnInt2LaunchQtpPortal.getStyleClass().remove("success");
+			btnInt2LaunchQtpPortal.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnInt2LaunchQtpPortal.getStyleClass().remove("danger");
 		btnInt2LaunchQtpPortal.getStyleClass().add("success");
 	}
 	

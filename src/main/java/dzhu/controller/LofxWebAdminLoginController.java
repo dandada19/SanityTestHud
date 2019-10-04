@@ -48,20 +48,24 @@ public class LofxWebAdminLoginController {
 	
 	@FXML
 	public void btnLofxLogonWebAdminClicked(Event e) {
-		btnLofxLogonWebAdmin.getStyleClass().remove("success");
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		driver.get(LofxSettings.WEBADMIN_LINK);
-		
-		logonWebAdmin(LofxSettings.WEBADMIN_USERNAME, LofxSettings.WEBADMIN_PASSWORD);
+		try {
+			driver = getDriver();
+			driver.get(LofxSettings.WEBADMIN_LINK);		
+			logonWebAdmin(LofxSettings.WEBADMIN_USERNAME, LofxSettings.WEBADMIN_PASSWORD);
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnLofxLogonWebAdmin.getStyleClass().remove("success");
+			btnLofxLogonWebAdmin.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnLofxLogonWebAdmin.getStyleClass().remove("danger");
 		btnLofxLogonWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnLofxResetPinClicked(Event e) {
-		btnLofxResetPin.getStyleClass().remove("success");
-		btnLofxResetPin.getStyleClass().remove("danger");
 		ControllerUtils.hideStages(getParentStage());
 		lbLofxWebadminResult.setText("");
 		
@@ -77,7 +81,7 @@ public class LofxWebAdminLoginController {
 		ControllerUtils.showStages(getParentStage());
 	}
 	
-	private void logonWebAdmin(String user, String pwd) {
+	private void logonWebAdmin(String user, String pwd) throws Exception{
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		By byRun = By.cssSelector("input[placeholder='Username']");
 		wait.until(ExpectedConditions.elementToBeClickable(byRun));
@@ -148,7 +152,7 @@ public class LofxWebAdminLoginController {
 		return true;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {			
 			return initDriver();
 		}else {
@@ -162,7 +166,7 @@ public class LofxWebAdminLoginController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);

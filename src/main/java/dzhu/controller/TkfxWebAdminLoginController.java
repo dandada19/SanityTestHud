@@ -51,36 +51,52 @@ public class TkfxWebAdminLoginController {
 	@FXML
 	public void btnTkfxLaunchWebAdminClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		driver.get(TkfxSettings.WEBADMIN_LINK);
+		try {
+			driver = getDriver();
+			driver.get(TkfxSettings.WEBADMIN_LINK);
+		}catch (Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnTkfxLaunchWebAdmin.getStyleClass().remove("success");
+			btnTkfxLaunchWebAdmin.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnTkfxLaunchWebAdmin.getStyleClass().remove("danger");
 		btnTkfxLaunchWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnTkfxLogonWebAdminClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		/*
-		//comment this thread out, so user has to select cert manually.		
-		Runnable run = () -> {
-			Screen s = new Screen();		
-			String elementsFolderPath = "src/main/resources/sikuli_elements/";
-	        Pattern btnOk = new Pattern(elementsFolderPath + "webadmin_button_ok.PNG");      
-	        try {
-				s.wait(btnOk, 20);
-		        s.click(btnOk);
-			} catch (FindFailed e1) {
-				e1.printStackTrace();
-			}
-		};
-		Thread thread = new Thread(run);
-		thread.start();
-		*/
-		driver.get(TkfxSettings.WEBADMIN_LINK);
-		
-		logonWebAdmin(TkfxSettings.WEBADMIN_USERNAME, TkfxSettings.WEBADMIN_PASSWORD);
+		try {
+			driver = getDriver();
+			/*
+			//comment this thread out, so user has to select cert manually.		
+			Runnable run = () -> {
+				Screen s = new Screen();		
+				String elementsFolderPath = "src/main/resources/sikuli_elements/";
+		        Pattern btnOk = new Pattern(elementsFolderPath + "webadmin_button_ok.PNG");      
+		        try {
+					s.wait(btnOk, 20);
+			        s.click(btnOk);
+				} catch (FindFailed e1) {
+					e1.printStackTrace();
+				}
+			};
+			Thread thread = new Thread(run);
+			thread.start();
+			*/
+			driver.get(TkfxSettings.WEBADMIN_LINK);
+			
+			logonWebAdmin(TkfxSettings.WEBADMIN_USERNAME, TkfxSettings.WEBADMIN_PASSWORD);
+		}catch (Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnTkfxLogonWebAdmin.getStyleClass().remove("success");
+			btnTkfxLogonWebAdmin.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnTkfxLogonWebAdmin.getStyleClass().remove("danger");
 		btnTkfxLogonWebAdmin.getStyleClass().add("success");
 	}
 	
@@ -101,7 +117,7 @@ public class TkfxWebAdminLoginController {
 		ControllerUtils.showStages(getParentStage());
 	}
 	
-	private void logonWebAdmin(String user, String pwd) {
+	private void logonWebAdmin(String user, String pwd) throws Exception{
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		By byRun = By.cssSelector("input[placeholder='Username']");
 		wait.until(ExpectedConditions.elementToBeClickable(byRun));
@@ -180,7 +196,7 @@ public class TkfxWebAdminLoginController {
 		return true;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {			
 			return initDriver();
 		}else {
@@ -194,7 +210,7 @@ public class TkfxWebAdminLoginController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);

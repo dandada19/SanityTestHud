@@ -48,7 +48,7 @@ public class Int2FixController {
 		return parentStage;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -62,7 +62,7 @@ public class Int2FixController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
@@ -72,61 +72,79 @@ public class Int2FixController {
 	@FXML
 	public void btnInt2FixFXClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-        driver.get(Int2Settings.FIX_FX_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
-
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
-        wait.until(ExpectedConditions.elementToBeClickable(byRun));
-        WebElement run = driver.findElement(byRun);
-        run.click();
-
+		try {
+			driver = getDriver();
+	        driver.get(Int2Settings.FIX_FX_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }	
+	        WebDriverWait wait = new WebDriverWait(driver, 30);
+	        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
+	        wait.until(ExpectedConditions.elementToBeClickable(byRun));
+	        WebElement run = driver.findElement(byRun);
+	        run.click();
+		}catch(Exception ex) {
+	        ControllerUtils.showStages(getParentStage());
+			btnInt2FixFX.getStyleClass().remove("success");
+			btnInt2FixFX.getStyleClass().add("danger");
+			return;
+		}
         ControllerUtils.showStages(getParentStage());
+		btnInt2FixFX.getStyleClass().remove("danger");
 		btnInt2FixFX.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnInt2FixTreasClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		driver.get(Int2Settings.FIX_TREASURY_LINK);        
-        if(isLoginPageShown()) {
-        	login();
-        }
-
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
-        wait.until(ExpectedConditions.elementToBeClickable(byRun));
-        WebElement run = driver.findElement(byRun);
-        run.click();
-
+		try {
+			driver = getDriver();
+			driver.get(Int2Settings.FIX_TREASURY_LINK);        
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+	
+	        WebDriverWait wait = new WebDriverWait(driver, 30);
+	        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
+	        wait.until(ExpectedConditions.elementToBeClickable(byRun));
+	        WebElement run = driver.findElement(byRun);
+	        run.click();
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnInt2FixTreas.getStyleClass().remove("success");
+			btnInt2FixTreas.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnInt2FixTreas.getStyleClass().remove("danger");
 		btnInt2FixTreas.getStyleClass().add("success");
 	}
 	@FXML
 	public void btnInt2LaunchTeamcityClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-        driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
-
+		try {
+			driver = getDriver();
+	        driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+	        btnInt2LaunchTeamcity.getStyleClass().remove("success");
+	        btnInt2LaunchTeamcity.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+        btnInt2LaunchTeamcity.getStyleClass().remove("danger");
         btnInt2LaunchTeamcity.getStyleClass().add("success");
 	}
 	
-	private void login() {
+	private void login() throws Exception{
 		WebElement username = driver.findElement(By.name("username"));
         username.sendKeys(GlobalSettings.FIXPORTAL_USERNAME);
         WebElement password = driver.findElement(By.name("password"));
         password.sendKeys(GlobalSettings.FIXPORTAL_PASSWORD);
         WebElement submitLogin = driver.findElement(By.name("submitLogin"));
         submitLogin.click();
-        
-        //saveCookieDate();
 	}
 	
 	private boolean isLoginPageShown() {

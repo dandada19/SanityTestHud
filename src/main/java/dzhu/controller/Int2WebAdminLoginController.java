@@ -49,37 +49,52 @@ public class Int2WebAdminLoginController {
 	@FXML
 	public void btnInt2LaunchWebAdminClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		driver.get(Int2Settings.WEBADMIN_LINK);
+		try {
+			driver = getDriver();
+			driver.get(Int2Settings.WEBADMIN_LINK);
+		}catch (Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnInt2LaunchWebAdmin.getStyleClass().remove("success");
+			btnInt2LaunchWebAdmin.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnInt2LaunchWebAdmin.getStyleClass().remove("danger");
 		btnInt2LaunchWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LogonWebAdminClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		Runnable run = () -> {
-			Screen s = new Screen();		
-			String elementsFolderPath = "src/main/resources/sikuli_elements/";
-	        Pattern btnOk = new Pattern(elementsFolderPath + "webadmin_button_ok.PNG");      
-	        try {
-				s.wait(btnOk, 20);
-		        s.click(btnOk);
-			} catch (FindFailed e1) {
-				e1.printStackTrace();
-			}
-		};
-		Thread thread = new Thread(run);
-		thread.start();
-		driver.get(Int2Settings.WEBADMIN_LINK);
-		
-		logonWebAdmin(Int2Settings.WEBADMIN_USERNAME, Int2Settings.WEBADMIN_PASSWORD);
+		try {
+			driver = getDriver();
+			Runnable run = () -> {
+				Screen s = new Screen();		
+				String elementsFolderPath = "src/main/resources/sikuli_elements/";
+		        Pattern btnOk = new Pattern(elementsFolderPath + "webadmin_button_ok.PNG");      
+		        try {
+					s.wait(btnOk, 20);
+			        s.click(btnOk);
+				} catch (FindFailed e1) {
+					e1.printStackTrace();
+				}
+			};
+			Thread thread = new Thread(run);
+			thread.start();
+			driver.get(Int2Settings.WEBADMIN_LINK);			
+			logonWebAdmin(Int2Settings.WEBADMIN_USERNAME, Int2Settings.WEBADMIN_PASSWORD);
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnInt2LogonWebAdmin.getStyleClass().remove("success");
+			btnInt2LogonWebAdmin.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnInt2LogonWebAdmin.getStyleClass().remove("danger");
 		btnInt2LogonWebAdmin.getStyleClass().add("success");
 	}
 	
-	private void logonWebAdmin(String user, String pwd) {
+	private void logonWebAdmin(String user, String pwd) throws Exception{
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		By byRun = By.cssSelector("input[placeholder='Username']");
 		wait.until(ExpectedConditions.elementToBeClickable(byRun));
@@ -91,7 +106,7 @@ public class Int2WebAdminLoginController {
         submitLogin.click();
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {			
 			return initDriver();
 		}else {
@@ -105,7 +120,7 @@ public class Int2WebAdminLoginController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);

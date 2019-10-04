@@ -35,17 +35,17 @@ public class EmailUtils {
 	
 	public static void initializeDriver() {
 		Thread t = new Thread(()-> {
-			ChromeDriverService service = ChromeDriverService.createDefaultService();
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--window-position=-32000,-32000");
-			options.addArguments("--headless");
-			driver = new ChromeDriver(service, options);		
-			driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
-
-			String url = "https://"+GlobalSettings.DEVPORTAL_USERNAME
-					+":"+GlobalSettings.DEVPORTAL_PASSWORD+"@"+GlobalSettings.DEV_PORTAL_LINK+"home.html";
-
 			try {
+				ChromeDriverService service = ChromeDriverService.createDefaultService();
+				ChromeOptions options = new ChromeOptions();
+				options.addArguments("--window-position=-32000,-32000");
+				options.addArguments("--headless");
+				driver = new ChromeDriver(service, options);		
+				driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
+	
+				String url = "https://"+GlobalSettings.DEVPORTAL_USERNAME
+						+":"+GlobalSettings.DEVPORTAL_PASSWORD+"@"+GlobalSettings.DEV_PORTAL_LINK+"home.html";
+
 				driver.get(url);
 			}catch(Exception e) {
 				e.printStackTrace();

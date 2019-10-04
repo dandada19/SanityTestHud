@@ -40,7 +40,7 @@ public class DretEnrollController {
 		return parentStage;
 	}
 	
-	public WebDriver getDriver() {
+	public WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -54,7 +54,7 @@ public class DretEnrollController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		InternetExplorerOptions options = new InternetExplorerOptions();
 		options.ignoreZoomSettings();
 		driver = new InternetExplorerDriver(options);
@@ -63,8 +63,7 @@ public class DretEnrollController {
 	
 	@FXML
 	public void btnDretEnrollClicked(Event e) {
-		ControllerUtils.hideStages(getParentStage());
-		btnDretEnroll.getStyleClass().remove("success");		
+		ControllerUtils.hideStages(getParentStage());	
 
 		boolean ret = ControllerUtils.doEnroll(DretSettings.ENROLL_PAGE_LINK, 
 				DretSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
@@ -82,11 +81,17 @@ public class DretEnrollController {
 	@FXML
 	public void btnDretLaunchIeClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());		
-		btnDretLaunchIe.getStyleClass().remove("success");
-
-		driver = getDriver();
-		driver.get(DretSettings.ENROLL_PAGE_LINK);
+		try {
+			driver = getDriver();
+			driver.get(DretSettings.ENROLL_PAGE_LINK);
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnDretLaunchIe.getStyleClass().remove("success");
+			btnDretLaunchIe.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnDretLaunchIe.getStyleClass().remove("danger");
 		btnDretLaunchIe.getStyleClass().add("success");
 	}
 }

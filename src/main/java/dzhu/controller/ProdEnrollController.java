@@ -27,7 +27,7 @@ public class ProdEnrollController {
 		return parentStage;
 	}
 	
-	public WebDriver getDriver() {
+	public WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -41,7 +41,7 @@ public class ProdEnrollController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		InternetExplorerOptions options = new InternetExplorerOptions();
 		options.ignoreZoomSettings();
 		driver = new InternetExplorerDriver(options);
@@ -51,7 +51,6 @@ public class ProdEnrollController {
 	@FXML
 	public void btnProdEnrollClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		btnProdEnroll.getStyleClass().remove("success");
 
 		boolean ret = ControllerUtils.doEnroll(ProdSettings.ENROLL_PAGE_LINK, 
 				ProdSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
@@ -69,12 +68,20 @@ public class ProdEnrollController {
 	
 	@FXML
 	public void btnProdLaunchIeClicked(Event e) {
-		ControllerUtils.hideStages(getParentStage());		
-		btnProdLaunchIe.getStyleClass().remove("success");
-
-		driver = getDriver();
-		driver.get(ProdSettings.ENROLL_PAGE_LINK);
+		ControllerUtils.hideStages(getParentStage());
+		try {
+			driver = getDriver();
+			driver.get(ProdSettings.ENROLL_PAGE_LINK);
+			ControllerUtils.showStages(getParentStage());
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			ControllerUtils.showStages(getParentStage());
+			btnProdLaunchIe.getStyleClass().remove("success");
+			btnProdLaunchIe.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnProdLaunchIe.getStyleClass().remove("danger");
 		btnProdLaunchIe.getStyleClass().add("success");
 	}
 }

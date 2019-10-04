@@ -44,7 +44,7 @@ public class DretX2Controller {
 		return parentStage;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -58,7 +58,7 @@ public class DretX2Controller {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
@@ -68,32 +68,43 @@ public class DretX2Controller {
 	@FXML
 	public void btnDretSeleniumX2TestClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		btnDretSeleniumX2Test.getStyleClass().remove("success");
-		
-		driver = getDriver();
-        driver.get(DretSettings.SELENIUM_X2_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
-
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
-        wait.until(ExpectedConditions.elementToBeClickable(byRun));
-        WebElement run = driver.findElement(byRun);
-        run.click();
-
+		try {
+			driver = getDriver();
+	        driver.get(DretSettings.SELENIUM_X2_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+	
+	        WebDriverWait wait = new WebDriverWait(driver, 30);
+	        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
+	        wait.until(ExpectedConditions.elementToBeClickable(byRun));
+	        WebElement run = driver.findElement(byRun);
+	        run.click();
+		}catch(Exception ex) {
+	        ControllerUtils.showStages(getParentStage());
+			btnDretSeleniumX2Test.getStyleClass().remove("success");
+			btnDretSeleniumX2Test.getStyleClass().add("danger");
+			return;
+		}
         ControllerUtils.showStages(getParentStage());
+		btnDretSeleniumX2Test.getStyleClass().remove("danger");
 		btnDretSeleniumX2Test.getStyleClass().add("success");
 	}
+	
 	@FXML
 	public void btnDretLaunchX2Clicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-        btnDretLaunchX2.getStyleClass().remove("success");
-        
-		driver = getDriver();
-        driver.get(DretSettings.X2_LINK);
-
+        try {
+			driver = getDriver();
+	        driver.get(DretSettings.X2_LINK);
+        }catch(Exception ex) {
+    		ControllerUtils.showStages(getParentStage());
+            btnDretLaunchX2.getStyleClass().remove("success");
+            btnDretLaunchX2.getStyleClass().add("danger");
+        	return;
+        }
 		ControllerUtils.showStages(getParentStage());
+        btnDretLaunchX2.getStyleClass().remove("danger");
         btnDretLaunchX2.getStyleClass().add("success");
 	}
 	

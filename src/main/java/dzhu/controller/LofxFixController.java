@@ -34,7 +34,7 @@ public class LofxFixController {
 		return parentStage;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -48,7 +48,7 @@ public class LofxFixController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
@@ -57,34 +57,46 @@ public class LofxFixController {
 	
 	@FXML
 	public void btnLofxFixFXClicked(Event e) {
-		btnLofxFixFX.getStyleClass().remove("success");
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-        driver.get(LofxSettings.FIX_FX_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
-
-        clickRun();
-
+		try {
+			driver = getDriver();
+	        driver.get(LofxSettings.FIX_FX_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+	        clickRun();
+		}catch(Exception ex) {
+	        ControllerUtils.showStages(getParentStage());
+			btnLofxFixFX.getStyleClass().remove("success");
+			btnLofxFixFX.getStyleClass().add("danger");
+			return;
+		}
         ControllerUtils.showStages(getParentStage());
+		btnLofxFixFX.getStyleClass().remove("danger");
 		btnLofxFixFX.getStyleClass().add("success");
 	}
 
 	@FXML
 	public void btnLofxLaunchTeamcityClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-        driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
-
+		try {
+			driver = getDriver();
+	        driver.get(GlobalSettings.FIX_TEAMCITY_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+	        btnLofxLaunchTeamcity.getStyleClass().remove("success");
+	        btnLofxLaunchTeamcity.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+        btnLofxLaunchTeamcity.getStyleClass().remove("danger");
         btnLofxLaunchTeamcity.getStyleClass().add("success");
 	}
 	
-	private void login() {
+	private void login() throws Exception {
 		WebElement username = driver.findElement(By.name("username"));
         username.sendKeys(GlobalSettings.FIXPORTAL_USERNAME);
         WebElement password = driver.findElement(By.name("password"));
@@ -93,7 +105,7 @@ public class LofxFixController {
         submitLogin.click();
 	}
 	
-	private void clickRun() {
+	private void clickRun() throws Exception{
 		WebDriverWait wait = new WebDriverWait(driver, 30);
         By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
         wait.until(ExpectedConditions.elementToBeClickable(byRun));

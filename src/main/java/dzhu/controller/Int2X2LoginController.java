@@ -48,23 +48,39 @@ public class Int2X2LoginController {
 	@FXML
 	public void btnInt2LaunchX2Clicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		driver.get(Int2Settings.X2_LINK);
+		try {
+			driver = getDriver();
+			driver.get(Int2Settings.X2_LINK);
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnInt2LaunchX2.getStyleClass().remove("success");
+			btnInt2LaunchX2.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnInt2LaunchX2.getStyleClass().remove("danger");
 		btnInt2LaunchX2.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnInt2LogonX2Clicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		driver.get(Int2Settings.X2_LINK);
-		logonX2(Int2Settings.X2TAKER_USERNAME, Int2Settings.X2TAKER_PASSWORD);
+		try {
+			driver = getDriver();
+			driver.get(Int2Settings.X2_LINK);
+			logonX2(Int2Settings.X2TAKER_USERNAME, Int2Settings.X2TAKER_PASSWORD);
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnInt2LogonX2.getStyleClass().remove("success");
+			btnInt2LogonX2.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnInt2LogonX2.getStyleClass().remove("danger");
 		btnInt2LogonX2.getStyleClass().add("success");
 	}
 	
-	private void logonX2(String user, String pwd) {
+	private void logonX2(String user, String pwd) throws Exception{
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		By byRun = By.cssSelector("input[placeholder='Username']");
 		wait.until(ExpectedConditions.elementToBeClickable(byRun));
@@ -94,7 +110,7 @@ public class Int2X2LoginController {
 		}
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {		
 			return initDriver();
 		}else {
@@ -108,7 +124,7 @@ public class Int2X2LoginController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);

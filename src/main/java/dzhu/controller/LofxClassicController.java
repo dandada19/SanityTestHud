@@ -39,7 +39,7 @@ public class LofxClassicController {
 		return parentStage;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -53,7 +53,7 @@ public class LofxClassicController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
@@ -62,15 +62,19 @@ public class LofxClassicController {
 	
 	@FXML
 	public void btnLofxLogonClassicTakerClicked(Event e) {
-		btnLofxLogonClassicTaker.getStyleClass().remove("success");
 		ControllerUtils.hideStages(getParentStage());
-		
-		driver = getDriver();
-        driver.get(LofxSettings.CLASSIC_TAKER_LINK);
-        
-        loginTakerFromWeb(LofxSettings.CLASSICTAKER_USERNAME, LofxSettings.CLASSICTAKER_PASSWORD);
-		
+		try {
+			driver = getDriver();
+	        driver.get(LofxSettings.CLASSIC_TAKER_LINK);	        
+	        loginTakerFromWeb(LofxSettings.CLASSICTAKER_USERNAME, LofxSettings.CLASSICTAKER_PASSWORD);
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnLofxLogonClassicTaker.getStyleClass().remove("success");
+			btnLofxLogonClassicTaker.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnLofxLogonClassicTaker.getStyleClass().remove("danger");
 		btnLofxLogonClassicTaker.getStyleClass().add("success");
 	}
 	

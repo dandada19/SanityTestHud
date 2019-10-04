@@ -52,36 +52,51 @@ public class DretWebAdminLoginController {
 	@FXML
 	public void btnDretLaunchWebAdminClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		driver.get(DretSettings.WEBADMIN_LINK);
+		try {
+			driver = getDriver();
+			driver.get(DretSettings.WEBADMIN_LINK);
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnDretLaunchWebAdmin.getStyleClass().remove("success");
+			btnDretLaunchWebAdmin.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnDretLaunchWebAdmin.getStyleClass().remove("danger");
 		btnDretLaunchWebAdmin.getStyleClass().add("success");
 	}
 	
 	@FXML
 	public void btnDretLogonWebAdminClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		driver = getDriver();
-		/*
-		//comment this thread out, so user has to select cert manually.		
-		Runnable run = () -> {
-			Screen s = new Screen();		
-			String elementsFolderPath = "src/main/resources/sikuli_elements/";
-	        Pattern btnOk = new Pattern(elementsFolderPath + "webadmin_button_ok.PNG");      
-	        try {
-				s.wait(btnOk, 20);
-		        s.click(btnOk);
-			} catch (FindFailed e1) {
-				e1.printStackTrace();
-			}
-		};
-		Thread thread = new Thread(run);
-		thread.start();
-		*/
-		driver.get(DretSettings.WEBADMIN_LINK);
-		
-		logonWebAdmin(DretSettings.WEBADMIN_USERNAME, DretSettings.WEBADMIN_PASSWORD);
+		try {
+			driver = getDriver();
+			/*
+			//comment this thread out, so user has to select cert manually.		
+			Runnable run = () -> {
+				Screen s = new Screen();		
+				String elementsFolderPath = "src/main/resources/sikuli_elements/";
+		        Pattern btnOk = new Pattern(elementsFolderPath + "webadmin_button_ok.PNG");      
+		        try {
+					s.wait(btnOk, 20);
+			        s.click(btnOk);
+				} catch (FindFailed e1) {
+					e1.printStackTrace();
+				}
+			};
+			Thread thread = new Thread(run);
+			thread.start();
+			*/
+			driver.get(DretSettings.WEBADMIN_LINK);
+			logonWebAdmin(DretSettings.WEBADMIN_USERNAME, DretSettings.WEBADMIN_PASSWORD);
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnDretLogonWebAdmin.getStyleClass().remove("success");
+			btnDretLogonWebAdmin.getStyleClass().add("danger");
+			return;			
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnDretLogonWebAdmin.getStyleClass().remove("danger");
 		btnDretLogonWebAdmin.getStyleClass().add("success");
 	}
 	
@@ -102,7 +117,7 @@ public class DretWebAdminLoginController {
 		ControllerUtils.showStages(getParentStage());
 	}
 	
-	private void logonWebAdmin(String user, String pwd) {
+	private void logonWebAdmin(String user, String pwd) throws Exception{
 		WebDriverWait wait = new WebDriverWait(driver, 20);
 		By byRun = By.cssSelector("input[placeholder='Username']");
 		wait.until(ExpectedConditions.elementToBeClickable(byRun));
@@ -181,7 +196,7 @@ public class DretWebAdminLoginController {
 		return true;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception{
 		if(driver==null) {			
 			return initDriver();
 		}else {
@@ -195,7 +210,7 @@ public class DretWebAdminLoginController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);

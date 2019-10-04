@@ -44,7 +44,7 @@ public class BretX2Controller {
 		return parentStage;
 	}
 	
-	private WebDriver getDriver() {
+	private WebDriver getDriver() throws Exception {
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -58,7 +58,7 @@ public class BretX2Controller {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--start-maximized");
 		driver = new ChromeDriver(options);
@@ -68,36 +68,48 @@ public class BretX2Controller {
 	@FXML
 	public void btnBretSeleniumX2TestClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		btnBretSeleniumX2Test.getStyleClass().remove("success");
-		
-		driver = getDriver();
-        driver.get(BretSettings.SELENIUM_X2_LINK);
-        if(isLoginPageShown()) {
-        	login();
-        }
-
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
-        wait.until(ExpectedConditions.elementToBeClickable(byRun));
-        WebElement run = driver.findElement(byRun);
-        run.click();
+		try {
+			driver = getDriver();
+	        driver.get(BretSettings.SELENIUM_X2_LINK);
+	        if(isLoginPageShown()) {
+	        	login();
+	        }
+	
+	        WebDriverWait wait = new WebDriverWait(driver, 30);
+	        By byRun = By.cssSelector(".btn-group_run > .btn:nth-child(1)");
+	        wait.until(ExpectedConditions.elementToBeClickable(byRun));
+	        WebElement run = driver.findElement(byRun);
+	        run.click();
+		}catch(Exception ex) {
+	        ControllerUtils.showStages(getParentStage());
+			btnBretSeleniumX2Test.getStyleClass().remove("success");
+			btnBretSeleniumX2Test.getStyleClass().add("danger");
+			return;
+		}
 
         ControllerUtils.showStages(getParentStage());
+		btnBretSeleniumX2Test.getStyleClass().remove("danger");
 		btnBretSeleniumX2Test.getStyleClass().add("success");
 	}
+	
 	@FXML
 	public void btnBretLaunchX2Clicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-        btnBretLaunchX2.getStyleClass().remove("success");
-        
-		driver = getDriver();
-        driver.get(BretSettings.X2_LINK);
-
+        try {
+			driver = getDriver();
+	        driver.get(BretSettings.X2_LINK);
+        }catch (Exception ex) {
+    		ControllerUtils.showStages(getParentStage());
+            btnBretLaunchX2.getStyleClass().remove("success");
+            btnBretLaunchX2.getStyleClass().add("danger");
+        	return;
+        }
 		ControllerUtils.showStages(getParentStage());
+        btnBretLaunchX2.getStyleClass().remove("danger");
         btnBretLaunchX2.getStyleClass().add("success");
 	}
 	
-	private void login() {
+	private void login() throws Exception{
 		WebElement username = driver.findElement(By.name("username"));
         username.sendKeys(GlobalSettings.FIXPORTAL_USERNAME);
         WebElement password = driver.findElement(By.name("password"));

@@ -39,7 +39,7 @@ public class PretEnrollController {
 		return parentStage;
 	}
 	
-	public WebDriver getDriver() {
+	public WebDriver getDriver() throws Exception{
 		if(driver==null) {
 			return initDriver();
 		}else {
@@ -53,7 +53,7 @@ public class PretEnrollController {
 		}
 	}
 	
-	private WebDriver initDriver() {
+	private WebDriver initDriver() throws Exception{
 		InternetExplorerOptions options = new InternetExplorerOptions();
 		options.ignoreZoomSettings();
 		driver = new InternetExplorerDriver(options);
@@ -63,7 +63,6 @@ public class PretEnrollController {
 	@FXML
 	public void btnPretEnrollClicked(Event e) {
 		ControllerUtils.hideStages(getParentStage());
-		btnPretEnroll.getStyleClass().remove("success");
 
 		boolean ret = ControllerUtils.doEnroll(PretSettings.ENROLL_PAGE_LINK, 
 				PretSettings.ENROLLMENT_USERNAME, GlobalSettings.COMMON_PIN);
@@ -80,12 +79,18 @@ public class PretEnrollController {
 	
 	@FXML
 	public void btnPretLaunchIeClicked(Event e) {
-		ControllerUtils.hideStages(getParentStage());		
-		btnPretLaunchIe.getStyleClass().remove("success");
-
-		driver = getDriver();
-		driver.get(PretSettings.ENROLL_PAGE_LINK);
+		ControllerUtils.hideStages(getParentStage());
+		try {
+			driver = getDriver();
+			driver.get(PretSettings.ENROLL_PAGE_LINK);
+		}catch(Exception ex) {
+			ControllerUtils.showStages(getParentStage());
+			btnPretLaunchIe.getStyleClass().remove("success");
+			btnPretLaunchIe.getStyleClass().add("danger");
+			return;
+		}
 		ControllerUtils.showStages(getParentStage());
+		btnPretLaunchIe.getStyleClass().remove("danger");
 		btnPretLaunchIe.getStyleClass().add("success");
 	}
 }
