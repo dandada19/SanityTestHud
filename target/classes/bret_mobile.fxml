@@ -3,10 +3,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css">
+<VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.BretMobileController">
 
 	<Label wrapText="true" text="Logon to CurrenexMobile" />
-	<Label text="    User Name: fastjmsf8" />
-	<Label text="    Password: Test1234" />
+	<Label fx:id="lb1" text="    User Name: [#BretSettings.MOBILE_USERNAME#]" />
+	<Label fx:id="lb2" text="    Password: [#BretSettings.MOBILE_PASSWORD#]" />
 	<Label wrapText="true" text="Ask help from Jim/Rahul/Mang if you have trouble" />
 </VBox>

@@ -269,9 +269,9 @@ public class MainStage {
 		TreeItem<CheckBox> bretFIX = new TreeItem<CheckBox>(new CheckBox("FIX"));
 		TreeItem<CheckBox> bretMdf = new TreeItem<CheckBox>(new CheckBox("MarketDF"));
 		TreeItem<CheckBox> bretX2 = new TreeItem<CheckBox>(new CheckBox("X2"));
-		//TreeItem<CheckBox> bretMobile = new TreeItem<CheckBox>(new CheckBox("Mobile"));
+		TreeItem<CheckBox> bretMobile = new TreeItem<CheckBox>(new CheckBox("Mobile"));
 		TreeItem<CheckBox> bretViking = new TreeItem<CheckBox>(new CheckBox("Viking"));
-		bret.getChildren().addAll(bretDevmon, bretWALogin, bretEnroll, bretQtp, bretFIX, bretMdf, bretX2, bretViking);
+		bret.getChildren().addAll(bretDevmon, bretWALogin, bretEnroll, bretQtp, bretFIX, bretMdf, bretX2, bretMobile, bretViking);
 		bret.setExpanded(false);
 		return bret;
 	}
