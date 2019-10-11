@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.BretQtpController">
 
 	<Label wrapText="true" text="Run qtp tests and check the results in your outlook" />
-	<Button fx:id="btnBretQtpRetailIc" text="Retail IC" onAction="#btnBretQtpRetailIcClicked"/>
-	<Button fx:id="btnBretQtpLondonAsiaRegionIcLogin" text="LondonAsiaRegion IC Login" onAction="#btnBretQtpLondonAsiaRegionIcLoginClicked"/>
-	<Button fx:id="btnBretQtpE2EELogin" text="E2EE Login" onAction="#btnBretQtpE2EELoginClicked"/>
-	<Button fx:id="btnBretQtpRetailMargin" text="Retail Margin" onAction="#btnBretQtpRetailMarginClicked"/>
-	<Button fx:id="btnBretQtpRetailWs" text="Retail WS" onAction="#btnBretQtpRetailWsClicked"/>
-	<Button visible="false" fx:id="btnBretQtpRetailAdminTool" text="Retail Admin Tool" onAction="#btnBretQtpRetailAdminToolClicked"/>
+	<HBox styleClass="hbox">
+		<Button fx:id="btnBretQtpRetailIc" text="Retail IC" onAction="#btnBretQtpRetailIcClicked"/>		
+		<CheckBox />
+	</HBox>
+	<HBox styleClass="hbox">
+		<Button fx:id="btnBretQtpLondonAsiaRegionIcLogin" text="LondonAsiaRegion IC Login" onAction="#btnBretQtpLondonAsiaRegionIcLoginClicked"/>
+		<CheckBox />
+	</HBox>
+	<HBox styleClass="hbox">
+		<Button fx:id="btnBretQtpE2EELogin" text="E2EE Login" onAction="#btnBretQtpE2EELoginClicked"/>
+		<CheckBox />
+	</HBox>
+	<HBox styleClass="hbox">
+		<Button fx:id="btnBretQtpRetailMargin" text="Retail Margin" onAction="#btnBretQtpRetailMarginClicked"/>
+		<CheckBox />
+	</HBox>
+	<HBox styleClass="hbox">
+		<Button fx:id="btnBretQtpRetailWs" text="Retail WS" onAction="#btnBretQtpRetailWsClicked"/>
+		<CheckBox />
+	</HBox>
+	<HBox styleClass="hbox" visible="false">
+		<Button fx:id="btnBretQtpRetailAdminTool" text="Retail Admin Tool" onAction="#btnBretQtpRetailAdminToolClicked"/>
+		<CheckBox />
+	</HBox>
 </VBox>

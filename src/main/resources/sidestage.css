@@ -7,3 +7,7 @@
     -fx-pref-width: 200;
     -fx-text-alignment: left;
 }
+
+.hbox{
+	-fx-spacing: 20;
+}

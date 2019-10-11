@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" styleClass="vbox" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.DretQtpController">
 
 	<Label wrapText="true" text="Run qtp tests and check the results in your outlook" />
-	<Button fx:id="btnDretQtpRetailIc" text="Retail IC" onAction="#btnDretQtpRetailIcClicked"/>
-	<Button fx:id="btnDretQtpLondonAsiaRegionIcLogin" text="LondonAsiaRegion IC Login" onAction="#btnDretQtpLondonAsiaRegionIcLoginClicked"/>
-	<Button fx:id="btnDretQtpRetailMargin" text="Retail Margin" onAction="#btnDretQtpRetailMarginClicked"/>
-	<Button fx:id="btnDretQtpRetailWs" text="Retail WS" onAction="#btnDretQtpRetailWsClicked"/>
-	<Button visible="false" fx:id="btnDretQtpRetailAdminTool" text="Retail Admin Tool" onAction="#btnDretQtpRetailAdminToolClicked"/>
-	<Button visible="false" fx:id="btnDretQtpE2EELogin" text="E2EE Login" onAction="#btnDretQtpE2EELoginClicked"/>
+	<HBox styleClass="hbox">
+		<Button fx:id="btnDretQtpRetailIc" text="Retail IC" onAction="#btnDretQtpRetailIcClicked"/>
+		<CheckBox />
+	</HBox>
+	<HBox styleClass="hbox">
+		<Button fx:id="btnDretQtpLondonAsiaRegionIcLogin" text="LondonAsiaRegion IC Login" onAction="#btnDretQtpLondonAsiaRegionIcLoginClicked"/>
+		<CheckBox />
+	</HBox>
+	<HBox styleClass="hbox">
+		<Button fx:id="btnDretQtpRetailMargin" text="Retail Margin" onAction="#btnDretQtpRetailMarginClicked"/>
+		<CheckBox />
+	</HBox>
+	<HBox styleClass="hbox">
+		<Button fx:id="btnDretQtpRetailWs" text="Retail WS" onAction="#btnDretQtpRetailWsClicked"/>
+		<CheckBox />
+	</HBox>
+	<HBox styleClass="hbox" visible="false">
+		<Button visible="false" fx:id="btnDretQtpRetailAdminTool" text="Retail Admin Tool" onAction="#btnDretQtpRetailAdminToolClicked"/>
+		<CheckBox />
+	</HBox>
+	<HBox styleClass="hbox" visible="false">
+		<Button visible="false" fx:id="btnDretQtpE2EELogin" text="E2EE Login" onAction="#btnDretQtpE2EELoginClicked"/>
+		<CheckBox />
+	</HBox>
 
 </VBox>
