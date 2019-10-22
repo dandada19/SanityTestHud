@@ -45,10 +45,10 @@ public class EmailUtils {
 	
 				String url = "https://"+GlobalSettings.DEVPORTAL_USERNAME
 						+":"+GlobalSettings.DEVPORTAL_PASSWORD+"@"+GlobalSettings.DEV_PORTAL_LINK+"home.html";
-
 				driver.get(url);
 			}catch(Exception e) {
-				e.printStackTrace();
+				driver.quit();
+				driver = null;
 				System.out.println("Timeout while navigating to DEV portal, "
 						+ "you might set wrong password for your DEV portal user");
 			}
@@ -58,18 +58,35 @@ public class EmailUtils {
 	
 	//stackName: {PROD, LOFX, PRET, DRET..}
 	public static String getStackVersion(String stackName) {
-		while(driver!=null && driver.getPageSource()!=null && driver.getPageSource().contains("?/?")) {			
+		int maxWaitTime = 6;//3 seconds
+		int elapsedTime = 0;
+		while(elapsedTime<maxWaitTime &&
+				driver!=null && 
+				driver.getPageSource()!=null && 
+				driver.getPageSource().contains("?/?")) {
+			elapsedTime ++;
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		WebElement spanVersion = driver.findElement(By.id(StackName2SpanId.get(stackName)));
-		String text = spanVersion.getText();
+		String text="";
+		try {
+			WebElement spanVersion = driver.findElement(By.id(StackName2SpanId.get(stackName)));
+			text = spanVersion.getText();
+		}catch (Exception e) {
+			System.out.println("Can't find version number of stack: " + stackName);
+		}
 		return text;
 	}
+	
+	public static void closeDriver() {
+		if(driver!=null) {
+			driver.quit();
+		}
+	}
+
 	
 	public static String sendGetRequest(String urlString) throws IOException {
 		URL url = new URL(urlString);

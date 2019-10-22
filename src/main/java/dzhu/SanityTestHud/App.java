@@ -23,4 +23,10 @@ public class App extends Application
 		mainStage.draw();
 		EmailUtils.initializeDriver();
 	}
+	
+	@Override
+	public void stop() {
+		System.out.println("Stopping");
+		EmailUtils.closeDriver();
+	}
 }
