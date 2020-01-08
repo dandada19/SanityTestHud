@@ -1,12 +1,8 @@
 package dzhu.controller;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import dzhu.settings.GlobalSettings;
@@ -92,26 +88,9 @@ public class BretQtpController {
 		
 		try {
 			driver = getDriver();
-			driver.get(GlobalSettings.QTP_PORTAL_LINK);
-	
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-	
-			Select selectProductGroup = new Select(wait.until(ExpectedConditions.elementToBeClickable(By.name("product_name"))));
-			selectProductGroup.selectByVisibleText(product);
-			
-			Thread.sleep(500);
-	
-			Select selectStackName = new Select(wait.until(ExpectedConditions.elementToBeClickable(By.name("stack_name"))));
-			selectStackName.selectByVisibleText(stack);
-			
-			Select selectSuiteType = new Select(wait.until(ExpectedConditions.elementToBeClickable(By.name("suite_type"))));
-			selectSuiteType.selectByVisibleText(suite);
-			
-			Select selectTestName = new Select(wait.until(ExpectedConditions.elementToBeClickable(By.name("test_name"))));
-			selectTestName.selectByVisibleText(test);
-			
-			WebElement btnRun = wait.until(ExpectedConditions.elementToBeClickable(By.name("submit_name")));
-			btnRun.click();
+			driver.get(GlobalSettings.QTP_PORTAL_LINK);	
+			WebDriverWait wait = new WebDriverWait(driver, 10);	
+			QtpUtils.runQtpTest(wait, product, stack, suite, test);
 		}catch(Exception ex) {
 			ex.printStackTrace();
 			ControllerUtils.showStages(getParentStage());
@@ -119,7 +98,6 @@ public class BretQtpController {
 			btnClicked.getStyleClass().add("danger");
 			return;
 		}
-
 		ControllerUtils.showStages(getParentStage());
 		btnClicked.getStyleClass().remove("danger");
 		btnClicked.getStyleClass().add("success");
