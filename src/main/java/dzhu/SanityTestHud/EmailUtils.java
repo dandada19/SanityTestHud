@@ -47,6 +47,7 @@ public class EmailUtils {
 						+":"+GlobalSettings.DEVPORTAL_PASSWORD+"@"+GlobalSettings.DEV_PORTAL_LINK+"home.html";
 				driver.get(url);
 			}catch(Exception e) {
+				e.printStackTrace();
 				driver.quit();
 				driver = null;
 				System.out.println("Timeout while navigating to DEV portal, "

@@ -98,6 +98,8 @@ public class BretQtpController {
 	
 			Select selectProductGroup = new Select(wait.until(ExpectedConditions.elementToBeClickable(By.name("product_name"))));
 			selectProductGroup.selectByVisibleText(product);
+			
+			Thread.sleep(500);
 	
 			Select selectStackName = new Select(wait.until(ExpectedConditions.elementToBeClickable(By.name("stack_name"))));
 			selectStackName.selectByVisibleText(stack);
@@ -111,6 +113,7 @@ public class BretQtpController {
 			WebElement btnRun = wait.until(ExpectedConditions.elementToBeClickable(By.name("submit_name")));
 			btnRun.click();
 		}catch(Exception ex) {
+			ex.printStackTrace();
 			ControllerUtils.showStages(getParentStage());
 			btnClicked.getStyleClass().remove("success");
 			btnClicked.getStyleClass().add("danger");
