@@ -12,19 +12,19 @@ public class QtpUtils {
 
 		Select selectProductGroup = new Select(wait.until(ExpectedConditions.elementToBeClickable(By.name("product_name"))));
 		selectProductGroup.selectByVisibleText(product);
-		try {
-			Thread.sleep(800);
-		} catch (Exception e) {
-		}
+		Thread.sleep(800);
 
 		Select selectStackName = new Select(wait.until(ExpectedConditions.elementToBeClickable(By.name("stack_name"))));
 		selectStackName.selectByVisibleText(stack);
+		Thread.sleep(800);
 		
 		Select selectSuiteType = new Select(wait.until(ExpectedConditions.elementToBeClickable(By.name("suite_type"))));
 		selectSuiteType.selectByVisibleText(suite);
+		Thread.sleep(100);
 		
 		Select selectTestName = new Select(wait.until(ExpectedConditions.elementToBeClickable(By.name("test_name"))));
 		selectTestName.selectByVisibleText(test);
+		Thread.sleep(100);
 		
 		WebElement btnRun = wait.until(ExpectedConditions.elementToBeClickable(By.name("submit_name")));
 		btnRun.click();
