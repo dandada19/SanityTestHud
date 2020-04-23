@@ -95,7 +95,7 @@ public class MainStage {
 				return;
 			}
 			String body = rets[1];
-			String strSubject = testedStacks + " updated";
+			String strSubject = "QA On Call Status Report: " + testedStacks;
 			String toList = "", ccList="";
 			if (testedStacks.toLowerCase().contains("int2")) {
 				toList = GlobalSettings.EMAIL_TO_LIST_INT2;

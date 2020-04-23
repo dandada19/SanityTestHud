@@ -22,16 +22,16 @@ public class GlobalSettings {
 	
 	public static String EMAIL_TO_LIST_PROD = "IQA-internal <QA-internal@globallink.com>; TechOps <techops@globallink.com>; "
 			+ "Development <dev@globallink.com>; tradeops2 <tradeops@currenex.com>; DBAs <DBAs@globallink.com>; network <network@eexchange.com>; "
-			+ "Product Management <ProductManagement@globallink.com>";
+			+ "Product Management <ProductManagement@globallink.com>; jira@globallink.com";
 	public static String EMAIL_CC_LIST_PROD = "Siby John STT <SJohn@StateStreet.com>; Integration Support <IntSupport@eexchange.com>";
 	
 
 	public static String EMAIL_TO_LIST_INT2 = "Integration Support <IntSupport@eexchange.com>; TechOps <techops@globallink.com>; "
-    		+ "Product Management <ProductManagement@globallink.com>";
+    		+ "Product Management <ProductManagement@globallink.com>; jira@globallink.com";
 	public static String EMAIL_CC_LIST_INT2 = "Siby John STT <SJohn@StateStreet.com>; QA-internal <QA-internal@globallink.com>";
 	
 	public static String EMAIL_TO_LIST_RET = "Retail Development <RetailDevelopment@globallink.com>; TechOps <techops@globallink.com>; "
-			+ "Product Management <ProductManagement@globallink.com>";
+			+ "Product Management <ProductManagement@globallink.com>; jira@globallink.com";
 	public static String EMAIL_CC_LIST_RET = "TokyoAcctMgr <TokyoAcctMgr@globallink.com>; SingaporeAcctMgr <SingaporeAcctMgr@globallink.com>;"
 			+ " QA-internal <QA-internal@globallink.com>; tradeops2 <tradeops@currenex.com>";
 }
