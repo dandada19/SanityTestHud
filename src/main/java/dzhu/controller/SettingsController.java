@@ -25,6 +25,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
@@ -35,6 +36,16 @@ public class SettingsController {
 	private static final Map<String, String> mapControl2Property;
     static {
         Map<String, String> map = new HashMap<>();
+        
+		//Today's Test
+		map.put("tfChangeTicketNumber", "TodayTestSettings.CHANGE_TICKET_NUMBER");
+		map.put("tfStackVersionNumber", "TodayTestSettings.STACK_VERSION_NUMBER");
+		map.put("radioButtonReboot", "TodayTestSettings.IS_STACK_REBOOT");
+		map.put("radioButtonMajor", "TodayTestSettings.IS_MAJOR_RELEASE");
+		map.put("radioButtonMinor", "TodayTestSettings.IS_MINOR_RELEASE");
+		map.put("radioButtonPatch", "TodayTestSettings.IS_PATCH");
+		
+		//Global 
         map.put("tfGlobalFixPortalUsername", "GlobalSettings.FIXPORTAL_USERNAME");
 		map.put("tfGlobalFixPortalPassword", "GlobalSettings.FIXPORTAL_PASSWORD");
 		map.put("tfGlobalDevPortalUsername", "GlobalSettings.DEVPORTAL_USERNAME");
@@ -145,6 +156,20 @@ public class SettingsController {
     
 	@FXML
 	private TabPane rootTabPane = null;
+	
+	//Today's Test
+	@FXML
+	private TextField tfChangeTicketNumber = null;
+	@FXML
+	private TextField tfStackVersionNumber = null;
+	@FXML
+	private RadioButton radioButtonReboot = null;
+	@FXML
+	private RadioButton radioButtonMajor = null;
+	@FXML
+	private RadioButton radioButtonMinor = null;
+	@FXML
+	private RadioButton radioButtonPatch = null;
 	
 	//Global
 	@FXML
@@ -370,6 +395,10 @@ public class SettingsController {
 	
 	@FXML
 	public void initialize() {
+		//Today's Test
+		radioButtonReboot.setSelected(true);
+		
+		//Global
 		tfGlobalFixPortalUsername.setText(GlobalSettings.FIXPORTAL_USERNAME);
 		tfGlobalFixPortalPassword.setText(GlobalSettings.FIXPORTAL_PASSWORD);
 		tfGlobalDevPortalUsername.setText(GlobalSettings.DEVPORTAL_USERNAME);
@@ -483,6 +512,9 @@ public class SettingsController {
 		for(Node n : rootTabPane.lookupAll(".last")) {
 			addFocusOffListener(n);
 		}
+		for(Node n : rootTabPane.lookupAll("RadioButton")) {
+			addFocusOffListener(n);
+		}
 	}
 	
 	private void addFocusOffListener(Node n) {
@@ -499,8 +531,21 @@ public class SettingsController {
 				            Class<?> c = Class.forName("dzhu.settings."+cls);
 				            Field f = c.getDeclaredField(field);
 				            f.setAccessible(true);
-				            TextInputControl input = (TextInputControl)n;
-				            f.set(c, input.getText());
+				            if(field.startsWith("IS")) {//boolean type
+				            	//below for loop set all IS_XXX value to false, 
+				            	//because they are in a radio button group.
+				            	for (Field ff : c.getDeclaredFields()) {
+				            		if(ff.getName().startsWith("IS")) {
+				            			ff.setAccessible(true);
+				            			ff.set(c, false);
+				            		}
+				            	}
+				            	RadioButton rb = (RadioButton)n;
+				            	f.set(c, rb.isSelected());
+				            }else {
+					            TextInputControl input = (TextInputControl)n;
+					            f.set(c, input.getText());
+				            }
 			            }catch(Exception e) {
 			            	e.printStackTrace();
 			            }
@@ -512,9 +557,13 @@ public class SettingsController {
 	
 	public void savePropertiesToFile() {
 		List<String> lines = new ArrayList<>();
-		Path path = Paths.get("settings.properties");		
+		Path path = Paths.get("settings.properties");
 		try {
 			for(Map.Entry<String, String> entry : mapControl2Property.entrySet()) {
+				System.out.println("###"+entry.getValue());
+				if(entry.getValue().startsWith("Today")) {
+					continue;
+				}
 				TextInputControl node = (TextInputControl)rootTabPane.lookup("#"+entry.getKey());
 				String value = "";
 				if(node.getText()!=null) {

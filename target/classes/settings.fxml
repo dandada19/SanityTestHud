@@ -5,14 +5,92 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 
+
  
 <TabPane xmlns:fx="http://javafx.com/fxml" fx:id="rootTabPane" tabClosingPolicy="UNAVAILABLE" stylesheets="@sidestage.css, @bootstrap3.css" fx:controller="dzhu.controller.SettingsController">
+     <Tab text="Today's Test">
+        <VBox spacing="10">
+        	<padding>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="20.0"/>
+            </padding>
+
+	        <HBox>
+		        <ToggleButton mnemonicParsing="false" selected="true" styleClass="first, primary" text="CHG Ticket" prefWidth="150">	                
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </ToggleButton>
+	            <TextField  fx:id="tfChangeTicketNumber" promptText="Ticket Number" styleClass="last" prefWidth="180"  editable="true">
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </TextField>
+	
+	        </HBox>
+        	<Separator visible="false" />
+        	
+        	<HBox>
+		        <ToggleButton mnemonicParsing="false" selected="true" styleClass="first, primary" text="Stack Version" prefWidth="150">	                
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </ToggleButton>
+	            <TextField  fx:id="tfStackVersionNumber" promptText="Stack Version like 11.13" styleClass="last" prefWidth="180"  editable="true">
+	                <HBox.margin>
+	                    <Insets right="-1.0"/>
+	                </HBox.margin>
+	            </TextField>
+	
+	        </HBox>
+        	<Separator visible="false" />
+        	
+        	<VBox>
+	        	<RadioButton fx:id="radioButtonReboot" text="Stack reboot" selected="true">
+				   <VBox.margin>
+				      <Insets bottom="20.0"/>
+				   </VBox.margin>
+				   <toggleGroup>
+				       <ToggleGroup fx:id="group"/>
+				   </toggleGroup>
+				</RadioButton>
+				<RadioButton fx:id="radioButtonMajor" text="Major releases such as 11.13">
+				   <VBox.margin>
+				      <Insets bottom="20.0"/>
+				   </VBox.margin>
+				   <toggleGroup>
+				       <fx:reference source="group"/>
+				   </toggleGroup>
+				</RadioButton>
+				<RadioButton fx:id="radioButtonMinor" text="Small releases such as 11.12.3">
+				   <VBox.margin>
+				      <Insets bottom="20.0"/>
+				   </VBox.margin>
+				   <toggleGroup>
+				       <fx:reference source="group"/>
+				   </toggleGroup>
+				</RadioButton>
+				<RadioButton fx:id="radioButtonPatch" text="Hot patch or weekend patch">
+				   <VBox.margin>
+				      <Insets bottom="20.0"/>
+				   </VBox.margin>
+				   <toggleGroup>
+				       <fx:reference source="group"/>
+				   </toggleGroup>
+				</RadioButton>
+			</VBox>
+
+
+        	<Separator visible="false" />        	
+        </VBox>
+    </Tab>
+    
     <Tab text="Global">
         <!-- <GridPane>
 		    <columnConstraints>
@@ -69,9 +147,7 @@
 	
 	            <PasswordField fx:id="tfGlobalDevPortalPassword" promptText="Password" styleClass="last" prefWidth="120"  editable="false"/>
 	        </HBox>
-        	<Separator visible="false" />
-        	
-        	
+        	<Separator visible="false" />        	
         </VBox>
     </Tab>
     

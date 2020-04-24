@@ -54,7 +54,7 @@ public class EmailUtils {
 						+ "you might set wrong password for your DEV portal user");
 			}
 		});
-		t.start();
+		//t.start();
 	}
 	
 	//stackName: {PROD, LOFX, PRET, DRET..}

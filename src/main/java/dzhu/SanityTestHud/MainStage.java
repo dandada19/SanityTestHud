@@ -7,6 +7,7 @@ import java.util.Random;
 
 import dzhu.controller.SettingsController;
 import dzhu.settings.GlobalSettings;
+import dzhu.settings.TodayTestSettings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -95,7 +96,25 @@ public class MainStage {
 				return;
 			}
 			String body = rets[1];
-			String strSubject = "QA On Call Status Report: " + testedStacks;
+			String strSubject = null;
+			String changeTicketNumber = TodayTestSettings.CHANGE_TICKET_NUMBER;
+			if(changeTicketNumber == null || changeTicketNumber.length()==0) {
+				changeTicketNumber = "CHG-xxxxx";
+			}
+			String stackVersion = TodayTestSettings.STACK_VERSION_NUMBER;
+			if(stackVersion == null || stackVersion.length()==0) {
+				stackVersion = "[Version]";
+			}
+			
+			if(TodayTestSettings.IS_STACK_REBOOT) {
+				strSubject = "Currenex " + stackVersion + " QA Status | " + testedStacks;
+			}else if(TodayTestSettings.IS_MAJOR_RELEASE) {
+				strSubject = changeTicketNumber + " | Currenex " + stackVersion + " Upgrade QA Status | " + testedStacks;
+			}else if(TodayTestSettings.IS_MINOR_RELEASE) {
+				strSubject = changeTicketNumber + " | Currenex " + stackVersion + " Upgrade QA Status | " + testedStacks;
+			}else {//patch
+				strSubject = changeTicketNumber + " | Currenex Patch QA Status | " + testedStacks;
+			}
 			String toList = "", ccList="";
 			if (testedStacks.toLowerCase().contains("int2")) {
 				toList = GlobalSettings.EMAIL_TO_LIST_INT2;
@@ -423,7 +442,8 @@ public class MainStage {
 			
 			if(isTested) {
 				stackResult = "<strong>"+stack.getValue() + " is updated to " +
-						EmailUtils.getStackVersion(stack.getValue().toString()) + 
+						(TodayTestSettings.STACK_VERSION_NUMBER==null ? "" : TodayTestSettings.STACK_VERSION_NUMBER) +
+						//EmailUtils.getStackVersion(stack.getValue().toString()) + 
 						"</strong><br>" + stackResult;
 				result += stackResult + "<br><br><br>";
 				testedStacks += stack.getValue() + "/";
