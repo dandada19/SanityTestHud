@@ -178,6 +178,7 @@ public class MainStage {
 						fxmlName = parentItem.getValue() + "_" + cb.getText() + ".fxml";
 						sideStage.setTitle(parentItem.getValue() + "-" + cb.getText());
 					}else {
+						//seems it never goes in here.
 						fxmlName = selectedItem.getValue() + ".fxml";
 						sideStage.setTitle(selectedItem.getValue().toString());
 					}
@@ -257,8 +258,9 @@ public class MainStage {
 		TreeItem<CheckBox> prodJasper = new TreeItem<CheckBox>(new CheckBox("Jasper"));
 		TreeItem<CheckBox> prodMobile = new TreeItem<CheckBox>(new CheckBox("Mobile"));
 		TreeItem<CheckBox> prodGlobalCredit = new TreeItem<CheckBox>(new CheckBox("GlobalCredit"));
+		TreeItem<CheckBox> prodWarmUpOrders = new TreeItem<CheckBox>(new CheckBox("WarmUpOrders"));
 		prod.getChildren().addAll(prodDevmon, prodFIX, prodWALogin, prodEnroll, prodClassic, prodMdf, prodX2, 
-				prodJasper, prodMobile, prodGlobalCredit);
+				prodJasper, prodMobile, prodGlobalCredit, prodWarmUpOrders);
 		prod.setExpanded(false);
 		return prod;
 	}
